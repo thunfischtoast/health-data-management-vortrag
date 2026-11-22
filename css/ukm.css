@@ -155,3 +155,60 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .facts[data-reached~="1"] .s1 .strip i, .facts[data-reached~="2"] .s2 .strip i { transform: none; }
 .facts .fact p { font-size: 38px; line-height: 1.3; }
 .facts .fact .soft { margin-top: 14px; font-size: 28px; }
+
+/* Bar charts: light bar = reference, blue bar = new method */
+.chart .chart-title { font-size: 28px; color: var(--muted); }
+.chart .group { margin-top: 26px; font-size: 34px; line-height: 44px; font-weight: 700; color: var(--dark); }
+.chart .bar { display: flex; align-items: center; gap: 18px; margin-top: 10px; font-size: 30px; line-height: 44px; white-space: nowrap; }
+.chart .bar i { display: block; width: var(--w); height: 44px; background: var(--blue); transform-origin: 0 0; transition: transform 600ms var(--ease) 200ms; }
+.chart .bar.kw i { background: var(--light); }
+.chart .bar b { margin-left: 8px; color: var(--dark); }
+.s1 .bar i, .s2 .bar i, .chart.s2 .bar i { transform: scaleX(0); }
+[data-reached~="1"] .s1 .bar i, [data-reached~="2"] .s2 .bar i, [data-reached~="2"] .chart.s2 .bar i { transform: none; }
+
+/* 10 Four verbs */
+.verbs .letter { left: 138px; top: 270px; width: 760px; height: 624px; padding: 44px 50px; }
+.verbs .letter .paper-head { font-size: 36px; line-height: 46px; }
+.verbs .letter .body { margin-top: 28px; font-size: 36px; line-height: 1.55; }
+.verbs[data-step="1"] .h1, .verbs[data-step="2"] .h2, .verbs[data-step="3"] .h3, .verbs[data-step="4"] .h4 { background-size: 100% 100%; }
+.verb { left: 990px; width: 792px; height: 142px; padding: 4px 0 0 30px; border-left: 6px solid var(--line); transition: border-color var(--t) ease; }
+.verb b { display: block; font-size: 40px; line-height: 50px; color: #8A9CA8; transition: color var(--t) ease; }
+.verb div { font-size: 32px; line-height: 42px; opacity: 0; transition: opacity var(--t) ease; }
+.verbs[data-reached~="1"] .v1 div, .verbs[data-reached~="2"] .v2 div, .verbs[data-reached~="3"] .v3 div, .verbs[data-reached~="4"] .v4 div { opacity: 1; }
+.verbs[data-step="1"] .v1 b, .verbs[data-step="2"] .v2 b, .verbs[data-step="3"] .v3 b, .verbs[data-step="4"] .v4 b { color: var(--blue); }
+.verbs[data-step="1"] .v1, .verbs[data-step="2"] .v2, .verbs[data-step="3"] .v3, .verbs[data-step="4"] .v4 { border-color: var(--blue); }
+
+/* 11 Search by meaning */
+.meaning .cloud { left: 138px; top: 300px; width: 1644px; height: 540px; transform-origin: 0 50%; }
+.meaning .w { position: absolute; left: 0; top: 0; font-size: 52px; line-height: 60px; white-space: nowrap; color: var(--blue); transform: translate(var(--x), var(--y)); transition: transform 600ms var(--ease) var(--d); }
+.meaning .w.alt { color: var(--muted); }
+.meaning .ring { position: absolute; border: 2px solid var(--light); border-radius: 50%; opacity: 0; }
+.meaning[data-reached~="1"] .w { transform: translate(var(--tx), var(--ty)); }
+.meaning[data-reached~="1"] .ring { opacity: 1; }
+.meaning[data-reached~="2"] .w { transform: translate(var(--ux), var(--uy)); font-size: 40px; transition: transform 600ms var(--ease), font-size 600ms var(--ease); }
+.meaning .ring { transition: opacity 400ms ease 300ms, left 600ms var(--ease), top 600ms var(--ease), width 600ms var(--ease), height 600ms var(--ease); }
+.meaning .r1 { left: 60px; top: 60px; width: 700px; height: 420px; }
+.meaning .r2 { left: 900px; top: 60px; width: 700px; height: 420px; }
+.meaning[data-reached~="2"] .r1 { left: 60px; top: 10px; width: 590px; height: 270px; }
+.meaning[data-reached~="2"] .r2 { left: 60px; top: 300px; width: 590px; height: 250px; }
+.meaning[data-reached~="2"] .until-2 { display: none; }
+/* 13 Failures */
+.fails .col { top: 350px; width: 512px; }
+.fails .pair { display: flex; gap: 40px; height: 260px; align-items: center; }
+.fails .pair div { font-size: 32px; color: var(--muted); }
+.fails .pair b { display: block; font-size: 104px; line-height: 1.15; color: var(--dark); }
+.fails .pair u { text-decoration: none; color: var(--limit); }
+.fails .pair svg { display: block; margin-bottom: 12px; }
+.fails p { font-size: 38px; line-height: 1.3; }
+.fails .col > p { margin-top: 30px; }
+.reveal .fails .source { font-size: 20px; line-height: 26px; }
+.fails .form-line { height: 114px; margin-bottom: 32px; padding: 12px 24px; background: var(--tint); border-left: 6px solid var(--light); font-size: 28px; line-height: 40px; color: var(--muted); }
+.fails .form-line b { font-size: 36px; line-height: 48px; color: var(--dark); }
+.fails .form-line .empty { color: var(--limit); }
+
+/* 14 Person plus model */
+.duo .change { display: flex; align-items: center; gap: 36px; margin-top: 10px; font-size: 100px; line-height: 160px; color: var(--steel); white-space: nowrap; }
+.duo .change b { font-size: 140px; color: var(--blue); letter-spacing: -.02em; }
+.duo .change svg { fill: none; stroke: var(--steel); stroke-width: 4; }
+.duo .strip i { display: block; width: var(--w); height: 26px; margin-top: 10px; background: var(--light); }
+.duo .strip .to { background: var(--blue); }

@@ -225,6 +225,128 @@
   </aside>
 </section>
 
+<!-- Chapter 2: New methods -->
+
+<section class="blue divider" data-background-color="#006DB0">
+  <img class="arc-full" src="assets/ukm/arc_white.svg" alt="">
+  <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
+  <h1>New methods</h1>
+  <aside class="notes"><p>What language models can do with the text we already have.</p></aside>
+</section>
+
+<section class="verbs tight" data-chapter="2" data-steps="4">
+  <h2>One letter, four verbs</h2>
+  <div class="abs paper letter">
+    <div class="paper-head"><span class="hl h2">Arztbrief</span><small>19.08.2026</small></div>
+    <div class="body"><span class="hl h3">Vorstellung mit zunehmender <span class="hl h4">Atemnot</span>, kein Fieber.</span> <span class="hl h3">Im CT vom 14.08.2026 neue <span class="hl h2">Milchglasinfiltrate beidseits</span>, V. a. <span class="hl h2">immuntherapie&shy;assoziierte Pneumonitis</span>.</span> Kein Hinweis auf Lungenembolie. <span class="hl h3"><span class="hl h1">Pembrolizumab pausiert</span>, Prednisolon begonnen.</span></div>
+  </div>
+  <div class="abs verb v1" style="top:270px"><b>Extract</b><div>Drug: Pembrolizumab<br>Status: paused</div></div>
+  <div class="abs verb v2" style="top:434px"><b>Classify</b><div>Arztbrief, immune-related adverse event, lung</div></div>
+  <div class="abs verb v3" style="top:598px"><b>Summarise</b><div>Increasing dyspnoea, suspected pneumonitis on CT; pembrolizumab paused, prednisolone started.</div></div>
+  <div class="abs verb v4" style="top:762px"><b>Search by meaning</b><div>“shortness of breath” finds „Atemnot“</div></div>
+  <p class="abs invented">Illustration, invented example</p>
+  <aside class="notes">
+    <p>Four tasks on the same letter. Yellow always marks the passage the answer comes from. The output is an illustration; no model was run for this slide.</p>
+  </aside>
+</section>
+
+<section class="meaning tight" data-chapter="2" data-steps="2">
+  <h2>Search by meaning</h2>
+  <div class="abs cloud">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <span class="w" style="--x:120px;--y:60px;--tx:130px;--ty:150px;--ux:190px;--uy:50px;--d:0ms">Atemnot</span>
+    <span class="w" style="--x:1060px;--y:40px;--tx:360px;--ty:230px;--ux:310px;--uy:105px;--d:40ms">Kurzatmigkeit</span>
+    <span class="w" style="--x:480px;--y:380px;--tx:170px;--ty:310px;--ux:130px;--uy:130px;--d:80ms">Dyspnoe</span>
+    <span class="w" style="--x:1380px;--y:300px;--tx:470px;--ty:350px;--ux:400px;--uy:180px;--d:120ms">SOB</span>
+    <span class="w alt" style="--x:640px;--y:150px;--tx:1010px;--ty:150px;--ux:220px;--uy:335px;--d:160ms">Fieber</span>
+    <span class="w alt" style="--x:150px;--y:270px;--tx:1090px;--ty:240px;--ux:180px;--uy:395px;--d:200ms">Temperatur erhöht</span>
+    <span class="w alt" style="--x:960px;--y:450px;--tx:1230px;--ty:340px;--ux:340px;--uy:455px;--d:240ms">febril</span>
+  </div>
+  <div class="abs chart s2" style="left:900px;top:350px;width:882px">
+    <p class="chart-title">Right hit near the top of the list</p>
+    <div class="group">Identical words</div>
+    <div class="bar kw"><i style="--w:503px"></i><span>Keyword search <b>83.9</b></span></div>
+    <div class="bar"><i style="--w:526px"></i><span>By meaning <b>87.7</b></span></div>
+    <div class="group">Synonyms</div>
+    <div class="bar kw"><i style="--w:269px"></i><span>Keyword search <b>44.8</b></span></div>
+    <div class="bar"><i style="--w:506px"></i><span>By meaning <b>84.3</b></span></div>
+  </div>
+  <p class="source s2">MRR x 100, English discharge summaries. Zhao et al., CliniQ, arXiv 2025, preprint. Word clusters: illustration</p>
+  <p class="abs invented until-2">Illustration</p>
+  <aside class="notes">
+    <p>An embedding turns text into a position. Words with similar meaning lie close together, so the search no longer needs the same letters. The cluster picture is an illustration.</p>
+    <p>MRR, mean reciprocal rank: 100 means the right passage is always the first hit.</p>
+    <p>Zhao et al., CliniQ, arXiv 2502.06252, 02/2025, preprint, https://arxiv.org/html/2502.06252v2. 1,000 MIMIC-III discharge summaries, 1,246 queries, 77,206 relevance judgments; search inside one patient's discharge summary. Synonyms: BM25 44.8, BM25 with UMLS synonyms 53.1, best embedding 84.3, hybrid 85.0. Identical words: 83.9, 83.9, 87.7, 94.3. English intensive-care data.</p>
+  </aside>
+</section>
+
+<section class="works" data-chapter="2" data-steps="2">
+  <h2>Stated facts work. Judgement is harder.</h2>
+  <div class="abs chart" style="left:138px;top:334px;width:1644px">
+    <p class="chart-title">Accuracy on 300 German oncology imaging reports, in percent</p>
+    <div class="group">Is there a metastasis?</div>
+    <div class="bar kw"><i style="--w:1132px"></i><span>Human <b>98.4</b></span></div>
+    <div class="bar"><i style="--w:1122px"></i><span>Best local model <b>97.6</b></span></div>
+    <div class="s1 bars">
+      <div class="group">Did the tumour respond to treatment?</div>
+      <div class="bar kw"><i style="--w:989px"></i><span>Human <b>86.0</b></span></div>
+      <div class="bar"><i style="--w:900px"></i><span>Best local model <b>78.3</b></span></div>
+    </div>
+  </div>
+  <p class="abs s2" style="left:138px;top:812px;width:1644px;padding-top:24px;border-top:2px solid var(--line);font-size:36px;line-height:1.3">Münster: 14 heart values from 497 German cardiac MRI reports, no fine-tuning.</p>
+  <p class="source two">Passweg et al., JCO Clin Cancer Inform 2026<span class="s2" style="display:block">Plagwitz et al., Stud Health Technol Inform 2024</span></p>
+  <aside class="notes">
+    <p>Passweg et al., Data Extraction From Oncology Imaging Reports by Large Language Models, JCO Clin Cancer Inform, 07/2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC13465685/. 400 reports from 317 patients, Swiss tertiary hospital, 300 in the test set, five local models, duplicate human extraction with adjudication. Best model for metastasis: gpt-oss:120b. Humans agreed with each other in 96.6% for metastasis and only 76.2% for response. The models saw each report without earlier imaging.</p>
+    <p>Plagwitz et al., Zero-Shot LLMs for Named Entity Recognition: Targeting Cardiac Function Indicators in German Clinical Texts, Stud Health Technol Inform, 08/2024, https://doi.org/10.3233/shti240861. Llama 3, Gemma, Mistral, Mixtral. Best values 95.4% right annotation and 99.8% entity recognition accuracy. Numbers stated explicitly are the easy end. Abstract read; the Münster link comes from an affiliation search match.</p>
+  </aside>
+</section>
+
+<section class="fails" data-chapter="2" data-steps="2">
+  <h2>Where it fails</h2>
+  <div class="abs col" style="left:138px">
+    <div class="pair"><div><b>p<u>N</u>1</b>lymph nodes</div><div><b><u>P</u>n1</b>nerves</div></div>
+    <p>The same letters, only the capitals differ</p>
+  </div>
+  <div class="abs col s1" style="left:704px">
+    <div class="pair"><div><svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="#006DB0"/><circle cx="30" cy="10" r="7" fill="#006DB0"/><circle cx="50" cy="10" r="7" fill="#006DB0"/><circle cx="70" cy="10" r="7" fill="#006DB0"/><circle cx="90" cy="10" r="7" fill="#006DB0"/><circle cx="110" cy="10" r="7" fill="#006DB0"/><circle cx="130" cy="10" r="7" fill="#006DB0"/><circle cx="150" cy="10" r="7" fill="#006DB0"/><circle cx="170" cy="10" r="7" fill="#006DB0"/><circle cx="190" cy="10" r="7" fill="#006DB0"/><circle cx="10" cy="30" r="7" fill="#006DB0"/><circle cx="30" cy="30" r="7" fill="#006DB0"/><circle cx="50" cy="30" r="7" fill="#006DB0"/><circle cx="70" cy="30" r="7" fill="#006DB0"/><circle cx="90" cy="30" r="7" fill="#006DB0"/><circle cx="110" cy="30" r="7" fill="#006DB0"/><circle cx="130" cy="30" r="7" fill="#006DB0"/><circle cx="150" cy="30" r="7" fill="#006DB0"/><circle cx="170" cy="30" r="7" fill="#006DB0"/><circle cx="190" cy="30" r="7" fill="#006DB0"/><circle cx="10" cy="50" r="7" fill="#006DB0"/><circle cx="30" cy="50" r="7" fill="#006DB0"/><circle cx="50" cy="50" r="7" fill="#006DB0"/><circle cx="70" cy="50" r="7" fill="#006DB0"/><circle cx="90" cy="50" r="7" fill="#006DB0"/><circle cx="110" cy="50" r="7" fill="#CFDBE4"/><circle cx="130" cy="50" r="7" fill="#CFDBE4"/><circle cx="150" cy="50" r="7" fill="#CFDBE4"/><circle cx="170" cy="50" r="7" fill="#CFDBE4"/><circle cx="190" cy="50" r="7" fill="#CFDBE4"/><circle cx="10" cy="70" r="7" fill="#CFDBE4"/><circle cx="30" cy="70" r="7" fill="#CFDBE4"/><circle cx="50" cy="70" r="7" fill="#CFDBE4"/><circle cx="70" cy="70" r="7" fill="#CFDBE4"/><circle cx="90" cy="70" r="7" fill="#CFDBE4"/><circle cx="110" cy="70" r="7" fill="#CFDBE4"/><circle cx="130" cy="70" r="7" fill="#CFDBE4"/><circle cx="150" cy="70" r="7" fill="#CFDBE4"/><circle cx="170" cy="70" r="7" fill="#CFDBE4"/><circle cx="190" cy="70" r="7" fill="#CFDBE4"/><circle cx="10" cy="90" r="7" fill="#CFDBE4"/><circle cx="30" cy="90" r="7" fill="#CFDBE4"/><circle cx="50" cy="90" r="7" fill="#CFDBE4"/><circle cx="70" cy="90" r="7" fill="#CFDBE4"/><circle cx="90" cy="90" r="7" fill="#CFDBE4"/><circle cx="110" cy="90" r="7" fill="#CFDBE4"/><circle cx="130" cy="90" r="7" fill="#CFDBE4"/><circle cx="150" cy="90" r="7" fill="#CFDBE4"/><circle cx="170" cy="90" r="7" fill="#CFDBE4"/><circle cx="190" cy="90" r="7" fill="#CFDBE4"/><circle cx="10" cy="110" r="7" fill="#CFDBE4"/><circle cx="30" cy="110" r="7" fill="#CFDBE4"/><circle cx="50" cy="110" r="7" fill="#CFDBE4"/><circle cx="70" cy="110" r="7" fill="#CFDBE4"/><circle cx="90" cy="110" r="7" fill="#CFDBE4"/><circle cx="110" cy="110" r="7" fill="#CFDBE4"/><circle cx="130" cy="110" r="7" fill="#CFDBE4"/><circle cx="150" cy="110" r="7" fill="#CFDBE4"/><circle cx="170" cy="110" r="7" fill="#CFDBE4"/><circle cx="190" cy="110" r="7" fill="#CFDBE4"/><circle cx="10" cy="130" r="7" fill="#CFDBE4"/><circle cx="30" cy="130" r="7" fill="#CFDBE4"/><circle cx="50" cy="130" r="7" fill="#CFDBE4"/><circle cx="70" cy="130" r="7" fill="#CFDBE4"/><circle cx="90" cy="130" r="7" fill="#CFDBE4"/><circle cx="110" cy="130" r="7" fill="#CFDBE4"/><circle cx="130" cy="130" r="7" fill="#CFDBE4"/><circle cx="150" cy="130" r="7" fill="#CFDBE4"/><circle cx="170" cy="130" r="7" fill="#CFDBE4"/><circle cx="190" cy="130" r="7" fill="#CFDBE4"/><circle cx="10" cy="150" r="7" fill="#CFDBE4"/><circle cx="30" cy="150" r="7" fill="#CFDBE4"/><circle cx="50" cy="150" r="7" fill="#CFDBE4"/><circle cx="70" cy="150" r="7" fill="#CFDBE4"/><circle cx="90" cy="150" r="7" fill="#CFDBE4"/><circle cx="110" cy="150" r="7" fill="#CFDBE4"/><circle cx="130" cy="150" r="7" fill="#CFDBE4"/><circle cx="150" cy="150" r="7" fill="#CFDBE4"/><circle cx="170" cy="150" r="7" fill="#CFDBE4"/><circle cx="190" cy="150" r="7" fill="#CFDBE4"/><circle cx="10" cy="170" r="7" fill="#CFDBE4"/><circle cx="30" cy="170" r="7" fill="#CFDBE4"/><circle cx="50" cy="170" r="7" fill="#CFDBE4"/><circle cx="70" cy="170" r="7" fill="#CFDBE4"/><circle cx="90" cy="170" r="7" fill="#CFDBE4"/><circle cx="110" cy="170" r="7" fill="#CFDBE4"/><circle cx="130" cy="170" r="7" fill="#CFDBE4"/><circle cx="150" cy="170" r="7" fill="#CFDBE4"/><circle cx="170" cy="170" r="7" fill="#CFDBE4"/><circle cx="190" cy="170" r="7" fill="#CFDBE4"/><circle cx="10" cy="190" r="7" fill="#CFDBE4"/><circle cx="30" cy="190" r="7" fill="#CFDBE4"/><circle cx="50" cy="190" r="7" fill="#CFDBE4"/><circle cx="70" cy="190" r="7" fill="#CFDBE4"/><circle cx="90" cy="190" r="7" fill="#CFDBE4"/><circle cx="110" cy="190" r="7" fill="#CFDBE4"/><circle cx="130" cy="190" r="7" fill="#CFDBE4"/><circle cx="150" cy="190" r="7" fill="#CFDBE4"/><circle cx="170" cy="190" r="7" fill="#CFDBE4"/><circle cx="190" cy="190" r="7" fill="#CFDBE4"/></svg>25 omissions</div><div><svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="#C31F38"/><circle cx="30" cy="10" r="7" fill="#C31F38"/><circle cx="50" cy="10" r="7" fill="#CFDBE4"/><circle cx="70" cy="10" r="7" fill="#CFDBE4"/><circle cx="90" cy="10" r="7" fill="#CFDBE4"/><circle cx="110" cy="10" r="7" fill="#CFDBE4"/><circle cx="130" cy="10" r="7" fill="#CFDBE4"/><circle cx="150" cy="10" r="7" fill="#CFDBE4"/><circle cx="170" cy="10" r="7" fill="#CFDBE4"/><circle cx="190" cy="10" r="7" fill="#CFDBE4"/><circle cx="10" cy="30" r="7" fill="#CFDBE4"/><circle cx="30" cy="30" r="7" fill="#CFDBE4"/><circle cx="50" cy="30" r="7" fill="#CFDBE4"/><circle cx="70" cy="30" r="7" fill="#CFDBE4"/><circle cx="90" cy="30" r="7" fill="#CFDBE4"/><circle cx="110" cy="30" r="7" fill="#CFDBE4"/><circle cx="130" cy="30" r="7" fill="#CFDBE4"/><circle cx="150" cy="30" r="7" fill="#CFDBE4"/><circle cx="170" cy="30" r="7" fill="#CFDBE4"/><circle cx="190" cy="30" r="7" fill="#CFDBE4"/><circle cx="10" cy="50" r="7" fill="#CFDBE4"/><circle cx="30" cy="50" r="7" fill="#CFDBE4"/><circle cx="50" cy="50" r="7" fill="#CFDBE4"/><circle cx="70" cy="50" r="7" fill="#CFDBE4"/><circle cx="90" cy="50" r="7" fill="#CFDBE4"/><circle cx="110" cy="50" r="7" fill="#CFDBE4"/><circle cx="130" cy="50" r="7" fill="#CFDBE4"/><circle cx="150" cy="50" r="7" fill="#CFDBE4"/><circle cx="170" cy="50" r="7" fill="#CFDBE4"/><circle cx="190" cy="50" r="7" fill="#CFDBE4"/><circle cx="10" cy="70" r="7" fill="#CFDBE4"/><circle cx="30" cy="70" r="7" fill="#CFDBE4"/><circle cx="50" cy="70" r="7" fill="#CFDBE4"/><circle cx="70" cy="70" r="7" fill="#CFDBE4"/><circle cx="90" cy="70" r="7" fill="#CFDBE4"/><circle cx="110" cy="70" r="7" fill="#CFDBE4"/><circle cx="130" cy="70" r="7" fill="#CFDBE4"/><circle cx="150" cy="70" r="7" fill="#CFDBE4"/><circle cx="170" cy="70" r="7" fill="#CFDBE4"/><circle cx="190" cy="70" r="7" fill="#CFDBE4"/><circle cx="10" cy="90" r="7" fill="#CFDBE4"/><circle cx="30" cy="90" r="7" fill="#CFDBE4"/><circle cx="50" cy="90" r="7" fill="#CFDBE4"/><circle cx="70" cy="90" r="7" fill="#CFDBE4"/><circle cx="90" cy="90" r="7" fill="#CFDBE4"/><circle cx="110" cy="90" r="7" fill="#CFDBE4"/><circle cx="130" cy="90" r="7" fill="#CFDBE4"/><circle cx="150" cy="90" r="7" fill="#CFDBE4"/><circle cx="170" cy="90" r="7" fill="#CFDBE4"/><circle cx="190" cy="90" r="7" fill="#CFDBE4"/><circle cx="10" cy="110" r="7" fill="#CFDBE4"/><circle cx="30" cy="110" r="7" fill="#CFDBE4"/><circle cx="50" cy="110" r="7" fill="#CFDBE4"/><circle cx="70" cy="110" r="7" fill="#CFDBE4"/><circle cx="90" cy="110" r="7" fill="#CFDBE4"/><circle cx="110" cy="110" r="7" fill="#CFDBE4"/><circle cx="130" cy="110" r="7" fill="#CFDBE4"/><circle cx="150" cy="110" r="7" fill="#CFDBE4"/><circle cx="170" cy="110" r="7" fill="#CFDBE4"/><circle cx="190" cy="110" r="7" fill="#CFDBE4"/><circle cx="10" cy="130" r="7" fill="#CFDBE4"/><circle cx="30" cy="130" r="7" fill="#CFDBE4"/><circle cx="50" cy="130" r="7" fill="#CFDBE4"/><circle cx="70" cy="130" r="7" fill="#CFDBE4"/><circle cx="90" cy="130" r="7" fill="#CFDBE4"/><circle cx="110" cy="130" r="7" fill="#CFDBE4"/><circle cx="130" cy="130" r="7" fill="#CFDBE4"/><circle cx="150" cy="130" r="7" fill="#CFDBE4"/><circle cx="170" cy="130" r="7" fill="#CFDBE4"/><circle cx="190" cy="130" r="7" fill="#CFDBE4"/><circle cx="10" cy="150" r="7" fill="#CFDBE4"/><circle cx="30" cy="150" r="7" fill="#CFDBE4"/><circle cx="50" cy="150" r="7" fill="#CFDBE4"/><circle cx="70" cy="150" r="7" fill="#CFDBE4"/><circle cx="90" cy="150" r="7" fill="#CFDBE4"/><circle cx="110" cy="150" r="7" fill="#CFDBE4"/><circle cx="130" cy="150" r="7" fill="#CFDBE4"/><circle cx="150" cy="150" r="7" fill="#CFDBE4"/><circle cx="170" cy="150" r="7" fill="#CFDBE4"/><circle cx="190" cy="150" r="7" fill="#CFDBE4"/><circle cx="10" cy="170" r="7" fill="#CFDBE4"/><circle cx="30" cy="170" r="7" fill="#CFDBE4"/><circle cx="50" cy="170" r="7" fill="#CFDBE4"/><circle cx="70" cy="170" r="7" fill="#CFDBE4"/><circle cx="90" cy="170" r="7" fill="#CFDBE4"/><circle cx="110" cy="170" r="7" fill="#CFDBE4"/><circle cx="130" cy="170" r="7" fill="#CFDBE4"/><circle cx="150" cy="170" r="7" fill="#CFDBE4"/><circle cx="170" cy="170" r="7" fill="#CFDBE4"/><circle cx="190" cy="170" r="7" fill="#CFDBE4"/><circle cx="10" cy="190" r="7" fill="#CFDBE4"/><circle cx="30" cy="190" r="7" fill="#CFDBE4"/><circle cx="50" cy="190" r="7" fill="#CFDBE4"/><circle cx="70" cy="190" r="7" fill="#CFDBE4"/><circle cx="90" cy="190" r="7" fill="#CFDBE4"/><circle cx="110" cy="190" r="7" fill="#CFDBE4"/><circle cx="130" cy="190" r="7" fill="#CFDBE4"/><circle cx="150" cy="190" r="7" fill="#CFDBE4"/><circle cx="170" cy="190" r="7" fill="#CFDBE4"/><circle cx="190" cy="190" r="7" fill="#CFDBE4"/></svg>2 invented</div></div>
+    <p>25 of 100 reviewed summaries with omissions, 2 with invented content</p>
+  </div>
+  <div class="abs col s2" style="left:1270px">
+    <div class="form-line">Kontrastmittelreaktion<br><b>nein</b></div>
+    <div class="form-line">Kontrastmittelreaktion<br><b class="empty">nicht dokumentiert</b></div>
+    <p>“Not documented” is different from “no”</p>
+  </div>
+  <p class="source" style="width:520px;top:890px">Grothey et al., Commun Med 2025</p>
+  <p class="source s1" style="left:704px;width:520px;top:890px">Grolleau et al., JAMA Netw Open 2026</p>
+  <p class="source s2" style="left:1270px;width:512px;top:890px">Murin, arXiv 2026, preprint. Form lines invented</p>
+  <aside class="notes">
+    <p>Grothey et al., Commun Med 5:96, 03/2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC11958830/. Error analysis, German prostate pathology: pN1 was reported when only Pn1 was in the text and pN was missing. A reader with the source line next to the value can spot this at once.</p>
+    <p>Grolleau et al., Physician-Reported Safety Outcomes of AI-Generated Hospital Course Summaries, JAMA Netw Open, 05/2026, https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2848785. Single-arm pilot at Stanford, 384 discharges, 11 physicians, 100 reviewed. Omissions 25%, inaccuracies 20%, hallucinations 2%, no severe harm. What is missing is the larger problem, and source links do not reveal it.</p>
+    <p>Murin, arXiv 2606.05970, 06/2026, preprint, https://arxiv.org/abs/2606.05970. MIMIC-IV, 17 fields, three prompt wordings, two model sizes. Merging "no" and "not documented" removed most disagreement between prompts. Single author, no human reference, abstract read. Define "not documented" in the codebook.</p>
+  </aside>
+</section>
+
+<section class="duo" data-chapter="2" data-steps="1">
+  <h2>Person plus model</h2>
+  <div class="abs" style="left:138px;top:350px;width:760px">
+    <p class="lead">Correct answers</p>
+    <div class="change"><span>68%</span><svg width="110" height="40" viewBox="0 0 110 40" aria-hidden="true"><path d="M4 20 H100 M84 6 L102 20 L84 34"/></svg><b>89%</b></div>
+    <div class="strip two"><i class="from" style="--w:68%"></i><i class="to" style="--w:89%"></i></div>
+  </div>
+  <div class="abs s1" style="left:1022px;top:350px;width:760px">
+    <p class="lead">Minutes per patient</p>
+    <div class="change"><span>9.4</span><svg width="110" height="40" viewBox="0 0 110 40" aria-hidden="true"><path d="M4 20 H100 M84 6 L102 20 L84 34"/></svg><b>3.6</b></div>
+    <div class="strip two"><i class="from" style="--w:94%"></i><i class="to" style="--w:36%"></i></div>
+  </div>
+  <p class="abs" style="left:138px;top:730px;width:1644px;font-size:38px">By hand, then with pre-filled answers from a local model that a clinician checks.</p>
+  <p class="source">38 patients, four clinicians, one centre. Neuse et al., BMC Med Inform Decis Mak 2026</p>
+  <aside class="notes">
+    <p>Neuse et al., Cutting chart-review time and improving database accuracy in IBD with human-in-the-loop LLMs, BMC Med Inform Decis Mak, 08/2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC13779612/. Mount Sinai, four clinicians, 38 patients, MedGemma 27B. Manual 142/207 (68%), assisted 185/207 (89%); median 9.4 and 3.6 minutes per patient. Invented values 1.2% (13/1063). Reference by one clinician. Values the model missed stay invisible to the reviewer.</p>
+    <p>Say if asked: in a separate benchmark the model alone averaged 69.3%. It must not be compared directly with 68% and 89%.</p>
+  </aside>
+</section>
+
 <!-- NEXT -->
 </div>
 </div>
