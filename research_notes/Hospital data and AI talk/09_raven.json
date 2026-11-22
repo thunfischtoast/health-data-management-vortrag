@@ -1,0 +1,138 @@
+{
+  "topic": "RACOON-RAVEN: what the code does, chain of proof, screens and walkthrough",
+  "summary": "RACOON-RAVEN turns uploaded CSV/XLSX tables, including a column with whole report texts, into filled study templates with one record per patient and timepoint. Every source writes a proposal with its cell or its quoted passage; the server checks that the quote is really in the text (exact except case and whitespace, first occurrence), and values that only a model read always wait for a person or a bulk accept. Conflicts, flags, a field history and a trace of every model call make a value checkable back to the uploaded row. The chain ends there: there is no PDF or ORBIS connection, a found quote does not prove that the value is right, and missed values leave no mark. Code state: main a7fa7ec, 2026-11-22; read, not run.",
+  "concepts": [
+    {"name": "Study", "plain": "One research project that holds visits, forms, patients, inputs and records."},
+    {"name": "Timepoint", "plain": "One planned visit, for example T0 baseline or T1 follow-up, optionally with a day offset and a window."},
+    {"name": "Template", "plain": "The empty form: questions with type, unit, allowed answers and a hint for the model. Stored as a FHIR R4 Questionnaire with draft, active and retired versions."},
+    {"name": "Patient / subject", "plain": "One person of the cohort with a study pseudonym and, for matching, name, birth date, sex and identifiers."},
+    {"name": "Input", "plain": "One uploaded CSV or XLSX sheet. One of its columns may hold full report texts."},
+    {"name": "Mapping", "plain": "Which column answers which question, which cell words mean which answer option, and which column is the report text."},
+    {"name": "Match review", "plain": "A queue for rows whose patient or timepoint is not certain. A person decides."},
+    {"name": "Record", "plain": "One filled form: one patient, one timepoint, one template."},
+    {"name": "Proposal", "plain": "What one source says about one question, with the place it came from. Several can stand side by side."},
+    {"name": "Field state", "plain": "proposed, auto accepted, accepted, corrected or rejected."},
+    {"name": "Conflict", "plain": "Usable sources disagree, or new evidence disagrees with an earlier decision."},
+    {"name": "Flag", "plain": "A proposal with a defect: quote not found, value needs mapping, invalid value."},
+    {"name": "Reference date", "plain": "A date of the record. Sources can be sorted by how many days they are away from it."},
+    {"name": "Trace", "plain": "The stored questions to and answers from the language model for one row."},
+    {"name": "Export", "plain": "CSV or XLSX, one row per record, with value, state and source per question, plus a code book."}
+  ],
+  "pipeline": [
+    {"step": "Set up the study", "what": "Create study, timepoints, template (editor or Questionnaire JSON import) and cohort (import wizard).", "evidence": "README.md Screens; backend/racoon_raven/services/templates.py; services/cohort.py"},
+    {"step": "Upload", "what": "CSV or XLSX only, first row is the header, at most 10,000 rows and 500 columns. File goes to object storage with SHA-256, each row is stored as raw cells.", "evidence": "backend/racoon_raven/services/cohort_file.py:30-37, 89-100; services/inputs.py:181-209; fhir/constants.py:22-24"},
+    {"step": "Mapping", "what": "Four steps: keys, columns, values, summary. Suggestions come from the server, a person saves. A report text column and a strategy can be chosen.", "evidence": "README.md Mapping wizard; frontend/src/routes/studies/[id]/inputs/[inputId]/+page.svelte:599"},
+    {"step": "LLM extraction", "what": "Background job sends each report text with the question list to the configured model and stores value plus quotes per question.", "evidence": "backend/racoon_raven/services/input_processing.py:165-194; llm/extractor.py:76-97; strategies/prompt.py:5-45"},
+    {"step": "Matching", "what": "Pseudonym, then patient ID, contradictions refused; fuzzy matches only as suggestions. Timepoint by code, date window or fixed.", "evidence": "backend/racoon_raven/services/input_matching.py:97-141, 186-208"},
+    {"step": "Proposals and state", "what": "Cells and model answers become proposals; the state of the field is derived from them.", "evidence": "backend/racoon_raven/services/ingest.py:60-90, 199-241, 363-394; services/field_state.py:75-106"},
+    {"step": "Review", "what": "Accept, correct, reject, reopen per field; conflict view; bulk accept of agreeing values; record closes when nothing is open.", "evidence": "backend/racoon_raven/services/review.py:53-180"},
+    {"step": "Export", "what": "Value, state, source per question; optional choice of the document closest to a reference date; code book and documents export.", "evidence": "backend/racoon_raven/services/export.py:72-176, 295-347; services/export_table.py:98-171"}
+  ],
+  "provenance": [
+    {"mechanism": "Proposal instead of direct value", "how": "Unique per input row, question and method (mapping or llm); stores value, raw text, location, flags and, for llm, the run.", "evidence": "backend/racoon_raven/db/models.py:432-471", "limit": "Reprocessing updates or deletes proposals in place (services/ingest.py:176-195); older proposal states are not kept."},
+    {"mechanism": "Source cell", "how": "Mapped values store column name and row number plus the raw cell text.", "evidence": "backend/racoon_raven/services/ingest.py:363-381", "limit": "Blank rows are dropped before numbering (services/cohort_file.py:90, services/inputs.py:204), so the number can differ from Excel. Dates and whole numbers are normalised on reading (cohort_file.py:76-86)."},
+    {"mechanism": "Quotes demanded from the model", "how": "JSON schema requires value and a list of verbatim, contiguous quotes for every question; null is allowed.", "evidence": "backend/racoon_raven/llm/schema.py:7-33; strategies/prompt.py:5-20", "limit": "Providers that refuse the schema get plain json_object for the rest of the job (llm/client.py:82-84). No confidence score."},
+    {"mechanism": "Quote verification", "how": "Substring search after collapsing whitespace and folding case, mapped back to offsets in the original text. Not fuzzy. First occurrence.", "evidence": "backend/racoon_raven/llm/quotes.py:4-33; services/ingest.py:384-394", "limit": "Proves presence of the words, not that they support the value. Short quotes can point to the wrong occurrence."},
+    {"mechanism": "Flag quote_not_found", "how": "Set when no quote of the answer was located, including an empty quote list. Flagged proposals never auto-accept, never count for agreement and keep the field open.", "evidence": "backend/racoon_raven/services/ingest.py:225-237; services/field_state.py:84-87; services/open_fields.py:22-32", "limit": "One located quote is enough; additional invented quotes only get a small marker. A reviewer may still accept a flagged proposal (field_state.py:54-61)."},
+    {"mechanism": "Type and code check", "how": "Values are coerced to the type of the question; unknown model codes become invalid_value.", "evidence": "backend/racoon_raven/services/coercion.py:22-120; services/ingest.py:222-224", "limit": "No plausibility ranges. Conversions by the model (cm to mm) are not recomputed."},
+    {"mechanism": "Automatic acceptance", "how": "All unflagged proposals agree and at least one is a mapped cell. Model-only values stay proposed.", "evidence": "backend/racoon_raven/services/field_state.py:97-106", "limit": "A single mapped cell satisfies this rule alone; no second source and no human look is needed."},
+    {"mechanism": "Conflict", "how": "Raised when unflagged proposals differ. Human decisions are not overwritten; later disagreement raises the conflict again.", "evidence": "backend/racoon_raven/services/field_state.py:88-106", "limit": "Until decided, the field shows the oldest value (mapping first). Flagged proposals do not raise a conflict."},
+    {"mechanism": "Open fields and record closing", "how": "Open means conflict, or only proposed, or undecided with a flag. A record cannot be closed while a field is open and reopens on new evidence.", "evidence": "backend/racoon_raven/services/open_fields.py:12-47; services/review.py:150-180; services/ingest.py:340-342", "limit": "Empty fields are not open. A record can be reviewed with values the model missed. Auto accepted values need no look."},
+    {"mechanism": "Bulk accept", "how": "Accepts every agreeing, unflagged proposed field in the current filter and names the user in the history.", "evidence": "backend/racoon_raven/services/review.py:105-148, 254-264", "limit": "Includes model-only values nobody looked at; stored reason review:bulk_accept is not shown in the UI history (frontend/src/lib/records/format.ts:68-72)."},
+    {"mechanism": "History", "how": "One event per state or value change with from, to, value, user, time and reason.", "evidence": "backend/racoon_raven/db/models.py:474-492; services/review.py:83-92; services/ingest.py:277-289", "limit": "Does not store the chosen proposal. Record-level close and reopen are not events (review.py:163-180). Append-only by convention; no trigger found."},
+    {"mechanism": "Trace of model calls", "how": "Run: model, host, strategy and version, template version, text SHA-256, status. Step: messages, schema, raw answer, error, duration, tokens.", "evidence": "backend/racoon_raven/db/models.py:288-331; llm/extractor.py:38-66, 146-176; frontend/src/lib/components/RowTrace.svelte", "limit": "Shown on the input page per row, not linked from a field. Retries, fallback mode, model weights hash and reasoning are not recorded."},
+    {"mechanism": "Reference date", "how": "Sort sources by signed days between document date and a reference date; the export can settle open conflicts with the closest document.", "evidence": "frontend/src/lib/review/sourceOrder.ts:3-14; backend/racoon_raven/services/export.py:295-347", "limit": "Depends on a date column in the table. In the review it only sorts; in the export it can pick a value without a human decision (state stays proposed)."},
+    {"mechanism": "Source in the export", "how": "Document ID, else filename:row, or manual for a free correction.", "evidence": "backend/racoon_raven/services/export_table.py:159-171", "limit": "No quote, offsets, model, reviewer or time. Empty if the proposal behind an accepted value was withdrawn. Contains unreviewed values with their state."},
+    {"mechanism": "FHIR response", "how": "Auto accepted, accepted and corrected values are written to a QuestionnaireResponse.", "evidence": "backend/racoon_raven/services/responses.py:20, 69-97", "limit": "No provenance in it; status is always in-progress (line 48)."},
+    {"mechanism": "Stored original", "how": "Uploaded file kept in object storage with SHA-256.", "evidence": "backend/racoon_raven/services/inputs.py:182-199", "limit": "No code reads it back or rechecks the hash; the viewer sees stored cells. The clinical document behind the table is not linked."}
+  ],
+  "gaps_vs_notes": [
+    {"note": "Insert unstructured letters", "code": "Only as text in a CSV/XLSX column or one pasted report (needs a configured provider). No PDF, DOCX, scan or OCR; explicitly out of scope in docs/superpowers/specs/2026-09-21-llm-ingestion-design.md section 0; parser refuses other files (cohort_file.py:30-37)."},
+    {"note": "Semi-structured Excel tables", "code": "Yes, one sheet per input, header in the first row, one row per patient/timepoint or per letter."},
+    {"note": "Link with a structured report template", "code": "Yes, FHIR R4 Questionnaire. Mapping is suggested, a person saves it."},
+    {"note": "System fills it automatically", "code": "It fills proposals. Values only read by a model stay proposed until a person accepts (singly or in bulk). Mapped cells without disagreement are accepted automatically."},
+    {"note": "UI shows where a value comes from", "code": "Yes: cell highlight and marked quote in the text stored with the row. Not in the original PDF or in ORBIS; there is no ORBIS connection."},
+    {"note": "RACOON-COMBINE", "code": "No such template in the repository (tracked text files searched). Only the invented CT thorax staging template."}
+  ],
+  "screens": [
+    {"name": "Record page", "route": "/studies/{id}/records/{recordId}", "why": "Core picture: source left, form right. Click a field: its cell gets an aqua border, its quote turns from yellow to solid aqua and scrolls into view. Click a marked passage: the field that quoted it is selected. Best traceability moment.", "evidence": "frontend/src/routes/studies/[id]/records/[recordId]/+page.svelte:374-604; frontend/src/lib/components/SourcePane.svelte:63-71, 96-147, 194-227"},
+    {"name": "Conflict view", "route": "/studies/{id}/conflicts", "why": "One disagreement at a time: one card per distinct value with file, row, document ID, date, distance and the quote in its sentence. Keys 1 to 9 decide.", "evidence": "frontend/src/routes/studies/[id]/conflicts/+page.svelte:302-468"},
+    {"name": "Mapping wizard", "route": "/studies/{id}/inputs/{inputId}", "why": "Shows how a table meets the form: columns linked to questions, one column marked as report text.", "evidence": "frontend/src/routes/studies/[id]/inputs/[inputId]/+page.svelte (steps Keys, Columns, Values, Summary; text column at 599)"},
+    {"name": "Trace", "route": "/studies/{id}/inputs/{inputId} (per row, Trace disclosure)", "why": "The exact question to the model and its exact answer, with model, duration and tokens.", "evidence": "frontend/src/lib/components/RowTrace.svelte:55-90; inputs/[inputId]/+page.svelte:453"},
+    {"name": "Records list", "route": "/studies/{id}/records", "why": "Overview for the patient by timepoint grid with open, auto accepted, proposed, decided, conflict and flagged counts; filter 'needs attention'.", "evidence": "frontend/src/routes/studies/[id]/records/+page.svelte:227-348"},
+    {"name": "Template editor", "route": "/studies/{id}/templates/{qid}", "why": "Optional: item tree, preview and the extraction hint per question, which makes the expert's definition visible.", "evidence": "README.md Screens; frontend/src/lib/components/ItemProperties.svelte"}
+  ],
+  "design_tokens": {
+    "source": "frontend/src/lib/styles/tokens.css and controls.css (copied from a NUM RACOON design board). No screenshots or mocks are tracked in git.",
+    "fonts": {"sans": "Montserrat, Helvetica Neue, Arial, sans-serif", "mono": "IBM Plex Mono (IDs, code)", "weights": [400, 500, 600, 700, 800]},
+    "type_sizes_px": {"overline_tag": 11, "label_caption": 12, "body": 13, "subheading": 14, "heading": 16, "title": 22, "display": 36},
+    "brand": {"aqua": "#42d1b8", "aqua20": "#d9f6f1", "aqua60": "#8ee3d4", "aquaDeep": "#0f7a69", "slate": "#485156", "rose": "#ea5167", "rose20": "#fbdce1", "rose60": "#f297a4", "roseDeep": "#c31f38", "gold": "#ffcc00", "gold20": "#fff5cc", "gold60": "#ffe066", "goldDeep": "#7a5c00"},
+    "surfaces": {"page": "#f4f6f6", "card": "#ffffff", "sunken": "#eaedee", "selectedField": "#d9f6f1", "borderSubtle": "#eaedee", "border": "#dce0e1", "borderStrong": "#c4cacc"},
+    "text": {"primary": "#23282b", "secondary": "#5b6367", "muted": "#737c80"},
+    "states": {"accepted_autoAccepted_reviewed": {"fg": "#0f7a69", "bg": "#d9f6f1", "border": "#8ee3d4"}, "proposed_corrected_open_llmTag": {"fg": "#7a5c00", "bg": "#fff5cc", "border": "#ffe066"}, "conflict_flag_rejected": {"fg": "#c31f38", "bg": "#fbdce1", "border": "#f297a4"}},
+    "evidence_highlight": {"quote_idle": "background #fff5cc, radius 3px", "quote_hover": "background #ffe066", "quote_of_selected_field": "background #42d1b8, text #23282b", "cell_of_selected_field": "background #d9f6f1, border 1px #42d1b8", "selected_field_row": "background #d9f6f1, outline 2px #0f7a69, radius 4px", "open_field_row": "left border 3px #ffe066", "selected_outline": "2px"},
+    "layout_px": {"sidebar": 224, "topbar": 48, "content_max": 1160, "wide_options": [1440, 1920, "full"], "card_radius": 6, "control_radius": 4, "control_height": 32, "small_control_height": 26, "card_padding": 16, "tag_radius": "pill"},
+    "record_page": "Bar with 'LC-009 · T0', review tag, Keys, Previous, Next, primary aqua button 'Mark reviewed'; fact card (pseudonym, timepoint, template, open fields); two columns with draggable divider: left sticky source cards 'baseline.xlsx · row 10' with label/value grid and the report below a line, right one card per form section. Each field: label, value with unit, state pill, buttons Accept, Correct, Reject; below it proposal lines ('baseline.xlsx · Tumorgröße (mm) · row 10: 48'), LLM pill, quotes indented with a left line and German quotation marks, History disclosure.",
+    "ui_language": "English labels, German data content",
+    "state_labels": ["empty", "proposed", "auto accepted", "accepted", "corrected", "rejected"],
+    "keys": {"j/k": "next or previous field", "n/N": "next or previous open field", "a": "accept", "1-9": "accept that proposal", "x": "reject", "e": "correct", "u": "undo", "r": "mark reviewed and go on", "[ ]": "previous or next record", "?": "help"},
+    "motion": "120 to 180 ms, cubic-bezier(0.2, 0, 0, 1)",
+    "dark_theme": "Tokens exist under [data-theme=dark]"
+  },
+  "walkthrough": [
+    {"step": 1, "title": "Start with the question, not the document", "viewer_sees": "Empty form 'CT thorax staging' with four sections; the hint at tumour size: largest axial diameter in mm, no lymph nodes, no prior values.", "spoken_point": "The researcher decides what to ask and how it is defined. The form comes first."},
+    {"step": 2, "title": "Put the hospital's table in", "viewer_sees": "baseline.xlsx drops in. Lines connect columns to questions; the column 'Befund' (report) gets the mark 'report text'.", "spoken_point": "The usual Excel list and the free text travel together. No PDF yet: the text must already be text."},
+    {"step": 3, "title": "Every source makes a proposal", "viewer_sees": "Form of invented patient LC-009, T0 fills. Examination date: cell and text agree, green 'auto accepted'. cT stage T2, contrast yes, no distant metastases: yellow 'proposed' with LLM tag.", "spoken_point": "What only a model has read is never accepted by itself."},
+    {"step": 4, "title": "Click a value, see the proof", "viewer_sees": "Click on 'T2'; in the report 'cT2a' turns from yellow to aqua. Staged variant: the model's quote is not in the text, red tag 'quote not found'.", "spoken_point": "The system searches the quote itself. If the words are not in the letter, it says so."},
+    {"step": 5, "title": "Two sources disagree", "viewer_sees": "Conflict cards (order may vary): 48 mm, baseline.xlsx, Tumorgröße (mm), row 10; 38 mm, LLM, '...Raumforderung im linken Oberlappen, 38 mm...'. The 38 mm card is accepted. History: proposed to accepted, name, time.", "spoken_point": "Most likely a typing error in the list. Without the second source nobody would have noticed. A person decides and signs."},
+    {"step": 6, "title": "From the table back to the sentence", "viewer_sees": "Export row: 38 | accepted | baseline.xlsx:10. Arrow back to record, quote, report. Then the Trace with the exact question and answer of the model.", "spoken_point": "Chain of proof: number, decision, passage, document row. Proven: the words are there. Judged by a person: what they mean. Not covered: what was overlooked."}
+  ],
+  "walkthrough_data": {
+    "origin": "samples/lung-ct, documented as invented (samples/lung-ct/README.md:3). Model answers are the expected ones; the model was not run for this note.",
+    "patient": "LC-009, invented name Petrović, T0, 10.02.2026, squamous cell carcinoma in the histology column, size column 48",
+    "report_de": "CT Thorax mit KM vom 10.02.2026.\nBefund: Raumforderung im linken Oberlappen, 38 mm, mit Kontakt zum Aortenbogen ohne sichere Infiltration. Links hilär Lymphknoten 13 mm. Kein Pleuraerguss. Keine suspekten Herde in Leber und Nebennieren. Alte Rippenserienfraktur rechts.\nBeurteilung: Bronchialkarzinom links apikal, cT2a, hiläre Lymphknotenmetastase möglich. Keine Fernmetastasen.",
+    "report_en_for_slide": "CT chest with contrast, 10 Feb 2026. Findings: Mass in the left upper lobe, 38 mm, in contact with the aortic arch, no definite infiltration. Left hilar lymph node 13 mm. No pleural effusion. No suspicious lesions in liver or adrenal glands. Old serial rib fractures on the right. Impression: Lung cancer, left apical, cT2a, hilar lymph node metastasis possible. No distant metastases.",
+    "other_useful_rows": [
+      "LC-002 T0: report '5,2 cm', cell 52, agree after conversion to mm, auto accepted",
+      "LC-011 T0: report names prior 29 mm and current 36 mm, cell empty",
+      "Follow-up row 'Lehman' without pseudonym: fuzzy candidate Lehmann LC-010, waits for a person",
+      "LC-006 T0: 'NSCLC NOS' has no option, flag needs_value_mapping"
+    ]
+  },
+  "demo_setup": "Python 3.14, uv, Node 24, Docker Desktop, just, Git Bash. cp .env.example .env; just infra-up; just install; just migrate; just dev (API 8000, worker, frontend http://localhost:5173, Keycloak 8080, dev user 'annotator' in infra/keycloak/racoon-realm.json). There is no seed script: follow the click path in samples/lung-ct/README.md (study with T0/T1, import template, cohort.xlsx, baseline.xlsx, followup.xlsx). Extraction needs a local OpenAI-compatible model via RR_LLM_BASE_URL and RR_LLM_MODEL; sample README measured about 7 s per report without thinking and 90 s with (qwen3.5-9b). frontend/e2e/fake-llm.mjs is a fixed-rule stand-in for layout only. Not started or tested for this note.",
+  "llm_and_data_flow": {
+    "strategies": ["single_call (default, v2)", "per_group (v2)"],
+    "provider": "One OpenAI-compatible endpoint from server settings; no default URL or model; off without both; temperature 0; timeout 120 s; concurrency 2",
+    "data": "Full report text is sent unchanged to the configured endpoint. Local operation is possible (Ollama, llama.cpp), not enforced. No de-identification. Prompt and text are stored in the trace.",
+    "auth": "Keycloak OIDC, RS256 JWT; no roles, no study membership",
+    "privacy": "Per-study pseudonyms, but names, birth dates and IDs are stored and exported (services/export.py:361-377). UI loads fonts from Google Fonts (tokens.css:6)."
+  },
+  "upstream": {
+    "url": "https://github.com/thunfischtoast/raven",
+    "checked": "page and README read via web; gh not installed",
+    "what": "RAVEN, Radiological Analysis and Validation Engine with NLP; MIT; FastAPI, Postgres, Svelte; extracts fields from free-text radiology reports and lets people rate them; Ollama or OpenRouter; single API key; research artifact, not a medical device",
+    "inherited_concepts": ["schema generated from a template", "prompting strategy as code", "quote per field", "false only when clearly negated", "per-field human rating", "trace per call"],
+    "dropped": ["fuzzy quote matching", "JSON repair", "guidance inside strategy files"],
+    "new": ["full re-implementation", "studies and timepoints", "cohort and patient matching", "spreadsheet mapping", "proposals from several sources, conflicts, flags", "conflict view and reference date", "FHIR Questionnaire templates", "OIDC login", "exports with state and source"],
+    "paper": "Römer et al., RAVEN: An open-source assessment framework for automated entity extraction in structured radiology reporting, Informatics in Medicine Unlocked 63, 101755 (2026), doi:10.1016/j.imu.2026.101755. Search snippet only (publisher 403): 5,355 items rated by two medical researchers, 11 error categories, Mistral-24B better than Llama-70B by 22.6 %. Not results of RACOON-RAVEN."
+  },
+  "maturity": {
+    "commits": 191, "period": "2026-09-10 to 2026-11-22", "backend_test_functions": 458, "frontend_test_cases": 187, "e2e_tests": 7,
+    "tests_run_here": false, "evaluation_figures": "No extraction accuracy recorded in the repository",
+    "unfinished": ["PDF, DOCX and zip upload", "FHIR bundle and HIVE export", "FHIR ingestion", "Mint import and export", "row dedup (design and plan only)", "roles and study membership", "patient merge"]
+  },
+  "limits": [
+    "A found quote proves that the words are in the text, not that they support the value.",
+    "First occurrence only: a short quote may be marked at the wrong place.",
+    "One mapped cell alone is accepted automatically, without a second source or a human look.",
+    "Values the model misses leave no mark; empty fields are not open; completeness is not checked.",
+    "Bulk accept can accept model-only values nobody looked at.",
+    "The history does not store which proposal was chosen; proposals change in place on reprocessing.",
+    "The chain ends at the uploaded row. Original PDF or ORBIS document is not linked; stored original file is not shown.",
+    "Row numbers can be off when the file has blank rows.",
+    "Export has no quote, reviewer or model; it contains unreviewed values and identifying patient data.",
+    "Auto accepted and accepted share the same green; only the word differs.",
+    "No de-identification before the model call; where data goes depends on the configured endpoint.",
+    "No accuracy figures for RACOON-RAVEN; not a certified medical device (inferred from upstream wording, no statement in this repository)."
+  ]
+}
