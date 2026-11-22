@@ -347,6 +347,115 @@
   </aside>
 </section>
 
+<!-- Chapter 3: RACOON-RAVEN -->
+
+<section class="blue divider" data-background-color="#006DB0">
+  <img class="arc-full" src="assets/ukm/arc_white.svg" alt="">
+  <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
+  <h1>RACOON-RAVEN</h1>
+  <aside class="notes"><p>One example of how to use these methods and stay in charge. Quick pass.</p></aside>
+</section>
+
+<section class="chain" data-chapter="3" data-steps="2">
+  <h2>How do I stay the boss?</h2>
+  <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path style="--d:100ms" d="M478 540 H566"/><path style="--d:500ms" d="M906 540 H994"/><path style="--d:900ms" d="M1334 540 H1422"/>
+  </svg>
+  <div class="abs node" style="left:138px"><b>Document</b><div class="paper page"><span>Arztbrief<br>06.10.2026</span><i></i><i></i><i class="hit"></i><i></i><i></i></div></div>
+  <div class="abs node late" style="left:566px;--d:200ms"><b>Passage</b><div class="paper page"><span>Bei <span class="hl m1">Pneumonitis Grad 3 keine Reexposition</span>.</span></div></div>
+  <div class="abs node late" style="left:994px;--d:600ms"><b>Value</b><div class="paper page"><span class="small">Reason for stop</span><strong>Pneumonitis grade 3</strong></div></div>
+  <div class="abs node late" style="left:1422px;--d:1000ms"><b>Statement</b><div class="paper page"><span>Immunotherapy stopped because of pneumonitis grade 3.</span></div></div>
+  <p class="abs s1" style="left:138px;top:730px;font-size:34px;color:var(--muted)">Chain of proof (technically: provenance)</p>
+  <p class="abs final s2" style="top:806px">The machine proposes. The person decides.</p>
+  <p class="abs invented">Invented example</p>
+  <aside class="notes">
+    <p>Read the chain from right to left: from each statement back to the value, the passage and the document. “Chain of proof” is our plain wording; provenance is the technical term.</p>
+  </aside>
+</section>
+
+<section class="sources tight" data-chapter="3" data-steps="1">
+  <h2>A form and its sources</h2>
+  <div class="abs table" style="left:138px;top:300px">
+    <div class="cap">ORBIS text export (CSV)</div>
+    <div class="cells"><b style="width:140px">Patient</b><b style="width:190px">Datum</b><b style="width:430px">Befundtext</b></div>
+    <div class="cells"><span style="width:140px">LC-009</span><span style="width:190px">10.02.2026</span><span style="width:430px">CT Thorax mit KM … Raum&shy;forderung im linken Oberlappen, 38 mm … cT2a …</span></div>
+  </div>
+  <div class="abs table" style="left:138px;top:640px">
+    <div class="cap">Excel table (baseline.xlsx)</div>
+    <div class="cells"><b style="width:196px">Pseudonym</b><b style="width:284px">Histologie</b><b style="width:280px">Tumorgröße (mm)</b></div>
+    <div class="cells"><span style="width:196px">LC-009</span><span style="width:284px">Plattenepithel-Ca.</span><span style="width:280px">48</span></div>
+  </div>
+  <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path pathLength="1" style="--d:0ms" d="M898 470 C1040 470 1000 412 1122 412"/>
+    <path pathLength="1" style="--d:150ms" d="M898 480 C1040 480 1000 520 1122 520"/>
+    <path pathLength="1" style="--d:300ms" d="M898 490 C1040 490 1000 690 1122 690"/>
+    <path pathLength="1" style="--d:450ms" d="M898 500 C1040 500 1000 780 1122 780"/>
+    <path pathLength="1" style="--d:600ms" d="M898 768 C1040 768 1010 550 1122 550"/>
+  </svg>
+  <div class="abs formbox">
+    <div class="cap">Form: CT thorax staging</div>
+    <div class="field" style="top:80px">Untersuchungsdatum</div>
+    <div class="field tall" style="top:170px">Tumorgröße<small>largest axial diameter in mm, no lymph nodes, no prior values</small></div>
+    <div class="field" style="top:358px">cT-Stadium</div>
+    <div class="field" style="top:448px">Fernmetastasen</div>
+  </div>
+  <p class="abs invented">Invented example</p>
+  <aside class="notes">
+    <p>The researcher decides what to ask and how it is defined. The hint at tumour size is the definition; the model and the human reviewer read the same words.</p>
+    <p>Sources are CSV or XLSX files with a column that holds the report text. There is no direct ORBIS connection and no PDF import yet.</p>
+  </aside>
+</section>
+
+<section class="demo" data-chapter="3" data-steps="4">
+  <h2>One record in RACOON-RAVEN</h2>
+  <div class="abs rv">
+    <div class="rv-bar"><b>LC-009 · T0</b><span>CT thorax staging</span><em>Mark reviewed</em></div>
+    <div class="rv-card rv-src">
+      <div class="rv-title">baseline.xlsx · row 10</div>
+      <div class="rv-grid"><span>Pseudonym</span><b>LC-009</b><span>Tumorgröße (mm)</span><b><i class="cell">48</i></b><span>Untersuchungsdatum</span><b>10.02.2026</b><span>Zeitpunkt</span><b>T0</b></div>
+      <div class="rv-report"><span class="rv-title">Befund</span>CT Thorax <q>mit KM</q> vom <q>10.02.2026</q>.<br>Befund: <q class="q3">Raumforderung im linken Oberlappen, 38 mm</q>, mit Kontakt zum Aortenbogen ohne sichere Infiltration. Links hilär Lymphknoten 13 mm. Kein Pleuraerguss. Keine suspekten Herde in Leber und Nebennieren. Alte Rippenserienfraktur rechts.<br>Beurteilung: Bronchialkarzinom links apikal, <q class="q1">cT2a</q>, hiläre Lymphknotenmetastase möglich. <q>Keine Fernmetastasen</q>.</div>
+    </div>
+    <div class="rv-card rv-form">
+      <div class="rv-field"><span>Untersuchungsdatum</span><b>10.02.2026</b><i class="pill ok">auto accepted</i></div>
+      <div class="rv-field f3"><span>Tumorgröße</span><b><u class="before">48 mm</u><u class="after">38 mm</u></b><i class="pill bad before">conflict</i><i class="pill ok after">accepted</i></div>
+      <div class="rv-field f1"><span>cT-Stadium</span><b>T2</b><i class="pill llm">LLM</i><i class="pill open">proposed</i></div>
+      <div class="rv-field"><span>Kontrastmittel</span><b>ja</b><i class="pill llm">LLM</i><i class="pill open">proposed</i></div>
+      <div class="rv-field"><span>Fernmetastasen</span><b>nein</b><i class="pill llm">LLM</i><i class="pill open">proposed</i></div>
+      <div class="rv-field f2"><span>Pleuraerguss</span><b>links</b><i class="pill llm">LLM</i><i class="pill bad">quote not found</i></div>
+      <div class="rv-detail d0">Select a value to see its source.</div>
+      <div class="rv-detail d1"><b>cT-Stadium: T2</b><div class="prop"><i class="pill llm">LLM</i> Quote from the report</div><div class="rv-quote">„cT2a“</div></div>
+      <div class="rv-detail d2"><b>Pleuraerguss: links <i class="pill plain">staged</i></b><div class="prop"><i class="pill llm">LLM</i> Quote from the model</div><div class="rv-quote miss">„Pleuraerguss links“</div></div>
+      <div class="rv-detail d3"><b>Tumorgröße: two proposals</b><div class="prop"><strong>48 mm</strong> baseline.xlsx · Tumorgröße (mm) · row 10</div><div class="prop"><strong>38 mm</strong> <i class="pill llm">LLM</i> „Raumforderung … 38 mm“</div></div>
+      <div class="rv-detail d4"><b>Tumorgröße: 38 mm</b><div class="prop">History: proposed to accepted, name, time</div><div class="prop">Export row <span class="export"><i>38</i><i>accepted</i><i>baseline.xlsx:10</i></span></div></div>
+    </div>
+  </div>
+  <div class="abs says c0">The form is filled. Green: accepted. Yellow: only a model has read it.</div>
+  <div class="abs says c1">Click a value and see the words it comes from.</div>
+  <div class="abs says c2">The quote is not in the report, and the system says so.</div>
+  <div class="abs says c3">Table and report disagree. Both sources are in view.</div>
+  <div class="abs says c4">A person decides. The export keeps the state and the source row.</div>
+  <p class="abs invented" style="top:944px">Screen redrawn, invented patient, expected model answers</p>
+  <aside class="notes">
+    <p>Redrawn record page. The values are the expected model answers for the invented sample LC-009; the model was not run for this slide. Run LC-009 once before the talk and compare.</p>
+    <p>Pleuraerguss “links” is staged to show the check. The report says „Kein Pleuraerguss“. The system searches the quote itself (exact text except case and whitespace, first occurrence).</p>
+    <p>What only a model has read is never accepted automatically. A single table cell is accepted automatically, without a second source. Auto accepted and accepted share the same green.</p>
+    <p>Examination date: cell and text agree. Tumour size: 48 mm is most likely a typing error in the list. PDF import is planned. The export has no quote, reviewer or model.</p>
+    <p>No accuracy figures exist for RACOON-RAVEN. It is not presented as a certified medical device.</p>
+  </aside>
+</section>
+
+<section class="rows limits" data-chapter="3" data-steps="2">
+  <h2>What the chain does not prove</h2>
+  <div class="abs row" style="top:340px"><div class="ask">That the reading is right</div><div class="today"><strong>15 of 23</strong>times, doctors dropped their own correct answer when a citation seemed to support a wrong AI answer<span class="src">Chanda et al., arXiv 2026, preprint</span></div></div>
+  <div class="abs row s1" style="top:540px"><div class="ask">That we stay critical</div><div class="today"><strong>82% to 46%</strong>correct, very experienced radiologists, with right and with wrong AI suggestions<span class="src">Dratsch et al., Radiology 2023</span></div></div>
+  <div class="abs row s2" style="top:740px"><div class="ask">That nothing is missing</div><div class="today"><strong class="none">No trace</strong>is left by values that the model overlooks<span class="src">RACOON-RAVEN source code, read 11/2026</span></div></div>
+  <aside class="notes">
+    <p>Chanda et al. (DKFZ), Large language models improve physician accuracy but lead to false reliance (CORA), arXiv 2608.00817, 08/2026, preprint, https://arxiv.org/abs/2608.00817. 46 dermatology physicians, 736 decisions. With perceived support 15 of 23 gave up their own correct answer, without it 2 of 25. Overall accuracy still rose from 70.8% to 82.6%. Perceived support was not randomised, no arm without citations, small subgroups.</p>
+    <p>Dratsch et al., Automation Bias in Mammography, Radiology, 05/2023, https://research.vu.nl/en/publications/automation-bias-in-mammography-the-impact-of-artificial-intellige/. 27 radiologists, 50 mammograms. Very experienced 82.3% to 45.5%, moderately experienced 81.3% to 24.8%, inexperienced 79.7% to 19.8%. Reader experiment without clinical consequences; abstract read.</p>
+    <p>RAVEN code, state 22.11.2026 (main a7fa7ec), read, not run: empty fields are not open, so a record can be closed with values the model missed. A found quote proves that the words are in the text.</p>
+  </aside>
+</section>
+
 <!-- NEXT -->
 </div>
 </div>
