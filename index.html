@@ -80,6 +80,151 @@
   </aside>
 </section>
 
+<!-- Chapter 1: Status quo -->
+
+<section class="blue divider" data-background-color="#006DB0">
+  <img class="arc-full" src="assets/ukm/arc_white.svg" alt="">
+  <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
+  <h1>Status quo</h1>
+  <aside class="notes"><p>What we have today, and why the question was hard to answer.</p></aside>
+</section>
+
+<section class="tree" data-chapter="1" data-steps="1">
+  <h2>We store documents</h2>
+  <svg class="abs tree-lines" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path d="M259 372 V404 M259 404 H1644 M259 404 V430 M723 404 V430 M1191 404 V430 M1644 404 V430"/>
+    <path d="M150 486 V618 M150 546 H172 M150 618 H172"/>
+    <path d="M614 486 V690 M614 546 H636 M614 618 H636 M614 690 H636"/>
+    <path d="M1082 486 V762 M1082 546 H1104 M1082 618 H1104 M1082 690 H1104 M1082 762 H1104"/>
+    <path d="M1518 486 V618 M1518 546 H1540 M1518 618 H1540"/>
+  </svg>
+  <div class="abs folder" style="left:138px;top:316px;width:330px">Patient LC-009</div>
+  <div class="abs folder" style="left:138px;top:430px;width:330px">Case 1, radiology</div>
+  <div class="abs folder" style="left:602px;top:430px;width:330px">Case 2, day clinic</div>
+  <div class="abs folder" style="left:1070px;top:430px;width:330px">Case 3, inpatient</div>
+  <div class="abs folder" style="left:1506px;top:430px;width:276px">Outpatient</div>
+  <svg class="abs axis" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path d="M138 640 H1782"/>
+    <path class="stems" d="M259 520 V640 M320 640 V696 M389 640 V768 M470 640 V840 M1356 450 V640 M1385 640 V696 M1472 640 V768 M1671 592 V640"/>
+  </svg>
+  <div class="abs months"><span style="left:200px">Feb</span><span style="left:380px">Mar</span><span style="left:560px">Apr</span><span style="left:740px">May</span><span style="left:920px">Jun</span><span style="left:1100px">Jul</span><span style="left:1280px">Aug</span><span style="left:1460px">Sep</span><span style="left:1640px">Oct</span></div>
+  <div class="abs chip" style="--x:172px;--y:520px;--tx:138px;--ty:500px;--d:0ms">Aufklärung</div>
+  <div class="abs chip" style="--x:172px;--y:592px;--tx:138px;--ty:572px;--d:30ms">CT-Befund 10.02.</div>
+  <div class="abs chip" style="--x:636px;--y:520px;--tx:199px;--ty:672px;--d:60ms">Tumorboard</div>
+  <div class="abs chip" style="--x:636px;--y:592px;--tx:268px;--ty:744px;--d:90ms">Medikationsplan</div>
+  <div class="abs chip" style="--x:636px;--y:664px;--tx:349px;--ty:816px;--d:120ms">Laborbericht</div>
+  <div class="abs chip" style="--x:1104px;--y:520px;--tx:1235px;--ty:428px;--d:150ms">CT-Befund 14.08.</div>
+  <div class="abs chip" style="--x:1104px;--y:592px;--tx:1235px;--ty:500px;--d:180ms">Absetzung 14.08.</div>
+  <div class="abs chip" style="--x:1104px;--y:664px;--tx:1235px;--ty:572px;--d:210ms">Fieberkurve</div>
+  <div class="abs chip" style="--x:1104px;--y:736px;--tx:1264px;--ty:672px;--d:240ms">Arztbrief 19.08.</div>
+  <div class="abs chip" style="--x:1540px;--y:520px;--tx:1351px;--ty:744px;--d:270ms">Hausarztbr. 03.09.</div>
+  <div class="abs chip" style="--x:1540px;--y:592px;--tx:1540px;--ty:572px;--d:300ms">Arztbrief 06.10.</div>
+  <p class="abs s1" style="left:138px;top:880px;width:1500px;font-size:38px;color:var(--blue);font-weight:700">Cases and forms suit administration. Questions follow the patient.</p>
+  <p class="abs invented">Invented example</p>
+  <aside class="notes">
+    <p>The same documents, first sorted by case and type, then by time. The second view is the one the question needs.</p>
+    <p>The tree is a schematic. Invented patient LC-009.</p>
+  </aside>
+</section>
+
+<section class="rows" data-chapter="1" data-steps="2">
+  <h2>More questions like this</h2>
+  <div class="abs row" style="top:352px"><div class="ask">Has this patient ever reacted to contrast medium?</div><div class="today"><b>Today</b>CAVE field, an old letter, or nowhere</div></div>
+  <div class="abs row s1" style="top:540px"><div class="ask">Which of our lung cancer patients developed pneumonitis under immunotherapy?</div><div class="today"><b>Today</b>Letters, synonyms, suspected diagnoses, incomplete codes</div></div>
+  <div class="abs row s2" style="top:728px"><div class="ask">How large was the tumour at first diagnosis?</div><div class="today"><b>Today</b>Table says <span class="num">48 mm</span>, report says <span class="num">38 mm</span></div></div>
+  <p class="abs invented s2">Invented example (48 mm and 38 mm)</p>
+  <aside class="notes">
+    <p>One question about a person, one about a group, one about a number. The 48 mm and 38 mm come from invented sample data and return in the demo.</p>
+  </aside>
+</section>
+
+<section class="meld tight" data-chapter="1" data-steps="2">
+  <h2>I searched for MELD</h2>
+  <div class="abs mask">
+    <div class="mask-label">Suche in Arztbriefen</div>
+    <div class="mask-row"><div class="mask-field">MELD<i></i></div><div class="mask-button">Suchen</div></div>
+    <div class="mask-result">Arztbriefe: <b>0</b></div>
+  </div>
+  <div class="abs paper letter">
+    <div class="paper-head">Arztbrief (PDF)</div>
+    <div class="body">Leberzirrhose Child-Pugh B.<br>Bei Aufnahme <span class="hl m1">MELD-Score 14</span>.<br>Vorstellung zur Transplantations&shy;ambulanz empfohlen.</div>
+  </div>
+  <div class="abs quote s2" style="left:138px;top:760px;width:1644px">“An automatic search for information in PDF-documents is not possible.”</div>
+  <p class="source s2">MeDIC Münster, Study module, undated, accessed 11/2026</p>
+  <p class="abs invented s1" style="left:1060px;top:606px">Invented example</p>
+  <p class="abs invented" style="left:138px;top:606px">Schematic search mask</p>
+  <aside class="notes">
+    <p>The search behaviour is my own observation. Repeat the search before the talk and say what was found. MELD is a score for severity of liver disease.</p>
+    <p>MeDIC Münster, Study module, https://medic.uni-muenster.de/en/advice-cooperation/study-module/, undated, read 11/2026. The page says the module can query structured and free-text data documented in ORBIS; it runs nightly queries and has supported more than 80 studies. The quote concerns PDF documents in this module. It does not describe the general ORBIS search. Verify with MeDIC before the talk.</p>
+  </aside>
+</section>
+
+<section class="vendor tight" data-chapter="1" data-steps="3">
+  <h2>The vendor says it too</h2>
+  <div class="abs crop paper" style="left:138px">
+    <div class="sheet" style="top:-699px"><img src="assets/vendor-quote/cmo.png" alt="Excerpt from Dedalus DIREKT 2/2024">
+      <i class="v1" style="left:58.6%;top:61%;width:36%;height:4%;--d:0ms"></i>
+      <i class="v1" style="left:4.4%;top:66.2%;width:90.4%;height:4%;--d:200ms"></i>
+      <i class="v1" style="left:4.4%;top:71.2%;width:90.2%;height:4%;--d:400ms"></i>
+      <i class="v1" style="left:4.4%;top:76.4%;width:9.2%;height:3.6%;--d:600ms"></i>
+    </div>
+  </div>
+  <div class="abs crop paper" style="left:992px">
+    <div class="sheet" style="top:-263px"><img src="assets/vendor-quote/ki24.png" alt="Excerpt from Dedalus DIREKT 1/2024">
+      <i class="v2" style="left:29.9%;top:37.4%;width:65.4%;height:5.8%;--d:0ms"></i>
+      <i class="v2" style="left:4.2%;top:44.6%;width:90.8%;height:5%;--d:150ms"></i>
+      <i class="v2" style="left:4.2%;top:51.6%;width:91%;height:5.4%;--d:300ms"></i>
+      <i class="v2" style="left:4.2%;top:58.5%;width:91%;height:5.2%;--d:450ms"></i>
+      <i class="v2" style="left:4.2%;top:65.3%;width:91%;height:5%;--d:600ms"></i>
+      <i class="v2" style="left:4.2%;top:72.2%;width:42%;height:5%;--d:750ms"></i>
+    </div>
+  </div>
+  <div class="abs call s1" style="left:138px">Systems often only imitate the paper chart instead of connecting data.<small>Chief Medical Officer, Dedalus DIREKT 2/2024</small></div>
+  <div class="abs call s2" style="left:992px">In most hospital systems a large part of the data is unstructured, also in ORBIS.<small>Dedalus DIREKT 1/2024</small></div>
+  <div class="abs third s3">„… erfordern jedoch weiterhin die Navigation durch verschiedene Module, Ansichten und Formulare“ <span>… still require navigating modules, views and forms. Dedalus and Corti, press release, 10/2026</span></div>
+  <aside class="notes">
+    <p>Dedalus DIREKT 2/2024, Paradigmenwechsel in der Patientensicht, https://www.dedalus.com/dach/wp-content/uploads/sites/24/2024/11/PatientensichtDIREKT_2_2024.pdf. Vendor magazine. Context: the interview praises ORBIS U Diagnosen und Probleme. A product manager adds that the information was usually in ORBIS, but often hidden in isolated free-text fields or coarse billing diagnoses.</p>
+    <p>Dedalus DIREKT 1/2024, Digitale Revolution: die nächsten Schritte, https://www.dedalus.com/dach/wp-content/uploads/sites/24/2024/03/KIDIREKT_1_2024.pdf. Vendor magazine, guest article. It gives no percentage.</p>
+    <p>Dedalus and Corti press release, 22 October 2026, https://www.dedalus.com/dach/de/news/10537/. The sentence is about hospital information systems in general and motivates ORBIS Buddy.</p>
+    <p>Fairness: Dedalus is Best in KLAS for DACH 2024, 2025 and 2026 (KLAS Research, 08/2025, https://engage.klasresearch.com/?p=8376). The point concerns this generation of systems.</p>
+  </aside>
+</section>
+
+<section class="facts" data-chapter="1" data-steps="2">
+  <h2>Is today’s data reliable?</h2>
+  <div class="abs fact" style="left:138px"><div class="big">34%</div><div class="strip"><i style="--w:34.4%"></i></div><p>of severe sepsis cases had a sepsis code</p><p class="soft">10 German hospitals</p></div>
+  <div class="abs fact s1" style="left:704px"><div class="big">6.6%</div><div class="strip"><i style="--w:6.6%"></i></div><p>errors when values are copied by hand from records</p><p class="soft">93 papers, published 1978 to 2008</p></div>
+  <div class="abs fact s2" style="left:1270px"><div class="big">50%</div><div class="strip"><i style="--w:50.1%"></i></div><p>of note text is copied from earlier notes</p><p class="soft">One US health system</p></div>
+  <p class="source" style="width:520px;top:890px">Schwarzkopf et al., Infection 2023</p>
+  <p class="source s1" style="left:704px;width:520px;top:890px">Garza et al., Int J Med Inform 2025</p>
+  <p class="source s2" style="left:1270px;width:512px;top:890px">Steinkamp et al., JAMA Netw Open 2022</p>
+  <aside class="notes">
+    <p>Schwarzkopf D et al., Understanding the biases to sepsis surveillance and quality assurance caused by inaccurate coding in administrative health data, Infection 2023;52(2):413-427, https://pmc.ncbi.nlm.nih.gov/articles/PMC10954942. 10,334 chart reviews, 8 university and 2 teaching hospitals, 2015 to 2017. Coding sensitivity 34.4% (10.7 to 58.5% between hospitals), PPV 83.3%. Sepsis was named in 49.7% of charts. Convenience sample, coding rules before 2020.</p>
+    <p>Garza MY et al., Error rates of data processing methods in clinical research, Int J Med Inform 2025, doi:10.1016/j.ijmedinf.2024.105749, https://pmc.ncbi.nlm.nih.gov/articles/PMC10775420/. Systematic review and meta-analysis, 93 papers from 1978 to 2008. Pooled 6.57% (95% CI 5.51 to 7.72) for manual abstraction, 0.29% for single and 0.14% for double data entry. Mostly uncontrolled, definitions vary. This is the fair comparison for a language model.</p>
+    <p>Steinkamp J, Kantrowitz JJ, Airan-Javia S, JAMA Netw Open 2022;5(9):e2233348, https://pmc.ncbi.nlm.nih.gov/articles/PMC9513649/. 104 million notes, 1.96 million patients, Penn Medicine 2015 to 2020: 50.1% of words were exact copies of earlier text about the same patient. Exact 10-word matches only; templates are included. Copying is a system problem. A copy is no independent evidence.</p>
+  </aside>
+</section>
+
+<section class="forms" data-chapter="1" data-steps="2">
+  <h2>Why not more forms?</h2>
+  <div class="abs" style="left:138px;top:350px;width:760px">
+    <p class="lead">Norway, after the move to a structured record</p>
+    <p class="quote" style="margin-top:22px">“free text remained the preferred method, with some exceptions”</p>
+    <p class="src">Golburean et al., JMIR Form Res 2025</p>
+  </div>
+  <div class="abs s1" style="left:1022px;top:350px;width:760px">
+    <p class="lead">RACOON, the first template</p>
+    <p class="big" style="margin-top:10px">67 items</p>
+    <p style="margin-top:6px">More time than routine reading</p>
+    <p class="src">Salg et al., npj Digital Medicine 2021</p>
+  </div>
+  <p class="abs final s2">Let people write. Let machines structure.</p>
+  <aside class="notes">
+    <p>Golburean O et al., JMIR Form Res 2025;9:e63902, https://pmc.ncbi.nlm.nih.gov/articles/PMC11971576/. Qualitative study, one Norwegian university hospital, Sept 2023 to Jan 2024, observations and interviews. Physicians distrusted some structured data because colleagues kept writing text. Abstract read.</p>
+    <p>Salg et al., A reporting and analysis framework for structured evaluation of COVID-19 clinical and imaging data, npj Digital Medicine 2021, https://pmc.ncbi.nlm.nih.gov/articles/PMC8041811. Proof of concept, 283 patients, 8 European centres, mint Lesion. The template that RACOON started from had 67 items. Completeness depended on the reader and on information radiologists do not see directly.</p>
+  </aside>
+</section>
+
 <!-- NEXT -->
 </div>
 </div>
