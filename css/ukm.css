@@ -75,7 +75,7 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .closing .who { position: absolute; left: 478px; top: 500px; font-size: 40px; line-height: 1.5; }
 
 /* 2 Who am I */
-.who-photo { left: 138px; top: 318px; width: 790px; height: 334px; object-fit: cover; max-width: none !important; max-height: none !important; }
+.who-photo { left: 138px; top: 306px; width: 790px; height: 366px; object-fit: cover; max-width: none !important; max-height: none !important; }
 .who-text { top: 676px; width: 790px; font-size: 30px; line-height: 1.36; }
 .who-text b { display: block; font-size: 34px; color: var(--blue); margin-bottom: 6px; }
 .who-text .soft { color: var(--muted); font-size: 26px; display: block; margin-top: 8px; }
@@ -287,11 +287,11 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .demo[data-step="0"] .c0, .demo[data-step="1"] .c1, .demo[data-step="2"] .c2, .demo[data-step="3"] .c3, .demo[data-step="4"] .c4 { opacity: 1; }
 
 /* 18 Limits */
-.reveal .limits .row { padding-top: 22px; height: 190px; gap: 50px; }
+.reveal .limits .row { padding-top: 18px; height: 190px; gap: 50px; }
 .reveal .limits .ask { width: 560px; }
 .reveal .limits .today { position: relative; width: 1034px; padding-left: 370px; font-size: 32px; }
 .reveal .limits .today strong { position: absolute; left: 0; top: -4px; font-size: 60px; line-height: 68px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: -.02em; }
-.reveal .limits .today .src { display: block; margin-top: 8px; }
+.reveal .limits .today .src { display: block; margin-top: 4px; }
 
 /* 19 and backup: two-column list */
 .list .grid { left: 138px; width: 1644px; display: grid; grid-template-columns: 460px 1fr; }
@@ -312,11 +312,11 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .answer .links path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 600ms var(--ease) var(--d); }
 .answer .links .weak { stroke: var(--light); }
 .answer[data-reached~="1"] .links path { stroke-dashoffset: 0; }
-.answer .src-doc { top: 470px; width: 390px; height: 250px; padding: 26px 28px; }
+.answer .src-doc { top: 470px; width: 390px; height: 296px; padding: 26px 28px; }
 .answer .src-doc .paper-head { font-size: 34px; line-height: 42px; }
 .reveal .answer .src-doc p { margin-top: 16px; font-size: 30px; line-height: 1.5; }
-.reveal .answer .note { left: 974px; top: 738px; font-size: 32px; color: var(--limit); }
-.reveal .answer .cohort { left: 138px; top: 836px; width: 1644px; font-size: 46px; color: var(--dark); }
+.reveal .answer .note { left: 974px; top: 780px; font-size: 32px; color: var(--limit); }
+.reveal .answer .cohort { left: 138px; top: 852px; width: 1644px; font-size: 46px; color: var(--dark); }
 .reveal .answer .cohort b { color: var(--blue); }
 
 /* B7 Sources */

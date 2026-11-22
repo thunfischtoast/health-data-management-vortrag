@@ -28,7 +28,7 @@
 <section class="tight">
   <h2>Who am I</h2>
   <p class="abs" style="left:138px;top:240px;width:1644px;font-size:34px">Christian Römer M. Sc., Scientific Associate, Clinic for Radiology, UKM</p>
-  <img class="abs who-photo" src="assets/img/group_racoon.jpg" alt="Group photo of the RACOON team" style="object-position:50% 26%">
+  <img class="abs who-photo" src="assets/img/group_racoon.jpg" alt="Group photo of the RACOON team" style="object-position:50% 36%">
   <img class="abs who-photo" src="assets/img/group_ukm.jpg" alt="Group photo in the UKM angiography suite" style="left:992px;object-position:50% 24%">
   <div class="abs who-text" style="left:138px">
     <b>RACOON</b>
@@ -65,7 +65,7 @@
   <div class="abs doc paper key" style="--x:440px;--y:136px;--r:5deg;--d:420ms;--fx:138px"><div class="paper-head">Arztbrief<small>19.08.2026</small></div><div class="body">Neue Milchglas&shy;infiltrate beidseits, <span class="hl m2">V. a. immuntherapie&shy;assoziierte Pneumonitis</span>.</div></div>
   <div class="abs doc paper key" style="--x:1060px;--y:132px;--r:4deg;--d:480ms;--fx:556px"><div class="paper-head">Medikationsplan<small>14.08.2026</small></div><div class="body">Pembrolizumab: <span class="hl m2">abgesetzt 14.08.2026</span></div></div>
   <div class="abs doc paper key" style="--x:400px;--y:664px;--r:-8deg;--d:540ms;--fx:974px"><div class="paper-head">Hausarztbrief<small>03.09.2026</small></div><div class="body">Immuntherapie <span class="hl m2">wegen Atemnot beendet</span>.</div></div>
-  <div class="abs doc paper key" style="--x:1230px;--y:642px;--r:-3deg;--d:600ms;--fx:1392px"><div class="paper-head">Arztbrief<small>06.10.2026</small></div><div class="body">Bei <span class="hl m2">Pneumonitis Grad 3 keine Reexposition</span>.</div></div>
+  <div class="abs doc paper key" style="--x:1230px;--y:642px;--r:-3deg;--d:600ms;--fx:1392px"><div class="paper-head">Arztbrief<small>06.10.2026</small></div><div class="body">Pembrolizumab bei <span class="hl m2">Pneumonitis Grad 3 dauerhaft beendet</span>, keine Reexposition.</div></div>
   <p class="abs q-line">Why was the immunotherapy stopped?</p>
   <p class="abs q-second s3">And in how many of our other patients, for the same reason?</p>
   <div class="abs q-call s2" style="left:138px">Suspicion</div>
@@ -76,7 +76,8 @@
   <aside class="notes">
     <p>Invented patient LC-009: squamous cell carcinoma, left upper lobe, baseline CT 10.02.2026, pembrolizumab from 03/2026.</p>
     <p>Let the question stand alone for a moment. Then the documents, the four that matter, and the question for the whole department.</p>
-    <p>No single document holds the answer. One gives a suspicion, one a date, one a symptom, one the final decision.</p>
+    <p>Each document holds a part: a suspicion, a date, a symptom, the final decision. Searching for one of these words misses the others.</p>
+    <p>The medication plan says "abgesetzt", the letter of 19 August says "pausiert". This difference is intended: the plan records the stop, the letter leaves it open until October.</p>
   </aside>
 </section>
 
@@ -111,10 +112,10 @@
   <div class="abs chip" style="--x:172px;--y:520px;--tx:138px;--ty:500px;--d:0ms">Aufklärung</div>
   <div class="abs chip" style="--x:172px;--y:592px;--tx:138px;--ty:572px;--d:30ms">CT-Befund 10.02.</div>
   <div class="abs chip" style="--x:636px;--y:520px;--tx:199px;--ty:672px;--d:60ms">Tumorboard</div>
-  <div class="abs chip" style="--x:636px;--y:592px;--tx:268px;--ty:744px;--d:90ms">Medikationsplan</div>
+  <div class="abs chip" style="--x:636px;--y:592px;--tx:268px;--ty:744px;--d:90ms">Med.-Plan März</div>
   <div class="abs chip" style="--x:636px;--y:664px;--tx:349px;--ty:816px;--d:120ms">Laborbericht</div>
   <div class="abs chip" style="--x:1104px;--y:520px;--tx:1235px;--ty:428px;--d:150ms">CT-Befund 14.08.</div>
-  <div class="abs chip" style="--x:1104px;--y:592px;--tx:1235px;--ty:500px;--d:180ms">Absetzung 14.08.</div>
+  <div class="abs chip" style="--x:1104px;--y:592px;--tx:1235px;--ty:500px;--d:180ms">Med.-Plan 14.08.</div>
   <div class="abs chip" style="--x:1104px;--y:664px;--tx:1235px;--ty:572px;--d:210ms">Fieberkurve</div>
   <div class="abs chip" style="--x:1104px;--y:736px;--tx:1264px;--ty:672px;--d:240ms">Arztbrief 19.08.</div>
   <div class="abs chip" style="--x:1540px;--y:520px;--tx:1351px;--ty:744px;--d:270ms">Hausarztbr. 03.09.</div>
@@ -141,15 +142,15 @@
 <section class="meld tight" data-chapter="1" data-steps="2">
   <h2>I searched for MELD</h2>
   <div class="abs mask">
-    <div class="mask-label">Suche in Arztbriefen</div>
+    <div class="mask-label">Volltextsuche</div>
     <div class="mask-row"><div class="mask-field">MELD<i></i></div><div class="mask-button">Suchen</div></div>
     <div class="mask-result">Arztbriefe: <b>0</b></div>
   </div>
   <div class="abs paper letter">
-    <div class="paper-head">Arztbrief (PDF)</div>
-    <div class="body">Leberzirrhose Child-Pugh B.<br>Bei Aufnahme <span class="hl m1">MELD-Score 14</span>.<br>Vorstellung zur Transplantations&shy;ambulanz empfohlen.</div>
+    <div class="paper-head">Arztbrief</div>
+    <div class="body">Leberzirrhose Child-Pugh B.<br>Bei Aufnahme <span class="hl m1">MELD-Score 14</span>.<br>Vorstellung in der Transplantations&shy;ambulanz empfohlen.</div>
   </div>
-  <div class="abs quote s2" style="left:138px;top:760px;width:1644px">“An automatic search for information in PDF-documents is not possible.”</div>
+  <div class="abs quote s2" style="left:138px;top:716px;width:1644px"><span style="display:block;font-size:30px;color:var(--muted)">About the ORBIS study module at UKM:</span>“An automatic search for information in PDF-documents is not possible.”</div>
   <p class="source s2">MeDIC Münster, Study module, undated, accessed 11/2026</p>
   <p class="abs invented s1" style="left:1060px;top:606px">Invented example</p>
   <p class="abs invented" style="left:138px;top:606px">Schematic search mask</p>
@@ -180,8 +181,8 @@
     </div>
   </div>
   <div class="abs call s1" style="left:138px">Systems often only imitate the paper chart instead of connecting data.<small>Chief Medical Officer, Dedalus DIREKT 2/2024</small></div>
-  <div class="abs call s2" style="left:992px">In most hospital systems a large part of the data is unstructured, also in ORBIS.<small>Dedalus DIREKT 1/2024</small></div>
-  <div class="abs third s3">„… erfordern jedoch weiterhin die Navigation durch verschiedene Module, Ansichten und Formulare“ <span>… still require navigating modules, views and forms. Dedalus and Corti, press release, 10/2026</span></div>
+  <div class="abs call s2" style="left:992px">In most hospital systems a large part of the data is unstructured, also in ORBIS.<small>Guest article by a Dedalus author, Dedalus DIREKT 1/2024</small></div>
+  <div class="abs third s3">„… erfordern jedoch weiterhin die Navigation durch verschiedene Module, Ansichten und Formulare“ <span>Hospital information systems in general: still require navigating modules, views and forms. Dedalus and Corti, press release, 10/2026</span></div>
   <aside class="notes">
     <p>Dedalus DIREKT 2/2024, Paradigmenwechsel in der Patientensicht, https://www.dedalus.com/dach/wp-content/uploads/sites/24/2024/11/PatientensichtDIREKT_2_2024.pdf. Vendor magazine. Context: the interview praises ORBIS U Diagnosen und Probleme. A product manager adds that the information was usually in ORBIS, but often hidden in isolated free-text fields or coarse billing diagnoses.</p>
     <p>Dedalus DIREKT 1/2024, Digitale Revolution: die nächsten Schritte, https://www.dedalus.com/dach/wp-content/uploads/sites/24/2024/03/KIDIREKT_1_2024.pdf. Vendor magazine, guest article. It gives no percentage.</p>
@@ -238,10 +239,10 @@
   <h2>One letter, four verbs</h2>
   <div class="abs paper letter">
     <div class="paper-head"><span class="hl h2">Arztbrief</span><small>19.08.2026</small></div>
-    <div class="body"><span class="hl h3">Vorstellung mit zunehmender <span class="hl h4">Atemnot</span>, kein Fieber.</span> <span class="hl h3">Im CT vom 14.08.2026 neue <span class="hl h2">Milchglasinfiltrate beidseits</span>, V. a. <span class="hl h2">immuntherapie&shy;assoziierte Pneumonitis</span>.</span> Kein Hinweis auf Lungenembolie. <span class="hl h3"><span class="hl h1">Pembrolizumab pausiert</span>, Prednisolon begonnen.</span></div>
+    <div class="body"><span class="hl h3">Vorstellung mit zunehmender <span class="hl h4">Atemnot</span>, kein Fieber.</span> <span class="hl h3">Im CT vom 14.08.2026 neue <span class="hl h2">Milchglasinfiltrate beidseits</span>, <span class="hl h2">V. a. immuntherapie&shy;assoziierte Pneumonitis</span>.</span> Kein Hinweis auf Lungenembolie. <span class="hl h3"><span class="hl h1">Pembrolizumab pausiert</span>, Prednisolon begonnen.</span></div>
   </div>
   <div class="abs verb v1" style="top:270px"><b>Extract</b><div>Drug: Pembrolizumab<br>Status: paused</div></div>
-  <div class="abs verb v2" style="top:434px"><b>Classify</b><div>Arztbrief, immune-related adverse event, lung</div></div>
+  <div class="abs verb v2" style="top:434px"><b>Classify</b><div>Arztbrief, suspected immune-related adverse event, lung</div></div>
   <div class="abs verb v3" style="top:598px"><b>Summarise</b><div>Increasing dyspnoea, suspected pneumonitis on CT; pembrolizumab paused, prednisolone started.</div></div>
   <div class="abs verb v4" style="top:762px"><b>Search by meaning</b><div>“shortness of breath” finds „Atemnot“</div></div>
   <p class="abs invented">Illustration, invented example</p>
@@ -339,7 +340,7 @@
     <div class="change"><span>9.4</span><svg width="110" height="40" viewBox="0 0 110 40" aria-hidden="true"><path d="M4 20 H100 M84 6 L102 20 L84 34"/></svg><b>3.6</b></div>
     <div class="strip two"><i class="from" style="--w:94%"></i><i class="to" style="--w:36%"></i></div>
   </div>
-  <p class="abs" style="left:138px;top:730px;width:1644px;font-size:38px">By hand, then with pre-filled answers from a local model that a clinician checks.</p>
+  <p class="abs" style="left:138px;top:730px;width:1644px;font-size:38px">By hand, compared with pre-filled answers from a local model that a clinician checks.</p>
   <p class="source">38 patients, four clinicians, one centre. Neuse et al., BMC Med Inform Decis Mak 2026</p>
   <aside class="notes">
     <p>Neuse et al., Cutting chart-review time and improving database accuracy in IBD with human-in-the-loop LLMs, BMC Med Inform Decis Mak, 08/2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC13779612/. Mount Sinai, four clinicians, 38 patients, MedGemma 27B. Manual 142/207 (68%), assisted 185/207 (89%); median 9.4 and 3.6 minutes per patient. Invented values 1.2% (13/1063). Reference by one clinician. Values the model missed stay invisible to the reviewer.</p>
@@ -362,7 +363,7 @@
     <path style="--d:100ms" d="M478 540 H566"/><path style="--d:500ms" d="M906 540 H994"/><path style="--d:900ms" d="M1334 540 H1422"/>
   </svg>
   <div class="abs node" style="left:138px"><b>Document</b><div class="paper page"><span>Arztbrief<br>06.10.2026</span><i></i><i></i><i class="hit"></i><i></i><i></i></div></div>
-  <div class="abs node late" style="left:566px;--d:200ms"><b>Passage</b><div class="paper page"><span>Bei <span class="hl m1">Pneumonitis Grad 3 keine Reexposition</span>.</span></div></div>
+  <div class="abs node late" style="left:566px;--d:200ms"><b>Passage</b><div class="paper page"><span>Pembrolizumab bei <span class="hl m1">Pneumonitis Grad 3 dauerhaft beendet</span></span></div></div>
   <div class="abs node late" style="left:994px;--d:600ms"><b>Value</b><div class="paper page"><span class="small">Reason for stop</span><strong>Pneumonitis grade 3</strong></div></div>
   <div class="abs node late" style="left:1422px;--d:1000ms"><b>Statement</b><div class="paper page"><span>Immunotherapy stopped because of pneumonitis grade 3.</span></div></div>
   <p class="abs s1" style="left:138px;top:730px;font-size:34px;color:var(--muted)">Chain of proof (technically: provenance)</p>
@@ -409,7 +410,7 @@
 <section class="demo" data-chapter="3" data-steps="4">
   <h2>One record in RACOON-RAVEN</h2>
   <div class="abs rv">
-    <div class="rv-bar"><b>LC-009 · T0</b><span>CT thorax staging</span><em>Mark reviewed</em></div>
+    <div class="rv-bar"><b>LC-009 · T0</b><span>CT thorax staging</span><em style="background:#eaedee;color:#737c80">Mark reviewed</em></div>
     <div class="rv-card rv-src">
       <div class="rv-title">baseline.xlsx · row 10</div>
       <div class="rv-grid"><span>Pseudonym</span><b>LC-009</b><span>Tumorgröße (mm)</span><b><i class="cell">48</i></b><span>Untersuchungsdatum</span><b>10.02.2026</b><span>Zeitpunkt</span><b>T0</b></div>
@@ -429,7 +430,7 @@
       <div class="rv-detail d4"><b>Tumorgröße: 38 mm</b><div class="prop">History: proposed to accepted, name, time</div><div class="prop">Export row <span class="export"><i>38</i><i>accepted</i><i>baseline.xlsx:10</i></span></div></div>
     </div>
   </div>
-  <div class="abs says c0">The form is filled. Green: accepted. Yellow: only a model has read it.</div>
+  <div class="abs says c0">Green: accepted. Yellow: only a model has read it. Red: look closer.</div>
   <div class="abs says c1">Click a value and see the words it comes from.</div>
   <div class="abs says c2">The quote is not in the report, and the system says so.</div>
   <div class="abs says c3">Table and report disagree. Both sources are in view.</div>
@@ -517,7 +518,7 @@
 
 <section class="answer tight" data-chapter="4" data-steps="2">
   <h2>Why was the immunotherapy stopped?</h2>
-  <p class="abs result s1">Pneumonitis grade 3, suspected 14 Aug 2026, confirmed decision 6 Oct 2026</p>
+  <p class="abs result s1">Pneumonitis grade 3, suspected in August, stopped for good in October 2026</p>
   <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
     <path pathLength="1" style="--d:200ms" d="M333 470 C333 410 420 410 420 350"/>
     <path pathLength="1" style="--d:300ms" d="M751 470 C751 410 800 410 800 350"/>
@@ -527,9 +528,9 @@
   <div class="abs paper src-doc" style="left:138px"><div class="paper-head">Arztbrief<small>19.08.2026</small></div><p><span class="hl m1">V. a. immuntherapie&shy;assoziierte Pneumonitis</span></p></div>
   <div class="abs paper src-doc" style="left:556px"><div class="paper-head">Medikationsplan<small>14.08.2026</small></div><p>Pembrolizumab: <span class="hl m1">abgesetzt 14.08.2026</span></p></div>
   <div class="abs paper src-doc" style="left:974px"><div class="paper-head">Hausarztbrief<small>03.09.2026</small></div><p>Immuntherapie <span class="hl m1">wegen Atemnot beendet</span>.</p></div>
-  <div class="abs paper src-doc" style="left:1392px"><div class="paper-head">Arztbrief<small>06.10.2026</small></div><p>Bei <span class="hl m1">Pneumonitis Grad 3 keine Reexposition</span>.</p></div>
+  <div class="abs paper src-doc" style="left:1392px"><div class="paper-head">Arztbrief<small>06.10.2026</small></div><p>Pembrolizumab bei <span class="hl m1">Pneumonitis Grad 3 dauerhaft beendet</span></p></div>
   <p class="abs note s1">Names only the symptom</p>
-  <p class="abs cohort s2">And in how many of our other patients, for the same reason? <b>Now a query.</b></p>
+  <p class="abs cohort s2">And in how many of our other patients, for the same reason? <b>Becomes a query.</b></p>
   <p class="abs invented">Illustration, invented patient, not RAVEN output</p>
   <aside class="notes">
     <p>The same question as at the start. Now the answer carries its four passages. The general practitioner's letter names only the symptom, so it does not contradict the answer and does not prove it.</p>
@@ -543,7 +544,7 @@
   <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
   <h1>Thank you. Questions?</h1>
   <div class="who"><b>Christian Römer M. Sc.</b><br>Scientific Associate<br>Clinic for Radiology</div>
-  <aside class="notes"><p>Backup slides follow below (arrow down): B1 law, B2 chatbots, B3 hallucination and omission, B4 local models in German, B5 AI scribes, B6 summaries in practice, B7 sources.</p></aside>
+  <aside class="notes"><p>Backup slides: press right once, then down: B1 law, B2 chatbots, B3 hallucination and omission, B4 local models in German, B5 AI scribes, B6 summaries in practice, B7 sources.</p></aside>
 </section>
 
 <section class="stack" data-visibility="uncounted">
@@ -607,7 +608,7 @@
   <h2>AI scribes</h2>
   <div class="abs grid wide" style="top:300px">
     <b>16 min</b><div>less documentation time per 8 patient hours, about 10%. Five US centres, observational<small>Rotenstein et al., JAMA 2026</small></div>
-    <b>9.5%</b><div>less note time with one scribe, no significant effect with another. Three-arm trial, 238 physicians<small>UCLA trial, NEJM AI 2025, read via UCLA Health release</small></div>
+    <b>9.5%</b><div>less note time with one scribe, no significant effect with another. Three-arm trial, one centre, 238 physicians<small>UCLA trial, NEJM AI 2025, read via UCLA Health release</small></div>
   </div>
   <aside class="notes">
     <p>Rotenstein et al., JAMA 2026, doi 10.1001/jama.2026.2253, https://jamanetwork.com/journals/jama/article-abstract/2847319. 8,581 clinicians, 1,809 adopters, difference in differences. 16.0 min (CI 13.7 to 18.3). Total EHR time -13.4 min (about 3%); after-hours work unchanged; only 32% used it in at least half of visits.</p>
