@@ -93,6 +93,7 @@
     transitionSpeed: 'fast',
     backgroundTransition: 'fade',
     pdfSeparateFragments: true,
+    pdfMaxPagesPerSlide: 1,
     plugins: [RevealNotes]
   });
 

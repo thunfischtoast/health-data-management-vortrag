@@ -1,0 +1,45 @@
+# Hospital data management in the age of AI
+
+Slides for a talk by Christian Römer, Clinic for Radiology, University Hospital Münster. They are built with reveal.js 6.0.2, which is included in `vendor/reveal/`. The talk needs no internet connection and no build step.
+
+## Start
+
+Double-click `index.html`. Use a current version of Edge, Chrome or Firefox and press F11 or F for full screen.
+
+| Key | Action |
+| --- | --- |
+| Space, right arrow | Next step or slide |
+| Left arrow | Previous step or slide |
+| Down arrow | Next backup slide (after the closing slide, press right once) |
+| S | Speaker view with notes |
+| Esc | Slide overview |
+| B | Black screen |
+| G | Go to slide |
+
+The browser must allow pop-ups for the speaker view. The notes hold the full citation, the study design and the caveats for every figure.
+
+The address shows the position as `#/slide/backup/step`, all counted from zero. `#/7` is the vendor slide without a click, and `#/7/0/2` shows it after three clicks.
+
+## PDF export
+
+Open `index.html?print-pdf` in Edge or Chrome and print to PDF with background graphics switched on and margins set to none. Each step becomes one page.
+
+## Edit
+
+- `index.html` contains all slides, in order, with the notes in `<aside class="notes">`.
+- `css/ukm.css` contains the UKM layout and one block per slide.
+- `js/scenes.js` adds the logo, header, slide number and chapter bar, and computes the current step. The name and date in the header are in `HEADER` at the top of the file.
+
+A slide declares its number of clicks with `data-steps="3"`. The script writes the current step to `data-step` and all steps reached so far to `data-reached`. Elements with the class `s2` appear at step 2, and passages with the classes `hl m2` are highlighted at step 2. Other states are CSS rules on the two attributes.
+
+Keep each `<section>` tag on one line, because `tools/shots.sh` reads the slides from there.
+
+## Screenshots
+
+`tools/shots.sh [first] [last]` runs in Git Bash and writes one image per step to `shots/` with Edge headless. The two arguments are slide indices and start at zero.
+
+## Sources and image rights
+
+The research notes in `research_notes/` hold the evidence behind each figure. All patients, letters and values on the slides are invented.
+
+The two excerpts from Dedalus DIREKT in `assets/vendor-quote/` are used as quotations with the source named on the slide. The group photos in `assets/img/` are for the talk only and must not be published. The logos belong to UKM and RACOON.
