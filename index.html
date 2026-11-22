@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hospital data management in the age of AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/reveal/reset.css">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<link rel="stylesheet" href="css/ukm.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Opening -->
+
+<section class="blue title" data-background-color="#006DB0">
+  <img class="arc-full" src="assets/ukm/arc_white.svg" alt="">
+  <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
+  <h1>Hospital data management in the age of AI</h1>
+  <p class="subtitle">How new methods help us to make better use of existing data in Orbis and other systems</p>
+  <div class="footer">Christian Römer M. Sc.<br>Clinic for Radiology, University Hospital Münster</div>
+  <aside class="notes">
+    <p>Welcome. The talk follows one invented patient and one question. No real patient data appears on any slide.</p>
+  </aside>
+</section>
+
+<section class="tight">
+  <h2>Who am I</h2>
+  <p class="abs" style="left:138px;top:240px;width:1644px;font-size:34px">Christian Römer M. Sc., Scientific Associate, Clinic for Radiology, UKM</p>
+  <img class="abs who-photo" src="assets/img/group_racoon.jpg" alt="Group photo of the RACOON team" style="object-position:50% 26%">
+  <img class="abs who-photo" src="assets/img/group_ukm.jpg" alt="Group photo in the UKM angiography suite" style="left:992px;object-position:50% 24%">
+  <div class="abs who-text" style="left:138px">
+    <b>RACOON</b>
+    Research infrastructure of all German university radiology departments. Structured data from reports.
+    <span class="soft">RAVEN, Informatics in Medicine Unlocked 2026</span>
+    <img src="assets/img/racoon_pos.png" alt="RACOON" style="height:48px;margin-top:18px">
+  </div>
+  <div class="abs who-text" style="left:992px">
+    <b>AI-based body composition analysis</b>
+    What routine CT says about prognosis.
+    <span class="soft">Lung cancer: J Cachexia Sarcopenia Muscle 2025<br>Melanoma: J Transl Med 2025<br>Oesophageal cancer: J Cachexia Sarcopenia Muscle 2026</span>
+  </div>
+  <p class="source">ORCID 0000-0003-4386-9323</p>
+  <aside class="notes">
+    <p>Publications:</p>
+    <ul>
+      <li>RAVEN, Informatics in Medicine Unlocked 2026, doi 10.1016/j.imu.2026.101755</li>
+      <li>Lung cancer, J Cachexia Sarcopenia Muscle 2025, doi 10.1002/jcsm.70021</li>
+      <li>Melanoma, J Transl Med 2025, doi 10.1186/s12967-025-06507-1</li>
+      <li>Oesophageal cancer, J Cachexia Sarcopenia Muscle 2026, doi 10.1002/jcsm.70363</li>
+    </ul>
+    <p>The group photos are for the talk only and must not be published.</p>
+  </aside>
+</section>
+
+<section class="q" data-steps="3">
+  <div class="abs doc paper" style="--x:150px;--y:170px;--r:-7deg;--d:0ms"><div class="paper-head">CT-Befund</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:1400px;--y:152px;--r:6deg;--d:60ms"><div class="paper-head">Laborbericht</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:690px;--y:640px;--r:-4deg;--d:120ms"><div class="paper-head">Pflegedoku</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:980px;--y:618px;--r:5deg;--d:180ms"><div class="paper-head">Tumorboard</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:760px;--y:168px;--r:-3deg;--d:240ms"><div class="paper-head">Fieberkurve</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:170px;--y:618px;--r:4deg;--d:300ms"><div class="paper-head">Aufklärung</div><div class="lines"></div></div>
+  <div class="abs doc paper" style="--x:1520px;--y:640px;--r:-6deg;--d:360ms"><div class="paper-head">Abrechnung</div><div class="lines"></div></div>
+  <div class="abs doc paper key" style="--x:440px;--y:136px;--r:5deg;--d:420ms;--fx:138px"><div class="paper-head">Arztbrief<small>19.08.2026</small></div><div class="body">Neue Milchglas&shy;infiltrate beidseits, <span class="hl m2">V. a. immuntherapie&shy;assoziierte Pneumonitis</span>.</div></div>
+  <div class="abs doc paper key" style="--x:1060px;--y:132px;--r:4deg;--d:480ms;--fx:556px"><div class="paper-head">Medikationsplan<small>14.08.2026</small></div><div class="body">Pembrolizumab: <span class="hl m2">abgesetzt 14.08.2026</span></div></div>
+  <div class="abs doc paper key" style="--x:400px;--y:664px;--r:-8deg;--d:540ms;--fx:974px"><div class="paper-head">Hausarztbrief<small>03.09.2026</small></div><div class="body">Immuntherapie <span class="hl m2">wegen Atemnot beendet</span>.</div></div>
+  <div class="abs doc paper key" style="--x:1230px;--y:642px;--r:-3deg;--d:600ms;--fx:1392px"><div class="paper-head">Arztbrief<small>06.10.2026</small></div><div class="body">Bei <span class="hl m2">Pneumonitis Grad 3 keine Reexposition</span>.</div></div>
+  <p class="abs q-line">Why was the immunotherapy stopped?</p>
+  <p class="abs q-second s3">And in how many of our other patients, for the same reason?</p>
+  <div class="abs q-call s2" style="left:138px">Suspicion</div>
+  <div class="abs q-call s2" style="left:556px">Date</div>
+  <div class="abs q-call s2" style="left:974px">Symptom</div>
+  <div class="abs q-call s2" style="left:1392px">Final reason</div>
+  <p class="abs invented s1" style="top:976px">Invented example</p>
+  <aside class="notes">
+    <p>Invented patient LC-009: squamous cell carcinoma, left upper lobe, baseline CT 10.02.2026, pembrolizumab from 03/2026.</p>
+    <p>Let the question stand alone for a moment. Then the documents, the four that matter, and the question for the whole department.</p>
+    <p>No single document holds the answer. One gives a suspicion, one a date, one a symptom, one the final decision.</p>
+  </aside>
+</section>
+
+<!-- NEXT -->
+</div>
+</div>
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes.js"></script>
+<script src="js/scenes.js"></script>
+</body>
+</html>
