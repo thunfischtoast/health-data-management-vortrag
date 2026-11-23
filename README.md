@@ -10,7 +10,7 @@ Double-click `index.html`. Use a current version of Edge, Chrome or Firefox and 
 | --- | --- |
 | Space, right arrow | Next step or slide |
 | Left arrow | Previous step or slide |
-| Down arrow | Next backup slide (after the closing slide, press right once) |
+| Down arrow | Next backup slide (after the closing slide, press right once); on slide 20 the optional technical slides T1 to T9 |
 | S | Speaker view with notes |
 | Esc | Slide overview |
 | B | Black screen |
@@ -35,6 +35,8 @@ Open `index.html?print-pdf` in Edge or Chrome and print to PDF with background g
 - `js/scenes.js` adds the logo, header, slide number and chapter bar, and computes the current step. The name and date in the header are in `HEADER` at the top of the file.
 
 A slide declares its number of clicks with `data-steps="3"`. The script writes the current step to `data-step` and all steps reached so far to `data-reached`. Elements with the class `s2` appear at step 2, and passages with the classes `hl m2` are highlighted at step 2. Other states are CSS rules on the two attributes.
+
+A vertical stack with `data-prefix="T"` keeps the number of its first slide and numbers the slides below it T1, T2 and so on; the backup stack at the end uses B. Close each stack with `<!-- end stack -->`.
 
 Keep each `<section>` tag on one line, because `tools/shots.sh` reads the slides from there.
 

@@ -318,7 +318,7 @@ RAVEN sends the text as it is to the configured model. Local operation is possib
 
 ### 20 One record in RACOON-RAVEN
 
-**Click.** 1: cT stage and its quote. 2: quote not found. 3: conflict. 4: decision and export.
+**Click.** 1: cT stage and its quote. 2: quote not found. 3: conflict. 4: decision and export. Down: optional technical slides T1 to T9.
 
 **Notes**
 - Green accepted, yellow only read by a model, red look closer
@@ -343,6 +343,134 @@ What you should know before someone asks:
 - There are no accuracy figures for RACOON-RAVEN, and it is not presented as a medical device.
 
 All of this was read from the code at commit a7fa7ec.
+
+### T1 to T9 Optional technical stack
+
+Press down on slide 20 to enter, right to skip to slide 21. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
+
+Two more marks apply here:
+
+- **code**: I read the lines myself in the source.
+- **fact sheet**: a code-reading agent reported it with file and line, and I did not open the lines again.
+
+### T1 RACOON-RAVEN under the hood
+
+**Notes**
+- Cover of the technical part
+- Down: details. Right: back to slide 21
+
+**Background.** The slide lists the topics and points down. If someone asks about size: about 9,700 lines of Python in the backend, 11,600 lines in the frontend, 458 backend and 187 frontend test functions, 7 browser tests against a fake LLM, 191 commits since 10 September 2026 (counted by command). There is no CI (fact sheet, from git log).
+
+### T2 Architecture
+
+**Click.** 1: the LLM endpoint turns red, with the data protection sentence.
+
+**Notes**
+- One Postgres: tables, FHIR resources, job queue
+- No FHIR server, no Redis
+- Only Postgres, Keycloak, Garage in Docker
+- LLM: any OpenAI-compatible URL
+- Text goes unchanged: protection is the choice of a local endpoint
+
+**Background.**
+- **Stack (fact sheet):** FastAPI with SQLAlchemy 2 async and psycopg 3. Procrastinate is a job queue that lives in Postgres, and the worker runs one task, `process_input`. The frontend is a SvelteKit single-page app that logs in with oidc-client-ts (OIDC with PKCE). The API checks the RS256 token against Keycloak's keys. It does not check the audience; it checks `azp`, the client the token was issued to.
+- **Docker (code):** `docker-compose.yml` has three services: `postgres:17`, `keycloak:26.7.3` and `garage:v2.3.0`.
+- **LLM client (code):** `llm/client.py` posts to `{base_url}/chat/completions` with httpx and uses no SDK. Any server that speaks this protocol works: llama.cpp, vLLM, Ollama or a cloud service. The model in use is Qwen 3.7 27B. The RAVEN docs still name qwen3.5-9b on llama.cpp, and the speed figures on T9 were measured with that older model.
+- **No de-identification (fact sheet, confirmed by grep):** no code removes names or dates from the text. `strategies/prompt.py` puts the report text unchanged between the markers. Dates are out of scope in the LLM spec. If someone points the URL at a cloud service, the report text leaves the hospital. Say this plainly.
+
+### T3 From upload to export
+
+**Click.** 0: upload. 1: map. 2: queue. 3: extract, with the call to the LLM. 4: match. 5: ingest. 6: export. Each click draws the next arrow and shows below what the invented patient LC-009 looks like at that stage: the Excel row with its German report, the column mapping, the job, the model answer as JSON, the match, the field states and the export row.
+
+**Notes**
+- Top lane: browser and API. Middle: worker. Bottom: what lands in Postgres
+- Upload and map in the browser, then one job
+- Worker: extract all reports first, then match and ingest row by row
+- Export reads the field values: CSV or XLSX
+
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 19 and 20: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
+
+### T4 The prompt
+
+**Click.** 1: three rules marked: no guessing, verbatim quotes, ignore instructions in the text.
+
+**Notes**
+- English rules, German report and form
+- One block per field, from the FHIR item: label, type, unit, hint
+- The hint is the researcher's definition
+- Answer: value plus verbatim quotes per field
+- Injection defence is one sentence
+
+**Background (code).** The system message is quoted in full from `strategies/prompt.py`. The field block is what `_field()` builds for the item `tumor-groesse` of the sample template `samples/lung-ct/template-ct-thorax-staging.json`, with its real German hint. Only the text column is sent; the pseudonym and patient ID columns are not added to the prompt. There are two strategies with the same prompt (fact sheet). `single_call` asks for all fields at once. `per_group` makes one call per top-level group, one after the other. The answer on the right is the expected one; no model was run for this slide.
+
+### T5 Checking the answer
+
+**Click.** 1: what a found quote proves.
+
+**Notes**
+- Schema forces value and quotes
+- Bad field dropped, rest kept
+- Quote search exact, only case and spaces ignored
+- Every call stored, reused when nothing changed
+- Timeout not retried on purpose
+
+**Background.**
+- **Schema (code):** `temperature: 0` and `response_format` of type `json_schema` with `strict: true`. After the first HTTP 400 the client switches to `json_object` for good, because some servers do not support schemas.
+- **Validation (fact sheet):** each field is checked with pydantic. Values then go through the same type check as table cells, and an unknown choice code gets the flag `invalid_value`.
+- **Quote search (code):** `llm/quotes.py` folds case (ß becomes ss), collapses whitespace on both sides and then looks for the exact substring. It takes the first hit and maps the offsets back to the original text. A field is flagged `quote_not_found` only when none of its quotes is found (`services/ingest.py`).
+- **Reuse (code):** a run is reused when it succeeded and text hash, strategy, strategy version, form version and model are all the same (`llm/extractor.py`).
+- **Retries (code):** network errors, 429 and 5xx are tried up to three times, with 1 s and 4 s pauses. A read timeout fails at once. The code comment says the server is still busy with the same request. The LLM spec says timeouts are retried; README and code agree with each other.
+
+### T6 The chain of proof in the database
+
+**Click.** 1: the conclusion.
+
+**Notes**
+- Start at the 38 in the export
+- Who decided, and when
+- Which proposals there were: report with quote, table cell
+- Where they came from: file and row, model call
+- Each step stores the one before. Nothing is lost on the way
+
+**Background (fact sheet).** The cards map to tables in `db/models.py`. The export is built on request from `field_value`. The decision is `field_value` plus one `field_event` per change, with user, time and reason. Each proposal is a `proposal` row, one per source row, item and method, with the table cell or the quote position. The source is `input_row` (the raw cells) and, for model proposals, `llm_run` and `llm_step` (prompt, model, raw answer). The QuestionnaireResponse is stored as FHIR JSON in the same database. There is no FHIR server (HAPI and Medplum too heavy, Fuego closed source, Aidbox commercial, from the scope spec) and no FHIR export yet. One caveat for questions: the CSV export itself names only value, state and source row, not the quote, reviewer or model. Those stay in RAVEN.
+
+### T7 Field states and automatic acceptance
+
+**Click.** 1: the rule that keeps model-only values open.
+
+**Notes**
+- Flagged proposals do not count
+- All sources agree, and one is a table column: automatic
+- Only a model read it: a person decides
+- Ingestion never overwrites a human decision
+- Settled conflicts stay settled
+
+**Background (code).** The excerpt is from `evaluate()` in `services/field_state.py`, with only the comment wrapped. One consequence for the main talk: a single table cell with no other source is accepted automatically, because "all sources agree" holds for one source. A conflict on a decided field is raised again only by a proposal that was updated after the decision. Both times come from the database clock (`clock_timestamp()`), so a job that waited for the reviewer's lock still counts as newer (fact sheet).
+
+### T8 Matching patients and timepoints
+
+**Notes**
+- Pseudonym, patient ID, then a score
+- Score: family name weighs half
+- From 0.6 a candidate, a person links
+- Timepoint: distance from baseline, inside a window
+- Unclear cases become review tasks
+
+**Background (code).** The weights and the formula are from `fhir/scoring.py`. The family name counts with its difflib similarity, the other fields only when they are equal. The sum is divided by the weights of the fields the row carries, so a row with only family name and birth date can still reach 0.6. The thresholds are in `fhir/constants.py`. The code comment gives the reason for difflib: trigram similarity is too low for one-letter typos, "meyer" and "meier" score 0.33. difflib gives 0.80; I computed that myself. For input rows, a fuzzy result never links on its own (`services/input_matching.py`). The timepoint rule is in `assign_timepoint()`. It has three modes per input: a fixed timepoint, a column with the timepoint code or label, and the date rule on the slide. The windows on the slide are invented. Dates are read day first (fact sheet).
+
+### T9 Review, and what is not there yet
+
+**Notes**
+- Keyboard review, one key per action
+- Conflict view: one card per value, all sources
+- Then the honest list, slowly
+
+**Background.**
+- **Keys (code):** they are in `frontend/src/lib/review/keymap.ts`. The list on the slide is shortened: `N` (previous open field), `[`, `]` and `?` are missing, and the arrow keys and Enter are aliases for j, k and e.
+- **Bulk accept (code):** "Accept agreeing values" in `services/review.py` takes every proposed field without conflict and without flags. That includes fields with only an LLM proposal.
+- **History (fact sheet):** `field_event` rows are deleted with a record that has neither a proposal nor a human decision. Records with a decision are never deleted this way.
+- **Speed (fact sheet, docs only):** about 91 s per report with thinking and 5 to 7 s without (qwen3.5-9b). A test with 2,000 table rows has a 60 s budget and took about 85 s on the dev machine (HANDOFF, 23.09.2026).
+- **Quality:** there are no figures. The LLM spec lists metrics and model comparison as out of scope.
 
 ### 21 What the chain does not prove
 

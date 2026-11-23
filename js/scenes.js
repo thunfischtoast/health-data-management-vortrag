@@ -69,7 +69,13 @@
   function slideNumber(section) {
     var parent = section.parentNode;
     var position = Array.prototype.indexOf.call(parent.children, section) + 1;
-    return parent.classList.contains('slides') ? position : 'B' + position;
+    if (parent.classList.contains('slides')) { return position; }
+    var prefix = parent.dataset.prefix;
+    if (!prefix) { return 'B' + position; }
+    // A main slide heads this stack and keeps its number; the optional slides below it
+    // count with the stack's prefix.
+    if (position === 1) { return slideNumber(parent); }
+    return prefix + (position - 1);
   }
 
   slides().forEach(function (section) {
