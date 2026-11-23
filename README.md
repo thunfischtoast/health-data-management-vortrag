@@ -20,6 +20,10 @@ The browser must allow pop-ups for the speaker view. The notes hold the full cit
 
 The address shows the position as `#/slide/backup/step`, all counted from zero. `#/7` is the vendor slide without a click, and `#/7/0/2` shows it after three clicks.
 
+## Website
+
+`.github/workflows/pages.yml` publishes the deck to GitHub Pages on every push to `main`. The site holds only `index.html`, `css/`, `js/`, `assets/` and `vendor/`. The two group photos are replaced by `tools/pages/photo-placeholder.jpg`, and the build fails if any other JPEG reaches the site. To switch the site on once, set Settings, Pages, Source to "GitHub Actions".
+
 ## PDF export
 
 Open `index.html?print-pdf` in Edge or Chrome and print to PDF with background graphics switched on and margins set to none. Each step becomes one page.
@@ -42,4 +46,4 @@ Keep each `<section>` tag on one line, because `tools/shots.sh` reads the slides
 
 The research notes in `research_notes/` hold the evidence behind each figure. All patients, letters and values on the slides are invented.
 
-The two excerpts from Dedalus DIREKT in `assets/vendor-quote/` are used as quotations with the source named on the slide. The group photos in `assets/img/` are for the talk only and must not be published. The logos belong to UKM and RACOON.
+The two excerpts from Dedalus DIREKT in `assets/vendor-quote/` are used as quotations with the source named on the slide. The group photos in `assets/img/` and `templates/` are for the talk only and must not be published. The website shows a placeholder instead, but the repository is public, so the files are visible there. The logos belong to UKM and RACOON.
