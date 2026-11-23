@@ -466,13 +466,13 @@
     <path d="M498 375 H566"/><path d="M926 375 H994"/><path class="llm" d="M1354 375 H1422"/>
     <path d="M318 460 V560"/><path d="M630 460 L480 560"/><path d="M746 460 V560"/><path d="M880 460 L1060 560"/><path d="M1174 460 V560"/>
   </svg>
-  <div class="abs box" style="left:138px;top:290px"><b>Browser</b><span>SvelteKit single-page app, login with OIDC and PKCE</span></div>
-  <div class="abs box" style="left:566px;top:290px"><b>API</b><span>FastAPI, Python 3.13+, REST and server-sent events</span></div>
-  <div class="abs box" style="left:994px;top:290px"><b>Worker</b><span>Procrastinate job: extraction, matching, proposals</span></div>
-  <div class="abs box ext" style="left:1422px;top:290px"><b>LLM endpoint</b><span>Any OpenAI-compatible server. Locally llama.cpp, qwen3.5-9b</span></div>
-  <div class="abs box dock" style="left:138px;top:560px"><b>Keycloak 26</b><span>Users and login; the API checks the token</span></div>
-  <div class="abs box dock" style="left:566px;top:560px"><b>Garage</b><span>S3 storage for the uploaded files</span></div>
-  <div class="abs box dock" style="left:994px;top:560px"><b>Postgres 17</b><span>Tables, FHIR resources as JSONB, job queue</span></div>
+  <div class="abs box" style="left:138px;top:290px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="3"/><path d="M4 17 H44"/><circle cx="10" cy="12.5" r="1.2"/><circle cx="15" cy="12.5" r="1.2"/></svg><b>Browser</b><span>SvelteKit single-page app, login with OIDC and PKCE</span></div>
+  <div class="abs box" style="left:566px;top:290px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><path d="M18 8 Q11 8 11 15 V20 Q11 24 6 24 Q11 24 11 28 V33 Q11 40 18 40"/><path d="M30 8 Q37 8 37 15 V20 Q37 24 42 24 Q37 24 37 28 V33 Q37 40 30 40"/></svg><b>API</b><span>FastAPI, Python 3.13+, REST and server-sent events</span></div>
+  <div class="abs box" style="left:994px;top:290px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="7"/><path d="M24 6 V12 M24 36 V42 M6 24 H12 M36 24 H42 M11.3 11.3 L15.5 15.5 M32.5 32.5 L36.7 36.7 M11.3 36.7 L15.5 32.5 M32.5 15.5 L36.7 11.3"/></svg><b>Worker</b><span>Procrastinate job: extraction, matching, proposals</span></div>
+  <div class="abs box ext" style="left:1422px;top:290px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="12" width="24" height="24" rx="3"/><path d="M18 6 V12 M24 6 V12 M30 6 V12 M18 36 V42 M24 36 V42 M30 36 V42 M6 18 H12 M6 24 H12 M6 30 H12 M36 18 H42 M36 24 H42 M36 30 H42"/><path d="M20 28 L24 20 L28 28 M21.5 25 H26.5"/></svg><b>LLM endpoint</b><span>Any OpenAI-compatible server. Currently Qwen 3.7 27B</span></div>
+  <div class="abs box dock" style="left:138px;top:560px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="15" cy="24" r="8"/><path d="M23 24 H43 M36 24 V31 M42 24 V31"/></svg><b>Keycloak 26</b><span>Users and login; the API checks the token</span></div>
+  <div class="abs box dock" style="left:566px;top:560px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><path d="M5 14 H19 L23 18 H43 V39 H5 Z"/></svg><b>Garage</b><span>S3 storage for the uploaded files</span></div>
+  <div class="abs box dock" style="left:994px;top:560px"><svg class="ico" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="11" rx="16" ry="5"/><path d="M8 11 V37 A16 5 0 0 0 40 37 V11"/><path d="M8 24 A16 5 0 0 0 40 24"/></svg><b>Postgres 17</b><span>Tables, FHIR resources as JSONB, job queue</span></div>
   <div class="abs legend" style="left:1422px;top:566px">
     <p><i class="dock"></i>docker compose</p>
     <p><i></i>on the host, <code>just dev</code></p>
@@ -482,7 +482,7 @@
   <p class="source">RACOON-RAVEN main a7fa7ec: docker-compose.yml, main.py, worker/, llm/client.py</p>
   <aside class="notes">
     <p>One Postgres holds the relational tables, the FHIR resources and the job queue (Procrastinate). There is no FHIR server and no Redis. API, worker and frontend run on the host; only Postgres, Keycloak and Garage run in Docker.</p>
-    <p>The LLM client is plain httpx against /chat/completions, no SDK. The model in the docs is qwen3.5-9b on llama.cpp. Data protection rests on choosing a local endpoint: the prompt builder sends the report text unchanged.</p>
+    <p>The LLM client is plain httpx against /chat/completions, no SDK. The model in use is Qwen 3.7 27B; the RAVEN docs still name qwen3.5-9b on llama.cpp. Data protection rests on choosing a local endpoint: the prompt builder sends the report text unchanged.</p>
   </aside>
 </section>
 
@@ -490,7 +490,7 @@
   <h2>From upload to export</h2>
   <div class="abs lane" style="top:270px"><span>Browser and API</span></div>
   <div class="abs lane" style="top:450px"><span>Worker</span></div>
-  <div class="abs lane db" style="top:630px"><span>Postgres 17</span></div>
+  <div class="abs lane db" style="top:630px"><span>Example: patient LC-009, invented</span></div>
   <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
     <path class="p1" pathLength="1" d="M380 364 H410"/>
     <path class="p2" pathLength="1" d="M630 364 H660"/>
@@ -514,12 +514,35 @@
   <div class="abs node n4" style="left:1160px;top:492px"><b>Match</b><span>patient, timepoint</span></div>
   <div class="abs node n5" style="left:1410px;top:492px"><b>Ingest</b><span>row by row</span></div>
   <div class="abs node n6" style="left:1560px;top:312px"><b>Export</b><span>CSV or XLSX</span></div>
-  <div class="abs chips" style="left:160px"><code class="c0">input</code><code class="c0" style="--d:120ms">input_row</code></div>
-  <div class="abs chips" style="left:410px"><code class="c1">input.column_map</code><code class="c1" style="--d:120ms">input.value_map</code></div>
-  <div class="abs chips" style="left:660px"><code class="c2">procrastinate_jobs</code><code class="c2" style="--d:120ms">job_link</code></div>
-  <div class="abs chips" style="left:910px"><code class="c3">llm_run</code><code class="c3" style="--d:120ms">llm_step</code></div>
-  <div class="abs chips" style="left:1160px"><code class="c4">subject_id</code><code class="c4" style="--d:120ms">timepoint_id</code><code class="c4" style="--d:240ms">match_task</code></div>
-  <div class="abs chips" style="left:1410px"><code class="c5">proposal</code><code class="c5" style="--d:120ms">field_value</code><code class="c5" style="--d:240ms">field_event</code><code class="c5" style="--d:360ms">FHIR response</code></div>
+  <div class="abs ex x0" style="left:160px;width:1600px">
+    <div class="xl"><b>Pseudonym</b><b>Untersuchungsdatum</b><b>Tumorgröße (mm)</b><b>Befund</b><span>LC-009</span><span>10.02.2026</span><span>48</span><span>CT Thorax mit KM vom 10.02.2026. Befund: Raumforderung im linken Oberlappen, 38 mm, mit Kontakt zum Aortenbogen ohne sichere Infiltration. Kein Pleuraerguss. Beurteilung: Bronchialkarzinom links apikal, cT2a. Keine Fernmetastasen.</span></div>
+    <small>baseline.xlsx, row 10</small>
+  </div>
+  <div class="abs ex x1" style="left:410px;width:900px">
+    <p><span>Pseudonym</span><i>→</i>key: pseudonym</p>
+    <p><span>Untersuchungsdatum</span><i>→</i>timepoint from the date</p>
+    <p><span>Tumorgröße (mm)</span><i>→</i>item tumor-groesse</p>
+    <p><span>Befund</span><i>→</i>report text for the model</p>
+  </div>
+  <div class="abs ex x2" style="left:660px;width:700px">
+    <p><b>Job process_input</b>: baseline.xlsx, 12 rows</p>
+    <div class="bar"><i></i></div>
+    <p class="soft2">extracting, row 5 of 12</p>
+  </div>
+  <div class="abs ex code x3" style="left:910px;width:860px">{"tumor-groesse": {"value": 38, "quotes":
+    ["Raumforderung im linken Oberlappen, 38 mm"]},
+ "kontrastmittel": {"value": true, "quotes": ["mit KM"]}}</div>
+  <div class="abs ex x4" style="left:1060px;width:710px">
+    <p><span>LC-009</span><i>→</i>patient LC-009, pseudonym exact</p>
+    <p><span>10.02.2026</span><i>→</i>day 0 after baseline: T0</p>
+  </div>
+  <div class="abs ex x5" style="left:900px;width:870px">
+    <p><span>Untersuchungsdatum</span>10.02.2026 in table and report<em class="g">auto accepted</em></p>
+    <p><span>Tumorgröße</span>48 mm table, 38 mm report<em class="r">conflict</em></p>
+    <p><span>Kontrastmittel</span>ja, report only<em class="y">proposed</em></p>
+  </div>
+  <div class="abs ex code x6" style="left:960px;width:810px">pseudonym,timepoint_code,…,tumor-groesse,tumor-groesse__state,tumor-groesse__source
+LC-009,T0,…,38,accepted,baseline.xlsx:10</div>
   <p class="abs say w0">The file is parsed at once. Each row is stored as raw cells, the original goes to S3.</p>
   <p class="abs say w1">Key columns, form items, answer options and the column with the report text.</p>
   <p class="abs say w2">One job in Postgres. The browser follows its progress live.</p>
@@ -528,7 +551,7 @@
   <p class="abs say w5">Proposals, field states and history. The FHIR response is rebuilt.</p>
   <p class="abs say w6">Value, state and source for every item. Read from the field values.</p>
   <aside class="notes">
-    <p>Each click moves one stage on; the grey band shows what that stage writes to Postgres. Extraction runs first for all rows (progress 0 to 90%), then each row is matched and ingested in its own transaction.</p>
+    <p>Each click moves one stage on; the band shows what the invented patient LC-009 looks like at that stage. The export row assumes that a reviewer accepted 38 mm. Extraction runs first for all rows (progress 0 to 90%), then each row is matched and ingested in its own transaction.</p>
     <p>Files: services/inputs.py, services/input_processing.py, llm/extractor.py, services/input_matching.py, services/ingest.py, api/exports.py.</p>
   </aside>
 </section>
@@ -569,25 +592,22 @@ Report text, between the markers:
   </aside>
 </section>
 
-<section class="tables tight" data-chapter="3" data-steps="1" data-visibility="uncounted">
-  <h2>Data model and chain of proof</h2>
+<section class="proof tight" data-chapter="3" data-steps="1" data-visibility="uncounted">
+  <h2>The chain of proof in the database</h2>
+  <p class="abs lead" style="left:138px;top:250px">Start at a number in the export and follow it back to the words.</p>
   <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
-    <path d="M498 380 H566"/><path d="M926 380 H994"/><path d="M1354 380 H1422"/>
-    <path d="M318 590 V470"/><path d="M746 590 V470"/><path d="M1174 590 V470"/><path d="M1500 590 L1300 470"/>
+    <defs><marker id="tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z"/></marker></defs>
+    <path marker-end="url(#tip)" d="M510 500 H558"/><path marker-end="url(#tip)" d="M934 500 H982"/><path marker-end="url(#tip)" d="M1358 500 H1406"/>
   </svg>
-  <div class="abs tbl" style="left:138px;top:290px"><code>input_row</code><span>raw cells (JSONB), row index, subject, timepoint, outcome</span></div>
-  <div class="abs tbl" style="left:566px;top:290px"><code>proposal</code><span>method mapping or llm, value, raw, <span class="hl m1">location: cell or quote offsets</span>, flags</span></div>
-  <div class="abs tbl" style="left:994px;top:290px"><code>field_value</code><span>value, state, conflict, decided by and at</span></div>
-  <div class="abs tbl fhir" style="left:1422px;top:290px"><code>Questionnaire&shy;Response</code><span>FHIR R4, rebuilt on every change</span></div>
-  <div class="abs tbl" style="left:138px;top:590px"><code>input</code><span>file name, SHA-256, S3 key, column map</span></div>
-  <div class="abs tbl" style="left:566px;top:590px"><code>llm_run, llm_step</code><span><span class="hl m1">model, strategy, text hash, messages, raw answer</span></span></div>
-  <div class="abs tbl" style="left:994px;top:590px"><code>field_event</code><span>from state, to state, value, user, time, reason</span></div>
-  <div class="abs tbl" style="left:1422px;top:590px"><code>record</code><span>one per study, subject, timepoint and form</span></div>
-  <p class="abs note">FHIR resources are JSONB rows with generated index columns. No FHIR server: HAPI and Medplum too heavy, Fuego closed source, Aidbox commercial.</p>
-  <p class="source">RACOON-RAVEN main a7fa7ec: db/models.py; reasons from docs/superpowers/specs, scope design</p>
+  <div class="abs card" style="left:138px"><p class="kind">Export</p><p class="big2">38</p><p>LC-009, T0, tumour size<br>state accepted<br>source baseline.xlsx:10</p></div>
+  <div class="abs card" style="left:562px"><p class="kind">Decision</p><p>38 mm accepted by a reviewer</p><p>History: proposed, then accepted, with name and time</p></div>
+  <div class="abs card" style="left:986px"><p class="kind">Proposals</p><p>38 mm from the report, <span class="hl m0">quote</span> found and its position stored</p><p>48 mm from the table cell</p></div>
+  <div class="abs card" style="left:1410px"><p class="kind">Source</p><p>baseline.xlsx, row 10</p><p>The model call: prompt, model, raw answer</p></div>
+  <p class="abs final s1" style="top:800px;font-size:44px">Every value in the export can be traced to the words it came from.</p>
+  <p class="abs invented">Invented patient. All of it is stored in one Postgres database</p>
   <aside class="notes">
-    <p>Read from left to right for the data, from right to left for the proof: answer, field, proposal with location, input row or LLM run, file. A proposal exists once per row, item and method.</p>
-    <p>The QuestionnaireResponse is stored in the FHIR table, but no endpoint exports it yet; export is CSV or XLSX. FHIR R4 is modelled with the R4B classes of fhir.resources 8.3.</p>
+    <p>Tables from left to right: export (built on request), field_value and field_event, proposal, input_row and llm_run. Each row stores the key of the one before it. A proposal stores either the table cell or the quote with its start and end in the text.</p>
+    <p>FHIR resources such as the QuestionnaireResponse are stored as JSON in the same database. There is no separate FHIR server, and no FHIR export yet.</p>
   </aside>
 </section>
 

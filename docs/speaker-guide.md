@@ -375,12 +375,12 @@ Two more marks apply here:
 **Background.**
 - **Stack (fact sheet):** FastAPI with SQLAlchemy 2 async and psycopg 3. Procrastinate is a job queue that lives in Postgres, and the worker runs one task, `process_input`. The frontend is a SvelteKit single-page app that logs in with oidc-client-ts (OIDC with PKCE). The API checks the RS256 token against Keycloak's keys. It does not check the audience; it checks `azp`, the client the token was issued to.
 - **Docker (code):** `docker-compose.yml` has three services: `postgres:17`, `keycloak:26.7.3` and `garage:v2.3.0`.
-- **LLM client (code):** `llm/client.py` posts to `{base_url}/chat/completions` with httpx and uses no SDK. Any server that speaks this protocol works: llama.cpp, vLLM, Ollama or a cloud service. The docs name llama.cpp with qwen3.5-9b.
+- **LLM client (code):** `llm/client.py` posts to `{base_url}/chat/completions` with httpx and uses no SDK. Any server that speaks this protocol works: llama.cpp, vLLM, Ollama or a cloud service. The model in use is Qwen 3.7 27B. The RAVEN docs still name qwen3.5-9b on llama.cpp, and the speed figures on T9 were measured with that older model.
 - **No de-identification (fact sheet, confirmed by grep):** no code removes names or dates from the text. `strategies/prompt.py` puts the report text unchanged between the markers. Dates are out of scope in the LLM spec. If someone points the URL at a cloud service, the report text leaves the hospital. Say this plainly.
 
 ### T3 From upload to export
 
-**Click.** 0: upload. 1: map. 2: queue. 3: extract, with the call to the LLM. 4: match. 5: ingest. 6: export. Each click draws the next arrow and drops into the Postgres band what that stage writes.
+**Click.** 0: upload. 1: map. 2: queue. 3: extract, with the call to the LLM. 4: match. 5: ingest. 6: export. Each click draws the next arrow and shows below what the invented patient LC-009 looks like at that stage: the Excel row with its German report, the column mapping, the job, the model answer as JSON, the match, the field states and the export row.
 
 **Notes**
 - Top lane: browser and API. Middle: worker. Bottom: what lands in Postgres
@@ -388,7 +388,7 @@ Two more marks apply here:
 - Worker: extract all reports first, then match and ingest row by row
 - Export reads the field values: CSV or XLSX
 
-**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The labels in the band are tables, except `input.column_map` and `input.value_map` (columns of `input`) and `subject_id` and `timepoint_id` (columns of `input_row`). `procrastinate_jobs` is the queue table of Procrastinate.
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 19 and 20: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
 
 ### T4 The prompt
 
@@ -421,18 +421,18 @@ Two more marks apply here:
 - **Reuse (code):** a run is reused when it succeeded and text hash, strategy, strategy version, form version and model are all the same (`llm/extractor.py`).
 - **Retries (code):** network errors, 429 and 5xx are tried up to three times, with 1 s and 4 s pauses. A read timeout fails at once. The code comment says the server is still busy with the same request. The LLM spec says timeouts are retried; README and code agree with each other.
 
-### T6 Data model and chain of proof
+### T6 The chain of proof in the database
 
-**Click.** 1: where the chain of proof is stored.
+**Click.** 1: the conclusion.
 
 **Notes**
-- Left to right: data. Right to left: proof
-- A proposal exists once per row, item and method
-- Location: table cell, or quote with offsets
-- Every change is an event with user and reason
-- FHIR in Postgres, no FHIR server, and why
+- Start at the 38 in the export
+- Who decided, and when
+- Which proposals there were: report with quote, table cell
+- Where they came from: file and row, model call
+- Each step stores the one before. Nothing is lost on the way
 
-**Background (fact sheet).** The tables are in `db/models.py`. A record is unique per study, subject, timepoint and form. The QuestionnaireResponse is rebuilt from the field values on every change and contains only accepted, auto-accepted and corrected values. It is stored but no endpoint exports it; FHIR export and the push to HIVE are a later part. FHIR R4 is modelled with the R4B classes of fhir.resources 8.3. The reasons against a FHIR server come from the scope design spec: HAPI too heavy, Fuego closed source, Medplum too heavy, Aidbox commercial.
+**Background (fact sheet).** The cards map to tables in `db/models.py`. The export is built on request from `field_value`. The decision is `field_value` plus one `field_event` per change, with user, time and reason. Each proposal is a `proposal` row, one per source row, item and method, with the table cell or the quote position. The source is `input_row` (the raw cells) and, for model proposals, `llm_run` and `llm_step` (prompt, model, raw answer). The QuestionnaireResponse is stored as FHIR JSON in the same database. There is no FHIR server (HAPI and Medplum too heavy, Fuego closed source, Aidbox commercial, from the scope spec) and no FHIR export yet. One caveat for questions: the CSV export itself names only value, state and source row, not the quote, reviewer or model. Those stay in RAVEN.
 
 ### T7 Field states and automatic acceptance
 

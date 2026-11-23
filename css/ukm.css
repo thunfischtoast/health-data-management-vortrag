@@ -327,11 +327,14 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .code { padding: 18px 24px; background: var(--tint); border: 1px solid var(--line); font-family: Consolas, "Courier New", monospace; font-size: 21px; line-height: 30px; color: var(--dark); white-space: pre-wrap; overflow: hidden; }
 .code .cap { margin-bottom: 10px; font-family: Arial, Helvetica, sans-serif; font-size: 22px; line-height: 28px; color: var(--muted); white-space: normal; }
 .reveal code { font-family: Consolas, "Courier New", monospace; }
-.arch .links path, .tables .links path, .states .links path { fill: none; stroke: var(--light); stroke-width: 3; }
+.arch .links path, .proof .links path, .states .links path { fill: none; stroke: var(--light); stroke-width: 3; }
 
-.arch .box, .tables .tbl { width: 360px; height: 170px; padding: 16px 22px; background: #fff; border: 2px solid var(--steel); }
+.arch .box { width: 360px; height: 170px; padding: 16px 22px; background: #fff; border: 2px solid var(--steel); }
+.arch .box .ico { position: absolute; right: 16px; top: 14px; fill: none; stroke: var(--blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.arch .box.ext .ico { stroke: var(--muted); }
+.arch[data-reached~="1"] .box.ext .ico { stroke: var(--limit); }
 .arch .box b { display: block; font-size: 30px; line-height: 38px; color: var(--dark); }
-.arch .box span, .tables .tbl > span { display: block; margin-top: 6px; font-size: 24px; line-height: 32px; }
+.arch .box span { display: block; margin-top: 6px; font-size: 24px; line-height: 32px; }
 .arch .dock { border-style: dashed; }
 .arch .ext { background: var(--tint); transition: border-color 400ms ease, box-shadow 400ms ease; }
 .arch[data-reached~="1"] .ext { border-color: var(--limit); box-shadow: inset 0 0 0 2px var(--limit); }
@@ -361,41 +364,57 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .flow .node b { display: block; font-size: 30px; line-height: 38px; }
 .flow .node span { display: block; font-size: 20px; line-height: 28px; }
 .flow .node.ext { border-style: dashed; }
-.flow .chips { top: 672px; width: 240px; }
-.flow .chips code { display: table; margin-bottom: 7px; padding: 0 10px; font-size: 21px; line-height: 34px; border-radius: 6px; background: #fff; border: 1px solid var(--steel); color: var(--dark); opacity: 0; transform: translateY(-24px); transition: opacity 400ms ease var(--d, 0ms), transform 500ms var(--ease) var(--d, 0ms); }
+.flow .ex { top: 664px; padding: 14px 20px; background: #fff; border: 1px solid var(--steel); border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 56, 102, .12); font-size: 26px; line-height: 36px; color: var(--text); opacity: 0; transform: translateY(18px); transition: opacity 350ms ease, transform 450ms var(--ease); }
+.flow .ex.code { font-family: Consolas, "Courier New", monospace; font-size: 23px; line-height: 32px; color: var(--dark); white-space: pre-wrap; }
+.flow .ex p span { display: inline-block; min-width: 290px; font-weight: 700; color: var(--dark); }
+.flow .ex p i { font-style: normal; margin: 0 16px 0 0; color: var(--blue); }
+.flow .ex em { float: right; margin-top: 3px; padding: 0 12px; font-style: normal; font-size: 21px; line-height: 30px; border-radius: 15px; border: 1px solid; }
+.flow .ex.x5 p { display: flex; align-items: center; }
+.flow .ex.x5 p span { flex: 0 0 300px; }
+.flow .ex.x5 em { float: none; margin: 0 0 0 auto; }
+.flow .ex em.g { color: #0F5A4E; background: #D9F6F1; border-color: #8EE3D4; }
+.flow .ex em.y { color: #6B5300; background: #FFF5CC; border-color: #FFE066; }
+.flow .ex em.r { color: var(--limit); background: #FBDCE1; border-color: #F297A4; }
+.flow .ex .xl { display: grid; grid-template-columns: 150px 250px 220px 1fr; border: 1px solid var(--line); font-size: 21px; line-height: 28px; }
+.flow .ex .xl > * { padding: 4px 10px; border-right: 1px solid var(--line); }
+.flow .ex .xl b { background: var(--tint); color: var(--dark); border-bottom: 1px solid var(--line); }
+.flow .ex small { display: block; margin-top: 4px; font-size: 20px; color: var(--muted); }
+.flow .ex .bar { height: 16px; margin: 10px 0 6px; background: var(--tint); border-radius: 8px; overflow: hidden; }
+.flow .ex .bar i { display: block; width: 42%; height: 100%; background: var(--blue); }
+.flow .ex .soft2 { font-size: 22px; color: var(--muted); }
 .reveal .flow .say { left: 138px; top: 874px; width: 1644px; font-size: 34px; line-height: 44px; font-weight: 700; color: var(--blue); opacity: 0; transition: opacity 300ms ease; }
 .flow[data-reached~="0"] .n0 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="0"] .n0 { background: var(--blue); color: #fff; }
-.flow[data-reached~="0"] .c0 { opacity: 1; transform: none; }
+.flow[data-step="0"] .x0 { opacity: 1; transform: none; }
 .flow[data-step="0"] .w0 { opacity: 1; }
 .flow[data-reached~="1"] .n1 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="1"] .n1 { background: var(--blue); color: #fff; }
-.flow[data-reached~="1"] .c1 { opacity: 1; transform: none; }
+.flow[data-step="1"] .x1 { opacity: 1; transform: none; }
 .flow[data-step="1"] .w1 { opacity: 1; }
 .flow[data-reached~="1"] .p1 { stroke-dashoffset: 0; }
 .flow[data-reached~="2"] .n2 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="2"] .n2 { background: var(--blue); color: #fff; }
-.flow[data-reached~="2"] .c2 { opacity: 1; transform: none; }
+.flow[data-step="2"] .x2 { opacity: 1; transform: none; }
 .flow[data-step="2"] .w2 { opacity: 1; }
 .flow[data-reached~="2"] .p2 { stroke-dashoffset: 0; }
 .flow[data-reached~="3"] .n3 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="3"] .n3 { background: var(--blue); color: #fff; }
-.flow[data-reached~="3"] .c3 { opacity: 1; transform: none; }
+.flow[data-step="3"] .x3 { opacity: 1; transform: none; }
 .flow[data-step="3"] .w3 { opacity: 1; }
 .flow[data-reached~="3"] .p3 { stroke-dashoffset: 0; }
 .flow[data-reached~="4"] .n4 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="4"] .n4 { background: var(--blue); color: #fff; }
-.flow[data-reached~="4"] .c4 { opacity: 1; transform: none; }
+.flow[data-step="4"] .x4 { opacity: 1; transform: none; }
 .flow[data-step="4"] .w4 { opacity: 1; }
 .flow[data-reached~="4"] .p4 { stroke-dashoffset: 0; }
 .flow[data-reached~="5"] .n5 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="5"] .n5 { background: var(--blue); color: #fff; }
-.flow[data-reached~="5"] .c5 { opacity: 1; transform: none; }
+.flow[data-step="5"] .x5 { opacity: 1; transform: none; }
 .flow[data-step="5"] .w5 { opacity: 1; }
 .flow[data-reached~="5"] .p5 { stroke-dashoffset: 0; }
 .flow[data-reached~="6"] .n6 { opacity: 1; border-color: var(--blue); color: var(--dark); }
 .flow[data-step="6"] .n6 { background: var(--blue); color: #fff; }
-.flow[data-reached~="6"] .c6 { opacity: 1; transform: none; }
+.flow[data-step="6"] .x6 { opacity: 1; transform: none; }
 .flow[data-step="6"] .w6 { opacity: 1; }
 .flow[data-reached~="6"] .p6 { stroke-dashoffset: 0; }
 .flow[data-step] .node { box-shadow: none; }
@@ -414,11 +433,14 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .reveal .evidence .grid b { font-size: 32px; line-height: 40px; }
 .evidence .grid { grid-template-columns: 300px 1fr; }
 
-.tables .tbl code { display: block; font-size: 28px; line-height: 38px; font-weight: 700; color: var(--dark); }
-.tables .fhir { background: var(--tint); }
-.reveal .tables .note, .reveal .states .note { font-size: 28px; line-height: 38px; color: var(--muted); }
-.reveal .tables .note { left: 138px; top: 808px; width: 1644px; }
-
+/* T6 chain of proof */
+.proof .links path { stroke: var(--blue); }
+.proof .links marker path { fill: var(--blue); stroke: none; }
+.proof .card { top: 330px; width: 372px; height: 340px; padding: 22px 26px; background: #fff; border: 2px solid var(--steel); border-radius: 10px; }
+.reveal .proof .card p { font-size: 28px; line-height: 38px; margin-top: 12px; }
+.reveal .proof .card .kind { margin-top: 0; font-size: 24px; font-weight: 700; color: var(--blue); }
+.reveal .proof .card .big2 { font-size: 88px; line-height: 96px; font-weight: 700; color: var(--dark); }
+.reveal .states .note { font-size: 28px; line-height: 38px; color: var(--muted); }
 .states .node { left: 620px; width: 300px; height: 76px; line-height: 72px; text-align: center; font-family: Consolas, "Courier New", monospace; font-size: 28px; border: 2px solid; }
 .states .prop { width: 280px; background: #FFF5CC; border-color: #E5C34D; color: #6B5300; }
 .states .ok { background: #D9F6F1; border-color: #42D1B8; color: #0F5A4E; }
