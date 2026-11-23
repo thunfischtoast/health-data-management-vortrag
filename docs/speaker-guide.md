@@ -356,11 +356,10 @@ Two more marks apply here:
 ### T1 RACOON-RAVEN under the hood
 
 **Notes**
-- About 10k lines backend, 12k frontend, 10k backend tests
-- Tests against a real Postgres, browser tests against a fake LLM
-- Built in parts, each with a spec and a plan
+- Cover of the technical part
+- Down: details. Right: back to slide 21
 
-**Background.** All numbers were counted by command (code): 9,729 lines of Python, 242 unit and 216 integration test functions, 187 Vitest cases, 7 Playwright specs, 191 commits since 10 September 2026. The frontend count of 11,602 excludes tests and the generated API schema of 4,649 lines (fact sheet). Parametrised tests are not expanded, and the last collected run listed 508 test IDs. The Playwright tests run against `frontend/e2e/fake-llm.mjs`, which returns fixed answers. They prove the pipeline, not the quality of a model. There is no CI: a workflow was added on 10 September and removed the next day (fact sheet, from git log).
+**Background.** The slide lists the topics and points down. If someone asks about size: about 9,700 lines of Python in the backend, 11,600 lines in the frontend, 458 backend and 187 frontend test functions, 7 browser tests against a fake LLM, 191 commits since 10 September 2026 (counted by command). There is no CI (fact sheet, from git log).
 
 ### T2 Architecture
 
@@ -381,12 +380,15 @@ Two more marks apply here:
 
 ### T3 From upload to export
 
-**Notes**
-- Upload and map in the browser
-- Worker: extract all rows first, then match and ingest row by row
-- Export is synchronous: CSV or XLSX
+**Click.** 0: upload. 1: map. 2: queue. 3: extract, with the call to the LLM. 4: match. 5: ingest. 6: export. Each click draws the next arrow and drops into the Postgres band what that stage writes.
 
-**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`).
+**Notes**
+- Top lane: browser and API. Middle: worker. Bottom: what lands in Postgres
+- Upload and map in the browser, then one job
+- Worker: extract all reports first, then match and ingest row by row
+- Export reads the field values: CSV or XLSX
+
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The labels in the band are tables, except `input.column_map` and `input.value_map` (columns of `input`) and `subject_id` and `timepoint_id` (columns of `input_row`). `procrastinate_jobs` is the queue table of Procrastinate.
 
 ### T4 The prompt
 

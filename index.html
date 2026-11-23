@@ -449,18 +449,14 @@
 
 <!-- Optional technical slides on RACOON-RAVEN, state main a7fa7ec (22.11.2026), read, not run -->
 
-<section class="list tight" data-chapter="3" data-visibility="uncounted">
+<section class="cover tight" data-chapter="3" data-visibility="uncounted">
   <h2>RACOON-RAVEN under the hood</h2>
-  <div class="abs grid wide" style="top:280px">
-    <b>9,729</b><div>lines of Python in the backend<small>FastAPI, SQLAlchemy 2 async, Procrastinate job queue, Alembic</small></div>
-    <b>11,602</b><div>lines of TypeScript and Svelte in the frontend<small>SvelteKit 2, Svelte 5; the API client is generated from the backend</small></div>
-    <b>458</b><div>backend tests, 216 of them against a real Postgres<small>Plus 187 frontend tests and 7 browser tests against a fake LLM; ruff, mypy strict</small></div>
-    <b>191</b><div>commits since 10 September 2026<small>One design spec and one plan for each part: 11 specs, 12 plans</small></div>
-  </div>
-  <p class="source">RACOON-RAVEN main a7fa7ec, 22.11.2026. Counted in the source code, not run</p>
+  <p class="abs topics">Architecture, pipeline, prompt, checks, data model, field states, matching, review</p>
+  <div class="abs down" aria-hidden="true"><svg width="120" height="150" viewBox="0 0 120 150"><path d="M60 8 V128 M14 86 L60 132 L106 86"/></svg></div>
+  <p class="abs go">Details below: press the down arrow</p>
+  <p class="source">RACOON-RAVEN main a7fa7ec, 22.11.2026. Source code read, not run</p>
   <aside class="notes">
-    <p>Optional technical part. Line counts without tests, migrations and the generated API schema (4,649 lines). Tests are counted as test functions; parametrised cases are not expanded.</p>
-    <p>Developed in parts, each with a spec and a plan under docs/superpowers. There is no CI: a workflow was added on 10 September and removed the next day.</p>
+    <p>Optional technical part. Down: details. Right: back to the main talk (slide 21).</p>
   </aside>
 </section>
 
@@ -490,20 +486,50 @@
   </aside>
 </section>
 
-<section class="steps tight" data-chapter="3" data-visibility="uncounted">
+<section class="flow tight" data-chapter="3" data-steps="6" data-visibility="uncounted">
   <h2>From upload to export</h2>
-  <div class="abs grid">
-    <i>1</i><div><b>Upload</b> CSV or XLSX; a SHA-256 hash warns about a known file</div><code>services/inputs.py</code>
-    <i>2</i><div><b>Map</b> key columns, items, answer options, text column</div><code>PUT …/mapping</code>
-    <i>3</i><div><b>Queue</b> one job in Postgres, progress live in the browser</div><code>services/input_processing.py</code>
-    <i>4</i><div><b>Extract</b> one LLM run per report, two in parallel, all traced</div><code>llm/extractor.py</code>
-    <i>5</i><div><b>Match</b> subject and timepoint per row, else a review task</div><code>services/input_matching.py</code>
-    <i>6</i><div><b>Ingest</b> proposals, field states, history, FHIR response</div><code>services/ingest.py</code>
-    <i>7</i><div><b>Export</b> CSV or XLSX with value, state and source per item</div><code>api/exports.py</code>
-  </div>
+  <div class="abs lane" style="top:270px"><span>Browser and API</span></div>
+  <div class="abs lane" style="top:450px"><span>Worker</span></div>
+  <div class="abs lane db" style="top:630px"><span>Postgres 17</span></div>
+  <svg class="abs links" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path class="p1" pathLength="1" d="M380 364 H410"/>
+    <path class="p2" pathLength="1" d="M630 364 H660"/>
+    <path class="p3" pathLength="1" d="M770 416 V504 Q770 544 810 544 H910"/>
+    <path class="p4" pathLength="1" d="M1130 544 H1160"/>
+    <path class="p5" pathLength="1" d="M1380 544 H1410"/>
+    <path class="p6" pathLength="1" d="M1630 544 H1648 Q1670 544 1670 522 V416"/>
+    <path class="llm" d="M1020 416 V492"/>
+  </svg>
+  <i class="abs dot d1" style="offset-path:path('M380 364 H410')"></i>
+  <i class="abs dot d2" style="offset-path:path('M630 364 H660')"></i>
+  <i class="abs dot d3" style="offset-path:path('M770 416 V504 Q770 544 810 544 H910')"></i>
+  <i class="abs dot d4" style="offset-path:path('M1130 544 H1160')"></i>
+  <i class="abs dot d5" style="offset-path:path('M1380 544 H1410')"></i>
+  <i class="abs dot d6" style="offset-path:path('M1630 544 H1648 Q1670 544 1670 522 V416')"></i>
+  <div class="abs node n0" style="left:160px;top:312px"><b>Upload</b><span>CSV or XLSX</span></div>
+  <div class="abs node n1" style="left:410px;top:312px"><b>Map</b><span>columns, values</span></div>
+  <div class="abs node n2" style="left:660px;top:312px"><b>Queue</b><span>one job</span></div>
+  <div class="abs node ext n3" style="left:910px;top:312px"><b>LLM</b><span>OpenAI-compatible</span></div>
+  <div class="abs node n3" style="left:910px;top:492px"><b>Extract</b><span>two in parallel</span></div>
+  <div class="abs node n4" style="left:1160px;top:492px"><b>Match</b><span>patient, timepoint</span></div>
+  <div class="abs node n5" style="left:1410px;top:492px"><b>Ingest</b><span>row by row</span></div>
+  <div class="abs node n6" style="left:1560px;top:312px"><b>Export</b><span>CSV or XLSX</span></div>
+  <div class="abs chips" style="left:160px"><code class="c0">input</code><code class="c0" style="--d:120ms">input_row</code></div>
+  <div class="abs chips" style="left:410px"><code class="c1">input.column_map</code><code class="c1" style="--d:120ms">input.value_map</code></div>
+  <div class="abs chips" style="left:660px"><code class="c2">procrastinate_jobs</code><code class="c2" style="--d:120ms">job_link</code></div>
+  <div class="abs chips" style="left:910px"><code class="c3">llm_run</code><code class="c3" style="--d:120ms">llm_step</code></div>
+  <div class="abs chips" style="left:1160px"><code class="c4">subject_id</code><code class="c4" style="--d:120ms">timepoint_id</code><code class="c4" style="--d:240ms">match_task</code></div>
+  <div class="abs chips" style="left:1410px"><code class="c5">proposal</code><code class="c5" style="--d:120ms">field_value</code><code class="c5" style="--d:240ms">field_event</code><code class="c5" style="--d:360ms">FHIR response</code></div>
+  <p class="abs say w0">The file is parsed at once. Each row is stored as raw cells, the original goes to S3.</p>
+  <p class="abs say w1">Key columns, form items, answer options and the column with the report text.</p>
+  <p class="abs say w2">One job in Postgres. The browser follows its progress live.</p>
+  <p class="abs say w3">One call per report, two at a time. Every call is stored with its answer.</p>
+  <p class="abs say w4">Each row finds its patient and timepoint, or becomes a review task.</p>
+  <p class="abs say w5">Proposals, field states and history. The FHIR response is rebuilt.</p>
+  <p class="abs say w6">Value, state and source for every item. Read from the field values.</p>
   <aside class="notes">
-    <p>Steps 4 to 6 run in the worker. Extraction comes first for all rows (progress 0 to 90%), then each row is matched and ingested in its own transaction.</p>
-    <p>Export is synchronous. Per item: value, state, source (file and row, or document ID), optionally the distance to a reference date.</p>
+    <p>Each click moves one stage on; the grey band shows what that stage writes to Postgres. Extraction runs first for all rows (progress 0 to 90%), then each row is matched and ingested in its own transaction.</p>
+    <p>Files: services/inputs.py, services/input_processing.py, llm/extractor.py, services/input_matching.py, services/ingest.py, api/exports.py.</p>
   </aside>
 </section>
 
