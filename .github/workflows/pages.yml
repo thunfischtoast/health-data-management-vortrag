@@ -1,0 +1,45 @@
+# Publishes the deck to GitHub Pages. The group photos may not be published,
+# so the site gets a placeholder in their place; templates, notes and reports stay out.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site without the group photos
+        run: |
+          mkdir _site
+          cp -r index.html css js assets vendor _site/
+          for f in _site/assets/img/group_*.jpg; do
+            cp tools/pages/photo-placeholder.jpg "$f"
+          done
+          # Guard: every JPEG in the site must be the placeholder.
+          find _site -type f -iname '*.jp*g' | while read -r f; do
+            cmp -s tools/pages/photo-placeholder.jpg "$f" || { echo "Unexpected photo: $f" >&2; exit 1; }
+          done
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
