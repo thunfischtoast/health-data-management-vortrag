@@ -1,5 +1,8 @@
-# Publishes the deck to GitHub Pages. The group photos may not be published,
-# so the site gets a placeholder in their place; templates, notes and reports stay out.
+# Publishes the deck to GitHub Pages: main at the site root, the erlangen
+# branch under /erlangen. Every run builds both from their latest commits,
+# so a push to either branch never drops the other from the site.
+# The group photos may not be published, so the site gets a placeholder in
+# their place; templates, notes and reports stay out.
 name: Pages
 
 on:
@@ -23,18 +26,42 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: src/main
+
+      - name: Check out erlangen
+        uses: actions/checkout@v4
+        with:
+          ref: erlangen
+          path: src/erlangen
 
       - name: Assemble site without the group photos
         run: |
-          mkdir _site
-          cp -r index.html css js assets vendor _site/
-          for f in _site/assets/img/group_*.jpg; do
-            cp tools/pages/photo-placeholder.jpg "$f"
-          done
+          # One placeholder (from main) for both versions, so the guard has
+          # a single reference to compare against.
+          placeholder=src/main/tools/pages/photo-placeholder.jpg
+
+          # assemble <checkout dir> <target dir>
+          assemble() {
+            mkdir -p "$2"
+            for item in index.html css js assets vendor; do
+              cp -r "$1/$item" "$2/"
+            done
+            for f in "$2"/assets/img/group_*.jpg; do
+              [ -e "$f" ] || continue
+              cp "$placeholder" "$f"
+            done
+          }
+
+          assemble src/main     _site
+          assemble src/erlangen _site/erlangen
+
           # Guard: every JPEG in the site must be the placeholder.
           find _site -type f -iname '*.jp*g' | while read -r f; do
-            cmp -s tools/pages/photo-placeholder.jpg "$f" || { echo "Unexpected photo: $f" >&2; exit 1; }
+            cmp -s "$placeholder" "$f" || { echo "Unexpected photo: $f" >&2; exit 1; }
           done
 
       - uses: actions/configure-pages@v5
