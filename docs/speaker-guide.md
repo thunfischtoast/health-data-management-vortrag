@@ -138,7 +138,7 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 ## What machines can do
 
-### 7 One letter, four verbs
+### 7 LLM use cases in data management
 
 **Click.** 1: extract. 2: classify. 3: summarise. 4: search by meaning.
 
