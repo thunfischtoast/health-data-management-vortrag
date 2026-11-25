@@ -215,26 +215,6 @@
   </aside>
 </section>
 
-<section class="fails" data-steps="1">
-  <h2>Where it fails</h2>
-  <div class="abs col" style="left:138px;width:790px">
-    <div class="pair"><div><b>p<u>N</u>1</b>lymph nodes</div><div><b><u>P</u>n1</b>nerves</div></div>
-    <p>The same letters, only the capitals differ</p>
-  </div>
-  <div class="abs col s1" style="left:992px;width:790px">
-    <div class="form-line">Kontrastmittelreaktion<br><b>nein</b></div>
-    <div class="form-line">Kontrastmittelreaktion<br><b class="empty">nicht dokumentiert</b></div>
-    <p>“Not documented” is different from “no”</p>
-  </div>
-  <p class="source" style="width:790px;top:890px">Grothey et al., Commun Med 2025</p>
-  <p class="source s1" style="left:992px;width:790px;top:890px">Murin, arXiv 2026, preprint. Form lines invented</p>
-  <aside class="notes">
-    <p>Grothey et al., Commun Med 5:96, 03/2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC11958830/. Error analysis, German prostate pathology: pN1 was reported when only Pn1 was in the text and pN was missing. A reader with the source line next to the value can spot this at once.</p>
-    <p>Say if asked, no longer on the slide: Grolleau et al., Physician-Reported Safety Outcomes of AI-Generated Hospital Course Summaries, JAMA Netw Open, 05/2026, https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2848785. Single-arm pilot at Stanford, 384 discharges, 11 physicians, 100 reviewed. Omissions 25%, inaccuracies 20%, hallucinations 2%, no severe harm. What is missing is the larger problem, and source links do not reveal it.</p>
-    <p>Murin, arXiv 2606.05970, 06/2026, preprint, https://arxiv.org/abs/2606.05970. MIMIC-IV, 17 fields, three prompt wordings, two model sizes. Merging "no" and "not documented" removed most disagreement between prompts. Single author, no human reference, abstract read. Define "not documented" in the codebook.</p>
-  </aside>
-</section>
-
 <section class="duo" data-steps="1">
   <h2>Person plus model</h2>
   <div class="abs" style="left:138px;top:350px;width:760px">
@@ -252,6 +232,26 @@
   <aside class="notes">
     <p>Neuse et al., Cutting chart-review time and improving database accuracy in IBD with human-in-the-loop LLMs, BMC Med Inform Decis Mak, 08/2026, https://pmc.ncbi.nlm.nih.gov/articles/PMC13779612/. Mount Sinai, four clinicians, 38 patients, MedGemma 27B. Manual 142/207 (68%), assisted 185/207 (89%); median 9.4 and 3.6 minutes per patient. Invented values 1.2% (13/1063). Reference by one clinician. Values the model missed stay invisible to the reviewer.</p>
     <p>Say if asked: in a separate benchmark the model alone averaged 69.3%. It must not be compared directly with 68% and 89%.</p>
+  </aside>
+</section>
+
+<section class="fails" data-steps="1">
+  <h2>Where it fails</h2>
+  <div class="abs col" style="left:138px;width:790px">
+    <div class="pair"><div><b>p<u>N</u>1</b>lymph nodes</div><div><b><u>P</u>n1</b>nerves</div></div>
+    <p>The same letters, only the capitals differ</p>
+  </div>
+  <div class="abs col s1" style="left:992px;width:790px">
+    <div class="form-line">Kontrastmittelreaktion<br><b>nein</b></div>
+    <div class="form-line">Kontrastmittelreaktion<br><b class="empty">nicht dokumentiert</b></div>
+    <p>“Not documented” is different from “no”</p>
+  </div>
+  <p class="source" style="width:790px;top:890px">Grothey et al., Commun Med 2025</p>
+  <p class="source s1" style="left:992px;width:790px;top:890px">Murin, arXiv 2026, preprint. Form lines invented</p>
+  <aside class="notes">
+    <p>Grothey et al., Commun Med 5:96, 03/2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC11958830/. Error analysis, German prostate pathology: pN1 was reported when only Pn1 was in the text and pN was missing. A reader with the source line next to the value can spot this at once.</p>
+    <p>Say if asked, no longer on the slide: Grolleau et al., Physician-Reported Safety Outcomes of AI-Generated Hospital Course Summaries, JAMA Netw Open, 05/2026, https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2848785. Single-arm pilot at Stanford, 384 discharges, 11 physicians, 100 reviewed. Omissions 25%, inaccuracies 20%, hallucinations 2%, no severe harm. What is missing is the larger problem, and source links do not reveal it.</p>
+    <p>Murin, arXiv 2606.05970, 06/2026, preprint, https://arxiv.org/abs/2606.05970. MIMIC-IV, 17 fields, three prompt wordings, two model sizes. Merging "no" and "not documented" removed most disagreement between prompts. Single author, no human reference, abstract read. Define "not documented" in the codebook.</p>
   </aside>
 </section>
 

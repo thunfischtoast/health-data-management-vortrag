@@ -24,7 +24,7 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 | 12 to 16 | How we stay in charge | 11 to 13 |
 | 16 to 20 | The answer and why now | 14 to 16 |
 
-Study figures appear on two slides only (10 and 15). All others are in the notes and in the backup, ready for questions.
+Study figures appear on two slides only (9 and 15). All others are in the notes and in the backup, ready for questions.
 
 
 ---
@@ -183,23 +183,7 @@ Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis.
 
 How a language model works, if asked: it has learned from very much text which words fit together, and it can follow an instruction such as "return the drug and its status as a table". It has no database of facts about the patient except the text you give it.
 
-### 9 Where it fails
-
-**Click.** 1: not documented.
-
-**Notes**
-- pN1 lymph nodes, Pn1 nerves. Two capitals
-- The error looks right, that is the danger
-- "Not documented" is not "no"
-- Contrast reaction: empty is no all-clear
-
-**Background.**
-
-- [**pN1/Pn1**][02:pn-pn-example] (checked). From a Cologne study on prostate pathology. Models reported a lymph node status that was not in the text because they had read the perineural invasion.
-- Not on the slide, say if asked: [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
-- [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
-
-### 10 Person plus model
+### 9 Person plus model
 
 **Click.** 1: minutes.
 
@@ -210,12 +194,30 @@ How a language model works, if asked: it has learned from very much text which w
 - Time: 9.4 to 3.6 minutes
 - 38 patients, small. But the direction fits others
 - Checking beats searching
+- Transition: but checking only works if we see where it goes wrong
 
 **Background.** [Neuse 2026][02:ibd-human-in-loop] (checked): Mount Sinai, inflammatory bowel disease, four clinicians, a local open model (MedGemma 27B). 207 values per arm. The reference came from one clinician.
 
 In a separate test the model alone reached 69.3%. Do not compare that directly with 68% and 89%, since it was another set.
 
 [A second study in an eye clinic][02:ophthoacr] points the same way: 82.3% by hand, 94.3% tool alone, 97.1% with both, and 8.8 instead of 25.2 minutes (checked; the paper's abstract and text differ slightly). Limits for both: one centre, not randomised, and set-up time is not counted. What the model misses is easily missed by the person too.
+
+### 10 Where it fails
+
+**Click.** 1: not documented.
+
+**Notes**
+- pN1 lymph nodes, Pn1 nerves. Two capitals
+- The error looks right, that is the danger
+- "Not documented" is not "no"
+- Contrast reaction: empty is no all-clear
+- Transition: so how do I stay the boss?
+
+**Background.**
+
+- [**pN1/Pn1**][02:pn-pn-example] (checked). From a Cologne study on prostate pathology. Models reported a lymph node status that was not in the text because they had read the perineural invasion.
+- Not on the slide, say if asked: [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
+- [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
 
 ---
 
