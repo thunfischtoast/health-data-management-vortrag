@@ -162,11 +162,25 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .s1 .bar i, .s2 .bar i, .chart.s2 .bar i { transform: scaleX(0); }
 [data-reached~="1"] .s1 .bar i, [data-reached~="2"] .s2 .bar i, [data-reached~="2"] .chart.s2 .bar i { transform: none; }
 
-/* 10 Four verbs */
-.verbs .letter { left: 138px; top: 270px; width: 760px; height: 624px; padding: 44px 50px; }
+/* 8 LLM use cases */
+.verbs .docs { left: 138px; top: 270px; width: 760px; height: 624px; padding: 22px 36px; transition: opacity var(--t) ease; }
+.reveal .verbs .query { margin-bottom: 10px; font-size: 24px; line-height: 32px; color: var(--muted); }
+.verbs .query b { color: var(--dark); }
+.verbs .doc { display: grid; grid-template-columns: 1fr auto; column-gap: 20px; max-height: 48px; overflow: hidden; padding: 0 12px; border-top: 1px solid var(--line); font-size: 26px; line-height: 47px; color: var(--dark); transition: max-height 600ms var(--ease), opacity 400ms ease, background-color 400ms ease; }
+.verbs .doc b { font-weight: 700; }
+.verbs .doc span { color: var(--muted); }
+.reveal .verbs .doc p { grid-column: 1 / -1; margin-top: -6px; font-size: 24px; line-height: 32px; color: var(--dark); opacity: 0; transition: opacity 400ms ease 300ms; }
+.verbs[data-step="1"] .doc.rel { background-color: var(--mark); }
+.verbs[data-step="1"] .doc:not(.rel) { opacity: .35; }
+.verbs[data-reached~="2"] .doc:not(.rel) { max-height: 0; opacity: 0; border-color: transparent; }
+.verbs[data-reached~="2"] .doc.rel { max-height: 86px; padding-bottom: 8px; }
+.verbs[data-reached~="2"] .doc.rel p { opacity: 1; }
+.verbs[data-reached~="3"] .docs { opacity: 0; }
+.verbs .letter { left: 138px; top: 270px; width: 760px; height: 624px; padding: 44px 50px; opacity: 0; transition: opacity var(--t) ease; }
+.verbs[data-reached~="3"] .letter { opacity: 1; }
 .verbs .letter .paper-head { font-size: 36px; line-height: 46px; }
 .verbs .letter .body { margin-top: 28px; font-size: 36px; line-height: 1.55; }
-.verbs[data-step="1"] .h1, .verbs[data-step="2"] .h2, .verbs[data-step="3"] .h3, .verbs[data-step="4"] .h4 { background-size: 100% 100%; }
+.verbs[data-step="3"] .h3, .verbs[data-step="4"] .h4 { background-size: 100% 100%; }
 .verb { left: 990px; width: 792px; height: 142px; padding: 4px 0 0 30px; border-left: 6px solid var(--line); transition: border-color var(--t) ease; }
 .verb b { display: block; font-size: 40px; line-height: 50px; color: #8A9CA8; transition: color var(--t) ease; }
 .verb div { font-size: 32px; line-height: 42px; opacity: 0; transition: opacity var(--t) ease; }

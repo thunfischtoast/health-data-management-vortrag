@@ -156,17 +156,20 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 ### 8 LLM use cases in data management
 
-**Click.** 1: extract. 2: classify. 3: summarise. 4: search by meaning.
+**Click.** 1: classify. 2: summarise. 3: extract. 4: search by meaning.
 
 **Notes**
-- Same letter as at the start
-- Extract: from free text into a structured template
-- Classify: is this document relevant for my query? "Suspected" stays suspected
-- Summarise: one summary per document that keeps the content
+- Eleven documents of LC-009, and the question from the start
+- Classify: five of them matter for the query, the model marks them
+- Summarise: only these five remain, each with one line aimed at the query
+- That is almost the answer already, in under a minute of reading
+- Extract: one letter, drug and status become fields. "Suspected" stays suspected
 - Search: "Atemnot" also finds "Dyspnoe"
 - No model was run for this slide
 
-**Background.** The four verbs are the vocabulary for the rest of the talk. "Extract" and "classify" produce data that can be counted, so they matter most for research. "Summarise" produces text for a person. "Search by meaning" finds passages.
+**Background.** The four verbs are the vocabulary for the rest of the talk. The first two steps form a chain: classify narrows the record to the documents that matter, summarise makes them readable in one glance. This is how the opening question gets answered in care. "Extract" produces data that can be counted, so it matters most for research. "Search by meaning" finds passages.
+
+The document list and the summaries are invented and match the timeline on slide 5. The five relevant documents are the four from slide 3 plus the CT of 14 August, which raised the suspicion.
 
 Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis. Detecting such shades (negation, suspicion, time) is what separates a useful system from a risky one.
 
