@@ -10,7 +10,7 @@ Reliability marks used below:
 
 Linked words lead to the source. Hover over a link to see its author and title. All full citations are also in the speaker view (`S`) of each slide, and all 210 findings are in `reports/Hospital data and AI talk.html`.
 
-**The red thread.** One invented patient (LC-009) and one question. Slide 2 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
+**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
 
 **The idea.** The talk has one sentence to remember: "Let people write. Let machines structure." It lands on slide 6, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
 
@@ -36,11 +36,27 @@ Study figures appear on two slides only (10 and 14). All others are in the notes
 **Notes**
 - Welcome, name, clinic
 - Topic: data we already have, how to use it better
-- No agenda. Go straight to the question on the next slide
+- No agenda. After a short introduction, go straight to the question
 
 **Background.** The title says "Orbis", the audience knows it as their daily system. Make clear early that this is about hospital systems as such and that ORBIS is the familiar example.
 
-### 2 Why was the immunotherapy stopped?
+### 2 Who am I
+
+**Notes**
+- Keep it short, about 30 seconds. The story starts on the next slide
+- Scientific associate, radiology, background in software and data
+- RACOON: research infrastructure, all German university radiology departments
+- RAVEN: our framework to assess extraction from reports, paper 2026
+- Body composition analysis: routine CT, AI, prognosis; lung, melanoma, oesophagus
+- Both the same idea: data that exists anyway, used a second time
+
+**Background.** The last point links your two topics to the talk. Body composition analysis reads information from CTs that were made for another reason, and RAVEN does the same with text. The papers: [lung][bca-lung], [melanoma][bca-melanoma], [oesophagus][bca-oesophagus].
+
+If someone asks about the [RAVEN paper][raven-paper]: it evaluates the earlier tool for extraction from radiology reports. RACOON-RAVEN, which you show later, is a new implementation, so the figures of the paper do not carry over. I only saw the paper's figures in a search snippet, so rely on your own copy.
+
+Check that the people in both photos agree to being shown. The RACOON extension 2026 to 2029 ("RACOON x NATON") [is announced][06:racoon-naton-2026] and can be mentioned (checked, except the number of 39 hospitals, which is not on the cited page).
+
+### 3 Why was the immunotherapy stopped?
 
 **Click.** 1: documents pile up. 2: four documents come forward with highlighted passages. 3: second question.
 
@@ -61,7 +77,7 @@ Each document alone is insufficient. The medication plan has the date without a 
 
 Pneumonitis is a known immune-related adverse event of checkpoint inhibitors. At grade 3, permanent discontinuation is the usual recommendation (general knowledge, please confirm with a clinician).
 
-### 3 I searched for MELD
+### 4 I searched for MELD
 
 **Click.** 1: the letter with the word.
 
@@ -81,22 +97,6 @@ The [study module][01:ukm-studymodule-no-pdf] deserves credit: it has supported 
 A good anecdote: UKM radiology [published a study in 2026][01:ukm-radiology-hcc-pdf] in which GPT models calculated MELD and other liver scores for 106 patients. The reports had to be retrieved from ORBIS as PDF files and merged into one anonymised PDF per patient first (checked).
 
 MELD can be calculated from laboratory values (general knowledge). If someone says "just take the lab data", the answer is that the example is about the search and the word.
-
-### 4 Who am I
-
-**Notes**
-- 20 seconds, after the story: now they know why you care
-- Scientific associate, radiology, background in software and data
-- RACOON: research infrastructure, all German university radiology departments
-- RAVEN: our framework to assess extraction from reports, paper 2026
-- Body composition analysis: routine CT, AI, prognosis; lung, melanoma, oesophagus
-- Both the same idea: data that exists anyway, used a second time
-
-**Background.** The last point links your two topics to the talk. Body composition analysis reads information from CTs that were made for another reason, and RAVEN does the same with text. The papers: [lung][bca-lung], [melanoma][bca-melanoma], [oesophagus][bca-oesophagus].
-
-If someone asks about the [RAVEN paper][raven-paper]: it evaluates the earlier tool for extraction from radiology reports. RACOON-RAVEN, which you show later, is a new implementation, so the figures of the paper do not carry over. I only saw the paper's figures in a search snippet, so rely on your own copy.
-
-Check that the people in both photos agree to being shown. The RACOON extension 2026 to 2029 ("RACOON x NATON") [is announced][06:racoon-naton-2026] and can be mentioned (checked, except the number of 39 hospitals, which is not on the cited page).
 
 ---
 
@@ -654,10 +654,10 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 ## Before the talk
 
-1. Have a clinician read the invented letters (slides 2, 7, 15).
+1. Have a clinician read the invented letters (slides 3, 7, 15).
 2. Run LC-009 in RAVEN and compare it with slide 13.
-3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 3).
-4. Ask whether the people in the photos agree (slide 4).
+3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 4).
+4. Ask whether the people in the photos agree (slide 2).
 5. Check the class of patient data for UniGPT (B2).
 6. Set the date in `HEADER` in `js/scenes.js`.
 7. Test projector and speaker view.
