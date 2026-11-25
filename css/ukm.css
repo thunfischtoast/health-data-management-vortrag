@@ -468,6 +468,15 @@ html.reveal-print .slides section { -webkit-print-color-adjust: exact; print-col
 /* B13 What the chain does not prove */
 .doubt .change b { color: var(--limit); }
 
+/* 16 Why now */
+.reveal .now .claim { margin-top: 14px; font-size: 44px; line-height: 1.25; font-weight: 700; color: var(--blue); }
+.reveal .now .claim.small { margin-top: 34px; padding-top: 26px; border-top: 2px solid var(--line); font-size: 36px; color: var(--dark); }
+.now .cite { margin-top: 34px; padding-left: 30px; border-left: 6px solid var(--light); }
+.reveal .now .quote { font-size: 32px; }
+.reveal .now .soft { margin-top: 10px; font-size: 26px; }
+.reveal .now .big { margin-top: 4px; }
+.reveal .now .per { font-size: 36px; line-height: 1.3; }
+
 /* 17 Closing */
 .reveal .closing .who { top: 640px; }
 

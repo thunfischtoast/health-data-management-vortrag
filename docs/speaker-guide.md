@@ -24,7 +24,7 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 | 12 to 16 | How we stay in charge | 12 to 14 |
 | 16 to 20 | The answer and why now | 15 to 17 |
 
-Study figures appear on one slide only (11). All others are in the notes and in the backup, ready for questions.
+Study figures appear on two slides only (11 and 16). All others are in the notes and in the backup, ready for questions.
 
 
 ---
@@ -439,13 +439,17 @@ Transition to the next slide: "We have the documents. Let us make them answer, a
 
 ### 16 Why now
 
-**Click.** 1: quote.
+**Click.** 1: quote. 2: care.
 
 **Notes**
-- ePA: research data centre from 2027
+- Research: ePA data for the research data centre from 2027
 - Only structured data, first the medication list
 - PDF findings stay outside
 - What we leave as PDF does not exist for research
+- Click: care. About 3 hours a day of documentation per doctor, 2.8 per nurse
+- That is an estimate by the hospitals; observed in one hospital: about 1.5 hours
+- Searching the record takes longer than reading what is found
+- The same tools that structure for research can help find things on the ward
 - Transition: so let people write, and let machines structure
 
 **Background.** The quote is from [a KVB article][08:kvb-structured-only] that summarises the gematik schedule (checked). The dates have moved before, so "is to get" is the right wording.
@@ -453,6 +457,13 @@ Transition to the next slide: "We have the documents. Let us make them answer, a
 As of October 2026, almost all hospital documents in the ePA are PDF/A, [according to the German Hospital Federation][05:epa-pdf-late-2026]. Search beyond metadata comes in 2027 at the earliest (checked). [The European Health Data Space][06:epa-ehds-timeline] follows: secondary use from March 2029, with exchange of discharge reports and images from 2031 (read).
 
 Patients can object to this use of their data.
+
+Care side:
+
+- [**3 hours, 2.8 hours**][dki-documentation-hours] (checked, full text). Deutsches Krankenhausinstitut, flash survey of 400 hospitals, September 2025: 3.0 h per physician (quartiles 2.0 and 3.5) and 2.8 h per nurse per day for documentation and proof obligations, up from 2.9 and 2.6 in 2024. It is the hospitals' own estimate. [Direct observation in one German hospital][observed-documentation-93min] found 93 minutes per day (19.4%), internists 120 minutes (checked, nine physicians). If someone questions the 3 hours, agree and give the observed figure: the burden is still large.
+- [**Searching versus reading**][leipzig-search-time] (checked, full text). Leipzig university hospital, 13 physicians, 2,205 observed minutes: 37.1% of the time went into the record, of which 9.0% searching, 7.7% reading and 20.5% writing. 28.0% went to patients. The system there was SAP i.s.h.med, not ORBIS.
+
+The slide shows the burden, not that language models reduce it. Say "could help", not "will save". The evidence for relief is mixed: [a chart search that cites its sources][03:scout-rct] made clinicians 37.6% faster (Duke, randomised crossover, 20 participants, preprint), AI scribes saved about 10% of documentation time (B5), and an Epic chart summary saved no time (B6).
 
 ### 17 Closing
 
@@ -724,6 +735,9 @@ Every linked source in order of appearance.
 - [LLM-AIx (medRxiv 2024; npj Precision Oncology 2025) and KatherLab/llmaixweb, 2024-09][08:llmaix] (page read)
 - [Wiest et al., A software pipeline for medical information extraction with LLMs, npj Precis Oncol 9:313, 2025-09][02:llmaix-ocr-errors] (full text)
 - [KVB FORUM 3-4/2026, ePA-Ausbaustufen, 2026][08:kvb-structured-only] (full text)
+- [Blum and Ludwig, Bürokratiebelastung im Krankenhaus, Deutsches Krankenhausinstitut, 2025-09][dki-documentation-hours] (full text)
+- [Schröder et al., Dtsch Med Wochenschr 149(16), 2024][observed-documentation-93min] (full text)
+- [de Hoop and Neumuth, Appl Clin Inform 12(5), 2021][leipzig-search-time] (full text)
 - [DKG, Umsetzungshinweise für die elektronische Patientenakte, prozessual-technischer Teil, Version 2.4, 2026-10][05:epa-pdf-late-2026] (full text)
 - [European Commission, EHDS Regulation; Federal Ministry of Health, FAQ FDZ Gesundheit, 2026][06:epa-ehds-timeline] (page read)
 - [GDNG section 6, gesetze-im-internet.de, 2024][07:gdng-6-own-data] (full text)
@@ -758,6 +772,9 @@ Every linked source in order of appearance.
 [01:dedalus-navigation-admission]: https://www.dedalus.com/dach/de/news/10537/ "Dedalus and Corti press release, 2026-10"
 [01:dedalus-market-share]: https://www.dedalus.com/dach/de/media/news/orbis-im-klas-report/ "Dedalus, ORBIS im KLAS Report, 2025-08"
 [01:klas-market-crossroads]: https://engage.klasresearch.com/?p=8376 "KLAS Research, DACH KIS 2025: A Market at a Crossroads, 2025-08"
+[dki-documentation-hours]: https://www.dki.de/fileadmin//user_upload/2025-09_Buerokratiebelastung_im_Krankenhaus_-_final.pdf "Blum and Ludwig, Bürokratiebelastung im Krankenhaus, DKI 2025"
+[observed-documentation-93min]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11296878 "Schröder et al., Dtsch Med Wochenschr 2024"
+[leipzig-search-time]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8695058/ "de Hoop and Neumuth, Appl Clin Inform 2021"
 [05:sepsis-undercoding-germany]: https://pmc.ncbi.nlm.nih.gov/articles/PMC10954942 "Schwarzkopf D et al., Understanding the biases to sepsis surveillance and quality assurance caused by inaccurate coding in administrative health data, Infection 2023;52(2):413-427, 2023-09"
 [sepsis-followup]: https://pmc.ncbi.nlm.nih.gov/articles/PMC12864231 "Thomas-Rüddel et al. 2025, follow-up analysis"
 [05:mra-error-rate]: https://pmc.ncbi.nlm.nih.gov/articles/PMC10775420/ "Garza MY et al., Error rates of data processing methods in clinical research, Int J Med Inform 2025, doi:10.1016/j.ijmedinf.2024.105749 (preprint full text and published abstract read; same numbers), 2025"
