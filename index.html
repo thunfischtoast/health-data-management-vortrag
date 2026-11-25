@@ -588,22 +588,6 @@ return FieldResult(
 </section>
 <!-- end stack -->
 
-<section class="duo doubt" data-steps="1">
-  <h2>What the chain does not prove</h2>
-  <div class="abs" style="left:138px;top:330px;width:1644px">
-    <p class="lead">Very experienced radiologists, correct answers</p>
-    <div class="change"><span>82%</span><svg width="110" height="40" viewBox="0 0 110 40" aria-hidden="true"><path d="M4 20 H100 M84 6 L102 20 L84 34"/></svg><b>46%</b></div>
-    <p style="font-size:38px">once the AI suggestion was wrong</p>
-  </div>
-  <p class="abs final s1">A quote shows where the words are. It does not show that the reading is right, or that nothing is missing.</p>
-  <p class="source">27 radiologists, 50 mammograms. Dratsch et al., Radiology 2023</p>
-  <aside class="notes">
-    <p>Chanda et al. (DKFZ), Large language models improve physician accuracy but lead to false reliance (CORA), arXiv 2608.00817, 08/2026, preprint, https://arxiv.org/abs/2608.00817. 46 dermatology physicians, 736 decisions. With perceived support 15 of 23 gave up their own correct answer, without it 2 of 25. Overall accuracy still rose from 70.8% to 82.6%. Perceived support was not randomised, no arm without citations, small subgroups.</p>
-    <p>Dratsch et al., Automation Bias in Mammography, Radiology, 05/2023, https://research.vu.nl/en/publications/automation-bias-in-mammography-the-impact-of-artificial-intellige/. 27 radiologists, 50 mammograms. Very experienced 82.3% to 45.5%, moderately experienced 81.3% to 24.8%, inexperienced 79.7% to 19.8%. Reader experiment without clinical consequences; abstract read.</p>
-    <p>RAVEN code, state 22.11.2026 (main a7fa7ec), read, not run: empty fields are not open, so a record can be closed with values the model missed. A found quote proves that the words are in the text.</p>
-  </aside>
-</section>
-
 <section class="answer tight" data-steps="2">
   <h2>Why was the immunotherapy stopped?</h2>
   <p class="abs result s1">Pneumonitis grade 3, suspected in August, stopped for good in October 2026</p>
@@ -649,7 +633,7 @@ return FieldResult(
   </div>
   <aside class="notes">
     <p>The call to action, for researchers first. Three habits that cost nothing and work with any tool, RAVEN or not.</p>
-    <p>Define the field: the hint at tumour size on slide 12 is the example. Keep the passage: it is what made the answer on slide 15 checkable. Ask for the sentence: ORBIS Buddy and the other announced tools (backup) do not describe links to source passages.</p>
+    <p>Define the field: the hint at tumour size on slide 12 is the example. Keep the passage: it is what made the answer on slide 14 checkable. Ask for the sentence: ORBIS Buddy and the other announced tools (backup) do not describe links to source passages.</p>
   </aside>
 </section>
 
@@ -659,7 +643,7 @@ return FieldResult(
   <img class="logo-white" src="assets/ukm/logo_white.svg" alt="UKM">
   <h1>Let people write.<br>Let machines structure.<br>Check where they read.</h1>
   <div class="who"><b>Thank you. Questions?</b><br>Christian Römer M. Sc.<br>Scientific Associate<br>Clinic for Radiology</div>
-  <aside class="notes"><p>Say the line once more, then thank the audience.</p><p>Backup slides: press right once, then down: B1 law, B2 chatbots, B3 hallucination and omission, B4 local models in German, B5 AI scribes, B6 summaries in practice, B7 more questions like this, B8 the vendor says it too, B9 is today’s data reliable, B10 stated facts and judgement, B11 what exists today, B12 what comes next, B13 sources.</p></aside>
+  <aside class="notes"><p>Say the line once more, then thank the audience.</p><p>Backup slides: press right once, then down: B1 law, B2 chatbots, B3 hallucination and omission, B4 local models in German, B5 AI scribes, B6 summaries in practice, B7 more questions like this, B8 the vendor says it too, B9 is today’s data reliable, B10 stated facts and judgement, B11 what exists today, B12 what comes next, B13 what the chain does not prove, B14 sources.</p></aside>
 </section>
 
 <section class="stack" data-visibility="uncounted">
@@ -855,6 +839,22 @@ return FieldResult(
   </div>
   <aside class="notes">
     <p>RAVEN code state 22.11.2026: PDF, DOCX and zip upload are listed as unfinished. For the hospital these are my own expectations, not announcements by UKM.</p>
+  </aside>
+</section>
+
+<section class="duo doubt" data-steps="1" data-visibility="uncounted">
+  <h2>What the chain does not prove</h2>
+  <div class="abs" style="left:138px;top:330px;width:1644px">
+    <p class="lead">Very experienced radiologists, correct answers</p>
+    <div class="change"><span>82%</span><svg width="110" height="40" viewBox="0 0 110 40" aria-hidden="true"><path d="M4 20 H100 M84 6 L102 20 L84 34"/></svg><b>46%</b></div>
+    <p style="font-size:38px">once the AI suggestion was wrong</p>
+  </div>
+  <p class="abs final s1">A quote shows where the words are. It does not show that the reading is right, or that nothing is missing.</p>
+  <p class="source">27 radiologists, 50 mammograms. Dratsch et al., Radiology 2023</p>
+  <aside class="notes">
+    <p>Chanda et al. (DKFZ), Large language models improve physician accuracy but lead to false reliance (CORA), arXiv 2608.00817, 08/2026, preprint, https://arxiv.org/abs/2608.00817. 46 dermatology physicians, 736 decisions. With perceived support 15 of 23 gave up their own correct answer, without it 2 of 25. Overall accuracy still rose from 70.8% to 82.6%. Perceived support was not randomised, no arm without citations, small subgroups.</p>
+    <p>Dratsch et al., Automation Bias in Mammography, Radiology, 05/2023, https://research.vu.nl/en/publications/automation-bias-in-mammography-the-impact-of-artificial-intellige/. 27 radiologists, 50 mammograms. Very experienced 82.3% to 45.5%, moderately experienced 81.3% to 24.8%, inexperienced 79.7% to 19.8%. Reader experiment without clinical consequences; abstract read.</p>
+    <p>RAVEN code, state 22.11.2026 (main a7fa7ec), read, not run: empty fields are not open, so a record can be closed with values the model missed. A found quote proves that the words are in the text.</p>
   </aside>
 </section>
 

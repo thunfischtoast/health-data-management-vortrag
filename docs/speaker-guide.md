@@ -10,7 +10,7 @@ Reliability marks used below:
 
 Linked words lead to the source. Hover over a link to see its author and title. All full citations are also in the speaker view (`S`) of each slide, and all 210 findings are in `reports/Hospital data and AI talk.html`.
 
-**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
+**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 14 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
 
 **The idea.** The talk has one sentence to remember: "Let people write. Let machines structure." It lands on slide 6, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
 
@@ -21,10 +21,10 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 | 0 to 4 | The question, and how I ran into it | 1 to 4 |
 | 4 to 7 | Why it is hard, and why more forms will not fix it | 5, 6 |
 | 7 to 12 | What machines can do now, and where they fail | 7 to 10 |
-| 12 to 17 | How we stay in charge | 11 to 14 |
-| 17 to 20 | The answer, why now, what you can do | 15 to 18 |
+| 12 to 16 | How we stay in charge | 11 to 13 |
+| 16 to 20 | The answer, why now, what you can do | 14 to 17 |
 
-Study figures appear on two slides only (10 and 14). All others are in the notes and in the backup, ready for questions.
+Study figures appear on one slide only (10). All others are in the notes and in the backup, ready for questions.
 
 
 ---
@@ -144,10 +144,10 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 **Notes**
 - Same letter as at the start
-- Extract: drug, status. Text becomes fields
-- Classify: what kind of document, what kind of event. "Suspected" stays suspected
-- Summarise: one sentence
-- Search: English query finds the German word
+- Extract: from free text into a structured template
+- Classify: is this document relevant for my query? "Suspected" stays suspected
+- Summarise: one summary per document that keeps the content
+- Search: "Atemnot" also finds "Dyspnoe"
 - No model was run for this slide
 
 **Background.** The four verbs are the vocabulary for the rest of the talk. "Extract" and "classify" produce data that can be counted, so they matter most for research. "Summarise" produces text for a person. "Search by meaning" finds passages.
@@ -402,30 +402,10 @@ Two more marks apply here:
 - **Speed (fact sheet, docs only):** about 91 s per report with thinking and 5 to 7 s without (qwen3.5-9b). A test with 2,000 table rows has a 60 s budget and took about 85 s on the dev machine (HANDOFF, 23.09.2026).
 - **Quality:** there are no figures. The LLM spec lists metrics and model comparison as out of scope.
 
-### 14 What the chain does not prove
-
-**Click.** 1: the sentence.
-
-**Notes**
-- Honest minute, take your time
-- Very experienced radiologists: 82% correct, 46% once the AI suggestion was wrong
-- That can happen to us with a quote next to the value
-- Click: a quote shows where the words are. Not that the reading is right, not that nothing is missing
-- So: keep reading, take samples, check for gaps
-
-**Background.** This slide makes the talk credible. Only the mammography study is on the slide; the other two points are for questions.
-
-- [**15 of 23**][04:cora-double-edge] (checked). DKFZ preprint with 46 dermatology physicians. Without perceived support it was 2 of 25. Overall accuracy still rose from 70.8% to 82.6%, which you should say if the mood turns against AI. Whether the citation seemed to fit was not randomised, and the groups are small.
-- [**82% to 46%**][04:mammo-bias] (checked). 27 radiologists, 50 mammograms, deliberately wrong suggestions. Inexperienced readers fell from 80% to 20%. It was an experiment without clinical consequences.
-- **No trace.** In RAVEN an empty field is not an open task, so a record can be closed with missed values.
-
-In another experiment [only 39% of users ever clicked][04:users-click-sources] a source (119 of 308, lay people, checked). No study I found isolates whether source links help doctors find errors in patient records. If asked what helps: showing the passage next to the value without a click, second readings of samples, and a fixed list of fields that must be answered with "not documented".
-
----
 
 ## Back to the question
 
-### 15 Back to the question
+### 14 Back to the question
 
 **Click.** 1: answer with four passages. 2: cohort question.
 
@@ -441,7 +421,7 @@ In another experiment [only 39% of users ever clicked][04:users-click-sources] a
 
 Transition to the next slide: "We have the documents. Let us make them answer, and soon."
 
-### 16 Why now
+### 15 Why now
 
 **Click.** 1: quote.
 
@@ -458,7 +438,7 @@ As of October 2026, almost all hospital documents in the ePA are PDF/A, [accordi
 
 Patients can object to this use of their data.
 
-### 17 What you can do on Monday
+### 16 What you can do on Monday
 
 **Click.** 1: keep the passage. 2: ask for the sentence.
 
@@ -469,14 +449,14 @@ Patients can object to this use of their data.
 - Ask for the sentence: every tool, every vendor demo. "Show me where you read that"
 - Doctoral candidates can start with the first two tomorrow
 
-**Background.** This slide is new and has no study behind it. It turns the talk into advice. The three habits follow from slides 6, 12 and 14. If someone asks about tools that already keep the passage: [LangExtract][08:langextract] marks where each item stands in the text (backup B11).
+**Background.** This slide is new and has no study behind it. It turns the talk into advice. The three habits follow from slides 6, 12 and 13. If someone asks about tools that already keep the passage: [LangExtract][08:langextract] marks where each item stands in the text (backup B11).
 
-### 18 Closing
+### 17 Closing
 
 **Notes**
 - Read the three lines slowly
 - Thanks, questions
-- Backup: right once, then down (B1 to B13)
+- Backup: right once, then down (B1 to B14)
 
 ---
 
@@ -632,7 +612,7 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 [Bonn][06:bonn-llm] (checked, preprint): one server with eight GPUs, approved by management, compliance, data protection and security. Tasks tied to a source text were rated best, and free conclusions caused the most critical errors. That supports your message.
 
-[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 16).
+[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 15).
 
 ### B12 What comes next
 
@@ -645,7 +625,27 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 **Background.** The right side is your expectation. It is no announcement by UKM, so say "I hope" or "I would ask for". PDF is harder than it looks: [in one open pipeline][02:llmaix-ocr-errors], part of the wrong values came from reading the scan and not from the language model (read).
 
-### B13 Sources
+### B13 What the chain does not prove
+
+**Click.** 1: the sentence.
+
+**Notes**
+- Very experienced radiologists: 82% correct, 46% once the AI suggestion was wrong
+- That can happen to us with a quote next to the value
+- Click: a quote shows where the words are. Not that the reading is right, not that nothing is missing
+- So: keep reading, take samples, check for gaps
+
+**Background.** This slide makes the talk credible. Only the mammography study is on the slide; the other two points are for questions.
+
+- [**15 of 23**][04:cora-double-edge] (checked). DKFZ preprint with 46 dermatology physicians. Without perceived support it was 2 of 25. Overall accuracy still rose from 70.8% to 82.6%, which you should say if the mood turns against AI. Whether the citation seemed to fit was not randomised, and the groups are small.
+- [**82% to 46%**][04:mammo-bias] (checked). 27 radiologists, 50 mammograms, deliberately wrong suggestions. Inexperienced readers fell from 80% to 20%. It was an experiment without clinical consequences.
+- **No trace.** In RAVEN an empty field is not an open task, so a record can be closed with missed values.
+
+In another experiment [only 39% of users ever clicked][04:users-click-sources] a source (119 of 308, lay people, checked). No study I found isolates whether source links help doctors find errors in patient records. If asked what helps: showing the passage next to the value without a click, second readings of samples, and a fixed list of fields that must be answered with "not documented".
+
+---
+
+### B14 Sources
 
 **Notes**
 - Short list, details in the speaker view
@@ -654,7 +654,7 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 ## Before the talk
 
-1. Have a clinician read the invented letters (slides 3, 7, 15).
+1. Have a clinician read the invented letters (slides 3, 7, 14).
 2. Run LC-009 in RAVEN and compare it with slide 13.
 3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 4).
 4. Ask whether the people in the photos agree (slide 2).
