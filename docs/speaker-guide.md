@@ -223,7 +223,7 @@ In a separate test the model alone reached 69.3%. Do not compare that directly w
 
 ## How we stay in charge
 
-### 11 How do I stay the boss?
+### 11 How do I stay in control?
 
 **Click.** 1: the chain builds up. 2: closing line.
 
