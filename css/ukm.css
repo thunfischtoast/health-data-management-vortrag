@@ -36,10 +36,6 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .slide-no { position: absolute; left: 1640px; top: 1001px; width: 142px; text-align: right; font-size: 32px; line-height: 40px; color: var(--blue); }
 .arc-small { position: absolute; left: 1208px; top: 716px; width: 712px; height: 364px; overflow: hidden; }
 .arc-small img { position: absolute; left: 0; top: 0; width: 2424px; height: 374px; max-width: none; max-height: none; }
-.chapters { position: absolute; left: 138px; top: 1004px; display: flex; gap: 44px; font-size: 24px; line-height: 32px; color: #64798A; }
-.chapters span { position: relative; }
-.chapters .current { color: var(--blue); font-weight: 700; }
-.chapters .current::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 4px; background: var(--blue); }
 
 .reveal h2 { position: absolute; left: 138px; top: 212px; width: 1644px; font-size: 56px; line-height: 1.12; font-weight: 700; color: var(--dark); }
 .reveal .tight h2 { top: 162px; }
@@ -166,11 +162,25 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .s1 .bar i, .s2 .bar i, .chart.s2 .bar i { transform: scaleX(0); }
 [data-reached~="1"] .s1 .bar i, [data-reached~="2"] .s2 .bar i, [data-reached~="2"] .chart.s2 .bar i { transform: none; }
 
-/* 10 Four verbs */
-.verbs .letter { left: 138px; top: 270px; width: 760px; height: 624px; padding: 44px 50px; }
+/* 8 LLM use cases */
+.verbs .docs { left: 138px; top: 270px; width: 760px; height: 624px; padding: 22px 36px; transition: opacity var(--t) ease; }
+.reveal .verbs .query { margin-bottom: 10px; font-size: 24px; line-height: 32px; color: var(--muted); }
+.verbs .query b { color: var(--dark); }
+.verbs .doc { display: grid; grid-template-columns: 1fr auto; column-gap: 20px; max-height: 48px; overflow: hidden; padding: 0 12px; border-top: 1px solid var(--line); font-size: 26px; line-height: 47px; color: var(--dark); transition: max-height 600ms var(--ease), opacity 400ms ease, background-color 400ms ease; }
+.verbs .doc b { font-weight: 700; }
+.verbs .doc span { color: var(--muted); }
+.reveal .verbs .doc p { grid-column: 1 / -1; margin-top: -6px; font-size: 24px; line-height: 32px; color: var(--dark); opacity: 0; transition: opacity 400ms ease 300ms; }
+.verbs[data-step="1"] .doc.rel { background-color: var(--mark); }
+.verbs[data-step="1"] .doc:not(.rel) { opacity: .35; }
+.verbs[data-reached~="2"] .doc:not(.rel) { max-height: 0; opacity: 0; border-color: transparent; }
+.verbs[data-reached~="2"] .doc.rel { max-height: 86px; padding-bottom: 8px; }
+.verbs[data-reached~="2"] .doc.rel p { opacity: 1; }
+.verbs[data-reached~="3"] .docs { opacity: 0; }
+.verbs .letter { left: 138px; top: 270px; width: 760px; height: 624px; padding: 44px 50px; opacity: 0; transition: opacity var(--t) ease; }
+.verbs[data-reached~="3"] .letter { opacity: 1; }
 .verbs .letter .paper-head { font-size: 36px; line-height: 46px; }
 .verbs .letter .body { margin-top: 28px; font-size: 36px; line-height: 1.55; }
-.verbs[data-step="1"] .h1, .verbs[data-step="2"] .h2, .verbs[data-step="3"] .h3, .verbs[data-step="4"] .h4 { background-size: 100% 100%; }
+.verbs[data-step="3"] .h3, .verbs[data-step="4"] .h4 { background-size: 100% 100%; }
 .verb { left: 990px; width: 792px; height: 142px; padding: 4px 0 0 30px; border-left: 6px solid var(--line); transition: border-color var(--t) ease; }
 .verb b { display: block; font-size: 40px; line-height: 50px; color: #8A9CA8; transition: color var(--t) ease; }
 .verb div { font-size: 32px; line-height: 42px; opacity: 0; transition: opacity var(--t) ease; }
@@ -178,27 +188,12 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .verbs[data-step="1"] .v1 b, .verbs[data-step="2"] .v2 b, .verbs[data-step="3"] .v3 b, .verbs[data-step="4"] .v4 b { color: var(--blue); }
 .verbs[data-step="1"] .v1, .verbs[data-step="2"] .v2, .verbs[data-step="3"] .v3, .verbs[data-step="4"] .v4 { border-color: var(--blue); }
 
-/* 11 Search by meaning */
-.meaning .cloud { left: 138px; top: 300px; width: 1644px; height: 540px; transform-origin: 0 50%; }
-.meaning .w { position: absolute; left: 0; top: 0; font-size: 52px; line-height: 60px; white-space: nowrap; color: var(--blue); transform: translate(var(--x), var(--y)); transition: transform 600ms var(--ease) var(--d); }
-.meaning .w.alt { color: var(--muted); }
-.meaning .ring { position: absolute; border: 2px solid var(--light); border-radius: 50%; opacity: 0; }
-.meaning[data-reached~="1"] .w { transform: translate(var(--tx), var(--ty)); }
-.meaning[data-reached~="1"] .ring { opacity: 1; }
-.meaning[data-reached~="2"] .w { transform: translate(var(--ux), var(--uy)); font-size: 40px; transition: transform 600ms var(--ease), font-size 600ms var(--ease); }
-.meaning .ring { transition: opacity 400ms ease 300ms, left 600ms var(--ease), top 600ms var(--ease), width 600ms var(--ease), height 600ms var(--ease); }
-.meaning .r1 { left: 60px; top: 60px; width: 700px; height: 420px; }
-.meaning .r2 { left: 900px; top: 60px; width: 700px; height: 420px; }
-.meaning[data-reached~="2"] .r1 { left: 60px; top: 10px; width: 590px; height: 270px; }
-.meaning[data-reached~="2"] .r2 { left: 60px; top: 300px; width: 590px; height: 250px; }
-.meaning[data-reached~="2"] .until-2 { display: none; }
 /* 13 Failures */
 .fails .col { top: 350px; width: 512px; }
 .fails .pair { display: flex; gap: 40px; height: 260px; align-items: center; }
 .fails .pair div { font-size: 32px; color: var(--muted); }
 .fails .pair b { display: block; font-size: 104px; line-height: 1.15; color: var(--dark); }
 .fails .pair u { text-decoration: none; color: var(--limit); }
-.fails .pair svg { display: block; margin-bottom: 12px; }
 .fails p { font-size: 38px; line-height: 1.3; }
 .fails .col > p { margin-top: 30px; }
 .reveal .fails .source { font-size: 20px; line-height: 26px; }
@@ -286,12 +281,6 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .demo .says { left: 138px; top: 882px; width: 1500px; font-size: 40px; line-height: 50px; font-weight: 700; color: var(--blue); opacity: 0; transition: opacity 300ms ease; }
 .demo[data-step="0"] .c0, .demo[data-step="1"] .c1, .demo[data-step="2"] .c2, .demo[data-step="3"] .c3, .demo[data-step="4"] .c4 { opacity: 1; }
 
-/* 18 Limits */
-.reveal .limits .row { padding-top: 18px; height: 190px; gap: 50px; }
-.reveal .limits .ask { width: 560px; }
-.reveal .limits .today { position: relative; width: 1034px; padding-left: 370px; font-size: 32px; }
-.reveal .limits .today strong { position: absolute; left: 0; top: -4px; font-size: 60px; line-height: 68px; font-weight: 700; color: var(--blue); white-space: nowrap; letter-spacing: -.02em; }
-.reveal .limits .today .src { display: block; margin-top: 4px; }
 
 /* 19 and backup: two-column list */
 .list .grid { left: 138px; width: 1644px; display: grid; grid-template-columns: 460px 1fr; }
@@ -479,3 +468,31 @@ html, body { margin: 0; height: 100%; background: #fff; }
 /* PDF export: every page shows its settled state */
 html.reveal-print .reveal .slides section * { transition: none !important; }
 html.reveal-print .slides section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* B13 What the chain does not prove */
+.doubt .change b { color: var(--limit); }
+
+/* 16 Why now */
+.reveal .now .claim { margin-top: 14px; font-size: 44px; line-height: 1.25; font-weight: 700; color: var(--blue); }
+.reveal .now .claim.small { margin-top: 34px; padding-top: 26px; border-top: 2px solid var(--line); font-size: 36px; color: var(--dark); }
+.now .cite { margin-top: 34px; padding-left: 30px; border-left: 6px solid var(--light); }
+.reveal .now .quote { font-size: 32px; }
+.reveal .now .soft { margin-top: 10px; font-size: 26px; }
+.reveal .now .big { margin-top: 4px; }
+.reveal .now .per { font-size: 36px; line-height: 1.3; }
+
+/* 17 Closing */
+.reveal .closing .who { top: 640px; }
+
+/* 6 The structure ends at the document */
+.reveal .inside .tag { font-size: 28px; line-height: 36px; font-weight: 700; color: var(--blue); }
+.reveal .inside .tag.warn { color: var(--limit); }
+.inside .meta { display: flex; gap: 14px; }
+.inside .meta span { padding: 8px 20px; background: var(--tint); border: 1px solid var(--line); font-size: 30px; line-height: 40px; color: var(--dark); }
+.inside .letter { left: 138px; top: 478px; width: 790px; height: 300px; padding: 30px 40px; }
+.inside .letter .body { font-size: 32px; line-height: 1.45; color: var(--dark); }
+.inside .scan { height: 380px; margin-top: 12px; padding: 30px 44px; background: #ECEAE3; box-shadow: 0 10px 34px rgba(0, 56, 102, .13); transform: rotate(-1.2deg); filter: blur(.7px) grayscale(1); font-family: Georgia, serif; color: #505050; }
+.inside .scan-head { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
+.reveal .inside .scan p { font-size: 28px; line-height: 1.45; margin-bottom: 12px; }
+.reveal .inside .scan-note { margin-top: 22px; font-size: 30px; color: var(--limit); }
+

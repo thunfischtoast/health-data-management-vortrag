@@ -10,24 +10,40 @@ Reliability marks used below:
 
 Linked words lead to the source. Hover over a link to see its author and title. All full citations are also in the speaker view (`S`) of each slide, and all 210 findings are in `reports/Hospital data and AI talk.html`.
 
-**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 26 answers it. Yellow always means "this is the source". The RAVEN demo (slide 20) uses the same patient but another fact, the tumour size.
+**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 14 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
+
+**The idea.** The talk has one sentence to remember: "Idea: Let people write. Let machines structure." It lands on slide 7, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
+
+**The arc.** Five parts in 20 minutes. The slides carry no chapter titles, so the transitions are yours to say.
+
+| Minutes | Part | Slides |
+| --- | --- | --- |
+| 0 to 4 | The question, and how I ran into it | 1 to 4 |
+| 4 to 7 | Why it is hard, and why more forms will not fix it | 5 to 7 |
+| 7 to 12 | What machines can do now, and where they fail | 8 to 10 |
+| 12 to 16 | How we stay in charge | 11 to 13 |
+| 16 to 20 | The answer and why now | 14 to 16 |
+
+Study figures appear on two slides only (9 and 15). All others are in the notes and in the backup, ready for questions.
+
 
 ---
 
-## Opening
+## The question
 
 ### 1 Title
 
 **Notes**
 - Welcome, name, clinic
 - Topic: data we already have, how to use it better
-- Promise: one question now, the answer at the end
+- No agenda. After a short introduction, go straight to the question
 
 **Background.** The title says "Orbis", the audience knows it as their daily system. Make clear early that this is about hospital systems as such and that ORBIS is the familiar example.
 
 ### 2 Who am I
 
 **Notes**
+- Keep it short, about 30 seconds. The story starts on the next slide
 - Scientific associate, radiology, background in software and data
 - RACOON: research infrastructure, all German university radiology departments
 - RAVEN: our framework to assess extraction from reports, paper 2026
@@ -51,6 +67,7 @@ Check that the people in both photos agree to being shown. The RACOON extension 
 - Click: four documents, four wordings. Suspicion, date, symptom, final reason
 - Click: from one patient to all. From care to research
 - Keep the answer for the end
+- Transition: "I ran into this myself. Let me show you how."
 
 **Background.** The patient and all documents are invented. The story: pembrolizumab from March 2026, breathlessness and new ground-glass opacities on CT on 14 August, suspicion of pneumonitis, therapy paused, final stop in October.
 
@@ -60,14 +77,30 @@ Each document alone is insufficient. The medication plan has the date without a 
 
 Pneumonitis is a known immune-related adverse event of checkpoint inhibitors. At grade 3, permanent discontinuation is the usual recommendation (general knowledge, please confirm with a clinician).
 
----
+### 4 I searched for MELD
 
-## Status quo
-
-### 4 Divider
+**Click.** 1: the letter with the word.
 
 **Notes**
-- What we have today, why this question was hard
+- My own search in ORBIS: MELD, no letters found
+- But the word is there
+- Full-text search covers only some fields
+- No semantic search that I know of
+- Tell it as a story: what you wanted, what you typed, what came back
+
+**Background.** The slide shows only your own observation, which applies to the normal ORBIS search. The MeDIC quote has left the slide; use it only if asked. It applies to the [ORBIS study module][01:ukm-studymodule-no-pdf], which helps to find study patients, and concerns PDF documents (checked, page undated). The quote does not explain the search result, so do not connect the two.
+
+Repeat the search shortly before the talk and have MeDIC confirm the quote. People from MeDIC or UKM IT may sit in the room.
+
+The [study module][01:ukm-studymodule-no-pdf] deserves credit: it has supported more than 80 studies at UKM and searches structured and free text every night.
+
+A good anecdote: UKM radiology [published a study in 2026][01:ukm-radiology-hcc-pdf] in which GPT models calculated MELD and other liver scores for 106 patients. The reports had to be retrieved from ORBIS as PDF files and merged into one anonymised PDF per patient first (checked).
+
+MELD can be calculated from laboratory values (general knowledge). If someone says "just take the lab data", the answer is that the example is about the search and the word.
+
+---
+
+## Why it is hard
 
 ### 5 We store documents
 
@@ -83,82 +116,23 @@ Pneumonitis is a known immune-related adverse event of checkpoint inhibitors. At
 
 Evidence that the order matters: in a simulation, [data grouped by problem was found faster][03:problem-view-faster] (173 instead of 205 seconds) and with fewer errors (3.4% instead of 7.7%) (abstract read). In Cologne, [a dashboard for one treatment question][01:orbis-vs-dashboard-time] needed 172 seconds instead of 635 in ORBIS (checked). Use that one with care: seven clinicians, built by the authors, and ORBIS had been completely filled beforehand. Neither is on the slide.
 
-### 6 More questions like this
+### 6 The structure ends at the document
 
-**Click.** 1: pneumonitis cohort. 2: tumour size.
-
-**Notes**
-- Contrast reaction: safety question, CAVE field or an old letter
-- Cohort: typical doctoral thesis; synonyms, suspected diagnoses, missing codes
-- Tumour size: one number, two sources, two answers (returns in the demo)
-- One person, one group, one number
-
-**Background.** The three questions are different kinds of problem. The first is about absence: an empty field can mean "no reaction" or "nobody asked". The second is about finding patients. The third is about contradiction.
-
-Someone will say that the contrast reaction belongs into the CAVE field. Agree, and ask how many reactions are only in a letter from another hospital.
-
-### 7 I searched for MELD
-
-**Click.** 1: the letter with the word. 2: MeDIC quote.
+**Click.** 1: scanned PDF. 2: closing line.
 
 **Notes**
-- My own search in ORBIS: MELD, no letters found
-- But the word is there
-- Full-text search covers only some fields
-- Click: the study module has a similar limit, MeDIC says it itself
-- No semantic search that I know of
+- Open one of the documents from the tree
+- Structured: patient, type, date. That is what the system knows
+- Everything we need is in the free text
+- Click: a scan from outside. Not even the words are there
+- Click: the relevant information is unstructured, sometimes not even machine-readable
+- Transition: so why not force structure at entry?
 
-**Background.** Two separate facts stand on this slide. The search result is your own observation and applies to the normal ORBIS search. The quote applies to the [ORBIS study module][01:ukm-studymodule-no-pdf], which helps to find study patients, and concerns PDF documents (checked, page undated). The quote does not explain the search result, so do not connect the two.
+**Background.** The letter text is the invented letter from slide 3. The scanned report is invented too; external findings, letters from other hospitals and faxes often arrive this way. Without OCR (optical character recognition) a scan is an image, and with OCR reading errors come on top: [in one open pipeline][02:llmaix-ocr-errors] part of the wrong values came from reading the scan and not from the language model (read).
 
-Repeat the search shortly before the talk and have MeDIC confirm the quote. People from MeDIC or UKM IT may sit in the room.
+Supporting facts for questions, none of them on the slide: UKM radiology had to retrieve reports from ORBIS as PDF files for [its 2026 MELD study][01:ukm-radiology-hcc-pdf] (checked). MeDIC writes about [the ORBIS study module][01:ukm-studymodule-no-pdf] that an automatic search in PDF documents is not possible (checked, confirm with MeDIC). In the ePA, [almost all hospital documents are PDF/A][05:epa-pdf-late-2026] as of October 2026 (checked). Avoid "80% of health data is unstructured" (see B9).
 
-The [study module][01:ukm-studymodule-no-pdf] deserves credit: it has supported more than 80 studies at UKM and searches structured and free text every night.
-
-A good anecdote: UKM radiology [published a study in 2026][01:ukm-radiology-hcc-pdf] in which GPT models calculated MELD and other liver scores for 106 patients. The reports had to be retrieved from ORBIS as PDF files and merged into one anonymised PDF per patient first (checked).
-
-MELD can be calculated from laboratory values (general knowledge). If someone says "just take the lab data", the answer is that the example is about the search and the word.
-
-### 8 The vendor says it too
-
-**Click.** 1: highlight on the first excerpt. 2: highlight on the second. 3: press release.
-
-**Notes**
-- Not my words: vendor magazine, 2024
-- Chief Medical Officer: systems imitate the paper chart
-- Guest article: large part unstructured, "so auch in ORBIS"
-- Press release last month: still navigating modules, views, forms
-- A generation of systems, all vendors
-
-**Background.** All three quotes are verbatim and checked. The context matters if a Dedalus-friendly colleague asks:
-
-- The first is from [an interview][01:dedalus-cmo-paper-copy] that promotes ORBIS U. The speaker describes the problem that the new product is meant to solve.
-- The second is [a guest article][01:dedalus-unstructured-orbis] by a Dedalus author. It also mentions UKM: about 300,000 outpatient bills per year, for which the diagnosis is to be derived from ORBIS documents with language processing.
-- [The third][01:dedalus-navigation-admission] speaks about hospital information systems in general. It announces the ORBIS Buddy assistant.
-
-Fairness: [KLAS gave ORBIS its DACH award][01:dedalus-market-share], and I found no usability score for ORBIS alone. [KLAS also reports][01:klas-market-crossroads] that customers criticise delays, support, outdated technology and usability across the vendors (checked). So criticise the generation of systems. Do not say that ORBIS is worse than others.
-
-The excerpts are short quotations with a source. If the slides are published, check the image rights.
-
-### 9 Is today's data reliable?
-
-**Click.** 1: second figure. 2: third figure.
-
-**Notes**
-- Before we doubt the AI: how good is the data now?
-- 34%: severe sepsis with a sepsis code, ten German hospitals
-- 6.6%: errors when people copy values from records into a study
-- 50%: note text copied (USA)
-- Compare AI with this, not with perfection
-
-**Background.**
-
-- [**34%**][05:sepsis-undercoding-germany] (checked). 10,334 charts in eight university and two teaching hospitals, 2015 to 2017. The range between hospitals was 11 to 59%. In a [follow-up analysis][sepsis-followup], 56% of cases were coded if sepsis was named in the chart, and 6% if it was not (read). The data predate a change in coding rules in 2020.
-- [**6.6%**][05:mra-error-rate] (checked). A meta-analysis of 93 papers from 1978 to 2008, so it is old, and definitions vary. With training and checks, one study reached 1.0 to 2.6% (read). Typing itself is not the problem: single data entry has 0.29% errors. The weak step is reading and interpreting the record, which is exactly what doctoral candidates do. An example from Erlangen: [668 hours by hand against about 35 with a data warehouse][05:erlangen-668-hours] for 251 patients (checked, not on the slide).
-- [**50%**][05:half-duplicated-text] (checked). 104 million notes at Penn Medicine. Templates count as copies, so part of it is harmless. Copying means that the same statement in five notes is one piece of evidence.
-
-Do not use "80% of health data is unstructured". I traced it to [a vendor-sponsored article][05:eighty-percent-folklore] without a measurement. The better figure is that [13% of the concepts][05:text-vs-codes-dutch-gp] in free text of 1.8 million Dutch GP records had a structured counterpart (checked). Do not turn that into "87% unstructured".
-
-### 10 Why not more forms?
+### 7 Why not structure everything?
 
 **Click.** 1: RACOON template. 2: conclusion.
 
@@ -168,6 +142,7 @@ Do not use "80% of health data is unstructured". I traced it to [a vendor-sponso
 - RACOON's first template: 67 items, more time than routine reading
 - Structure costs the time of the person who writes
 - Click: let people write, let machines structure
+- This is the idea of the talk. Say it, then pause
 
 **Background.** [The Norwegian study][05:free-text-preferred-norway] is qualitative and from one hospital (abstract read). Doctors distrusted structured fields because colleagues kept writing the real information as text.
 
@@ -177,95 +152,49 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 ---
 
-## New methods
+## What machines can do
 
-### 11 Divider
+### 8 LLM use cases in data management
 
-**Notes**
-- What language models can do with text we already have
-
-### 12 One letter, four verbs
-
-**Click.** 1: extract. 2: classify. 3: summarise. 4: search by meaning.
+**Click.** 1: classify. 2: summarise. 3: extract. 4: search by meaning.
 
 **Notes**
-- Same letter as at the start
-- Extract: drug, status. Text becomes fields
-- Classify: what kind of document, what kind of event. "Suspected" stays suspected
-- Summarise: one sentence
-- Search: English query finds the German word
+- Eleven documents of LC-009, and the question from the start
+- Classify: five of them matter for the query, the model marks them
+- Summarise: only these five remain, each with one line aimed at the query
+- That is almost the answer already, in under a minute of reading
+- Extract: one letter, drug and status become fields. "Suspected" stays suspected
+- Search: "Atemnot" also finds "Dyspnoe"
 - No model was run for this slide
 
-**Background.** The four verbs are the vocabulary for the rest of the talk. "Extract" and "classify" produce data that can be counted, so they matter most for research. "Summarise" produces text for a person. "Search by meaning" finds passages.
+**Background.** The four verbs are the vocabulary for the rest of the talk. The first two steps form a chain: classify narrows the record to the documents that matter, summarise makes them readable in one glance. This is how the opening question gets answered in care. "Extract" produces data that can be counted, so it matters most for research. "Search by meaning" finds passages.
 
-Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis. Detecting such shades (negation, suspicion, time) is what separates a useful system from a risky one.
+Search by meaning, if asked. An embedding is a list of numbers that places a text on a map with many dimensions. The search looks for passages near the question. 
 
-How a language model works, if asked: it has learned from very much text which words fit together, and it can follow an instruction such as "return the drug and its status as a table". It has no database of facts about the patient except the text you give it.
-
-### 13 Search by meaning
-
-**Click.** 1: words move into clusters. 2: chart.
-
-**Notes**
-- Keyword search compares letters
-- Atemnot, Kurzatmigkeit, Dyspnoe, SOB: no shared letters, one meaning
-- Text becomes a position on a map, similar meaning lies close together
-- Click: identical words, both work. Synonyms: keyword search halves, meaning stays
-- English data, German still open
-
-**Background.** An embedding is a list of numbers that places a text on a map with many dimensions. The search looks for passages near the question. The two clusters on the slide are drawn by hand.
-
-The chart (checked): MRR, mean reciprocal rank, scaled to 100. 100 means the right passage is always first. A passage in second place scores 50, in fourth place 25. The source is [CliniQ][03:cliniq-synonym-gap], a preprint with 1,000 English discharge summaries from intensive care. "By meaning" is the best embedding model in that test.
+Figures if asked (checked): MRR, mean reciprocal rank, scaled to 100. 100 means the right passage is always first. A passage in second place scores 50, in fourth place 25. The source is [CliniQ][03:cliniq-synonym-gap], a preprint with 1,000 English discharge summaries from intensive care. "By meaning" is the best embedding model in that test.
 
 Two things to know. [For drug names keyword search was better][03:cliniq-hybrid-drugs], and the combination of both was best overall, so nobody should throw away keyword search. Semantic search can also [confuse a finding with its absence][03:negation-weakness] ("Atemnot" and "keine Atemnot"). The study behind this used biomedical literature (abstract read). Counterexample: [in hospital notes in Philadelphia][03:chop-semantic-search], a search plus language model answered 94% of negative questions correctly, compared with 71% without the search (preprint, checked).
 
 I found no comparison of keyword and semantic search on German clinical text. The nearest is [Essen][03:essen-german-embeddings], which trained a search model on German hospital documents without a keyword baseline (read).
 
-### 14 Stated facts work. Judgement is harder.
+The document list and the summaries are invented and match the timeline on slide 5. The five relevant documents are the four from slide 3 plus the CT of 14 August, which raised the suspicion.
 
-**Click.** 1: second question. 2: Münster study.
+Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis. Detecting such shades (negation, suspicion, time) is what separates a useful system from a risky one.
 
-**Notes**
-- 300 German oncology reports, models running locally
-- Metastasis yes or no: as good as people
-- Response to treatment: below people
-- People disagree there too
-- Münster: 14 heart values from 497 MRI reports, no training
-- Rule: is the answer written in the text?
+How a language model works, if asked: it has learned from very much text which words fit together, and it can follow an instruction such as "return the drug and its status as a table". It has no database of facts about the patient except the text you give it.
 
-**Background.** [Passweg 2026][02:passweg-metastasis-response] (checked): Swiss hospital, reports in German, 300 in the test set, five models on local hardware. The human value comes from duplicate extraction by people. Humans agreed with each other in 96.6% of cases on metastasis and in 76.2% on response, so the second question is hard for everyone.
-
-A good detail for the discussion: experts looked again at cases where model and human reference disagreed, and [the human reference was wrong in about 20% of them][02:passweg-gold-standard-wrong] (read). Only disagreements were re-checked, which favours the model.
-
-[The Münster study][02:ukm-cardiac-mri] (checked) by Plagwitz and colleagues reached up to 95.4% correct annotation. "No fine-tuning" means that the models were used as they were, only with an instruction. The authors may be in the audience; the Münster affiliation was found by search and not read on the paper itself.
-
-### 15 Where it fails
-
-**Click.** 1: omissions. 2: not documented.
-
-**Notes**
-- pN1 lymph nodes, Pn1 nerves. Two capitals
-- Omissions: 25 of 100, invented: 2 of 100
-- Everybody fears inventions, the gaps are more frequent
-- "Not documented" is not "no"
-- Contrast reaction: empty is no all-clear
-
-**Background.**
-
-- [**pN1/Pn1**][02:pn-pn-example] (checked). From a Cologne study on prostate pathology. Models reported a lymph node status that was not in the text because they had read the perineural invasion.
-- [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
-- [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
-
-### 16 Person plus model
+### 9 Person plus model
 
 **Click.** 1: minutes.
 
 **Notes**
+- The one study figure in this part. Let it stand
 - Chart review by hand: 68% correct
 - With answers pre-filled by a local model: 89%
 - Time: 9.4 to 3.6 minutes
 - 38 patients, small. But the direction fits others
 - Checking beats searching
+- Transition: but checking only works if we see where it goes wrong
 
 **Background.** [Neuse 2026][02:ibd-human-in-loop] (checked): Mount Sinai, inflammatory bowel disease, four clinicians, a local open model (MedGemma 27B). 207 values per arm. The reference came from one clinician.
 
@@ -273,16 +202,28 @@ In a separate test the model alone reached 69.3%. Do not compare that directly w
 
 [A second study in an eye clinic][02:ophthoacr] points the same way: 82.3% by hand, 94.3% tool alone, 97.1% with both, and 8.8 instead of 25.2 minutes (checked; the paper's abstract and text differ slightly). Limits for both: one centre, not randomised, and set-up time is not counted. What the model misses is easily missed by the person too.
 
----
+### 10 Where it fails
 
-## RACOON-RAVEN
-
-### 17 Divider
+**Click.** 1: not documented.
 
 **Notes**
-- One example of how to use this and stay in charge
+- pN1 lymph nodes, Pn1 nerves. Two capitals
+- The error looks right, that is the danger
+- "Not documented" is not "no"
+- Contrast reaction: empty is no all-clear
+- Transition: so how do I stay the boss?
 
-### 18 How do I stay the boss?
+**Background.**
+
+- [**pN1/Pn1**][02:pn-pn-example] (checked). From a Cologne study on prostate pathology. Models reported a lymph node status that was not in the text because they had read the perineural invasion.
+- Not on the slide, say if asked: [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
+- [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
+
+---
+
+## How we stay in charge
+
+### 11 How do I stay in control?
 
 **Click.** 1: the chain builds up. 2: closing line.
 
@@ -299,7 +240,7 @@ The closest relative in medicine is source data verification in clinical trials,
 
 Best supporting study: at Duke, [a chart search that cites every claim][03:scout-rct] made clinicians 37.6% faster at non-inferior quality (9.67 to 6.03 minutes, randomised crossover, 20 participants, preprint, checked).
 
-### 19 A form and its sources
+### 12 A form and its sources
 
 **Click.** 1: connections.
 
@@ -316,7 +257,7 @@ The ORBIS route is the text export: one column with the letter, other columns wi
 
 RAVEN sends the text as it is to the configured model. Local operation is possible and nothing enforces it. If asked about privacy: it depends on the configured endpoint, and the text is not de-identified before the call.
 
-### 20 One record in RACOON-RAVEN
+### 13 One record in RACOON-RAVEN
 
 **Click.** 1: cT stage and its quote. 2: quote not found. 3: conflict. 4: decision and export. Down: optional technical slides T1 to T9.
 
@@ -346,7 +287,7 @@ All of this was read from the code at commit a7fa7ec.
 
 ### T1 to T9 Optional technical stack
 
-Press down on slide 20 to enter, right to skip to slide 21. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
+Press down on slide 13 to enter, right to skip to slide 14. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
 
 Two more marks apply here:
 
@@ -357,7 +298,7 @@ Two more marks apply here:
 
 **Notes**
 - Cover of the technical part
-- Down: details. Right: back to slide 21
+- Down: details. Right: back to slide 14
 
 **Background.** The slide lists the topics and points down. If someone asks about size: about 9,700 lines of Python in the backend, 11,600 lines in the frontend, 458 backend and 187 frontend test functions, 7 browser tests against a fake LLM, 191 commits since 10 September 2026 (counted by command). There is no CI (fact sheet, from git log).
 
@@ -388,7 +329,7 @@ Two more marks apply here:
 - Worker: extract all reports first, then match and ingest row by row
 - Export reads the field values: CSV or XLSX
 
-**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 19 and 20: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 12 and 13: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
 
 ### T4 The prompt
 
@@ -472,81 +413,10 @@ Two more marks apply here:
 - **Speed (fact sheet, docs only):** about 91 s per report with thinking and 5 to 7 s without (qwen3.5-9b). A test with 2,000 table rows has a 60 s budget and took about 85 s on the dev machine (HANDOFF, 23.09.2026).
 - **Quality:** there are no figures. The LLM spec lists metrics and model comparison as out of scope.
 
-### 21 What the chain does not prove
 
-**Click.** 1: staying critical. 2: nothing missing.
+## Back to the question
 
-**Notes**
-- Honest minute
-- A found quote proves the words are there, not that the reading is right
-- 15 of 23: own correct answer dropped, because a citation seemed to fit
-- 82 to 46: very experienced radiologists, wrong AI suggestion
-- What the model overlooks leaves no trace
-- So: keep reading, take samples, check for gaps
-
-**Background.** This slide makes the talk credible, so take time for it.
-
-- [**15 of 23**][04:cora-double-edge] (checked). DKFZ preprint with 46 dermatology physicians. Without perceived support it was 2 of 25. Overall accuracy still rose from 70.8% to 82.6%, which you should say if the mood turns against AI. Whether the citation seemed to fit was not randomised, and the groups are small.
-- [**82% to 46%**][04:mammo-bias] (checked). 27 radiologists, 50 mammograms, deliberately wrong suggestions. Inexperienced readers fell from 80% to 20%. It was an experiment without clinical consequences.
-- **No trace.** In RAVEN an empty field is not an open task, so a record can be closed with missed values.
-
-In another experiment [only 39% of users ever clicked][04:users-click-sources] a source (119 of 308, lay people, checked). No study I found isolates whether source links help doctors find errors in patient records. If asked what helps: showing the passage next to the value without a click, second readings of samples, and a fixed list of fields that must be answered with "not documented".
-
----
-
-## Outlook
-
-### 22 Divider
-
-**Notes**
-- What exists, what comes, why now
-
-### 23 What exists today
-
-**Notes**
-- ORBIS: five AI functions, vendor information
-- ORBIS Buddy: assistant over the record, announced last month
-- UKM: letter pilot, data stay in house
-- Bonn: local model, approved for real patient data
-- For research: LangExtract, LLM-AIx, free, local
-- Ask each tool: does it show me the source?
-
-**Background.** There is hardly any independent evidence for the first two rows. [The brochure claim][01:orbis-ai-available] that the speech assistant takes over 80 to 90% of documentation has no source. I did not check which functions UKM has licensed. [The Buddy press release][01:orbis-buddy] calls actions traceable, but does not describe links to passages.
-
-The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chamber of commerce magazine (checked). No UKM-internal language model and no UKM AI strategy were found publicly. If you know more, use that.
-
-[Bonn][06:bonn-llm] (checked, preprint): one server with eight GPUs, approved by management, compliance, data protection and security. Tasks tied to a source text were rated best, and free conclusions caused the most critical errors. That supports your message.
-
-[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 25).
-
-### 24 What comes next
-
-**Click.** 1: hospital.
-
-**Notes**
-- RAVEN: PDF documents, planned
-- Hospital: traceable answers, local hardware, structured data as by-product
-- Doctors write as today, structure arises alongside
-
-**Background.** The right side is your expectation. It is no announcement by UKM, so say "I hope" or "I would ask for". PDF is harder than it looks: [in one open pipeline][02:llmaix-ocr-errors], part of the wrong values came from reading the scan and not from the language model (read).
-
-### 25 Why now
-
-**Click.** 1: quote.
-
-**Notes**
-- ePA: research data centre from 2027
-- Only structured data, first the medication list
-- PDF findings stay outside
-- What we leave as PDF does not exist for research
-
-**Background.** The quote is from [a KVB article][08:kvb-structured-only] that summarises the gematik schedule (checked). The dates have moved before, so "is to get" is the right wording.
-
-As of October 2026, almost all hospital documents in the ePA are PDF/A, [according to the German Hospital Federation][05:epa-pdf-late-2026]. Search beyond metadata comes in 2027 at the earliest (checked). [The European Health Data Space][06:epa-ehds-timeline] follows: secondary use from March 2029, with exchange of discharge reports and images from 2031 (read).
-
-Patients can object to this use of their data.
-
-### 26 Back to the question
+### 14 Back to the question
 
 **Click.** 1: answer with four passages. 2: cohort question.
 
@@ -560,13 +430,42 @@ Patients can object to this use of their data.
 
 **Background.** This is an illustration and no RAVEN output. It shows the goal. "Becomes a query" is meant as a step that structured data makes possible, so do not give a number and do not claim that it runs today.
 
-This is the sentence to end on: "We have the documents. Let us make them answer."
+Transition to the next slide: "We have the documents. Let us make them answer, and soon."
 
-### 27 Thank you
+### 15 Why now
+
+**Click.** 1: quote. 2: care.
 
 **Notes**
+- Research: ePA data for the research data centre from 2027
+- Only structured data, first the medication list
+- PDF findings stay outside
+- What we leave as PDF does not exist for research
+- Click: care. About 3 hours a day of documentation per doctor, 2.8 per nurse
+- That is an estimate by the hospitals; observed in one hospital: about 1.5 hours
+- Searching the record takes longer than reading what is found
+- The same tools that structure for research can help find things on the ward
+- Transition: so let people write, and let machines structure
+
+**Background.** The quote is from [a KVB article][08:kvb-structured-only] that summarises the gematik schedule (checked). The dates have moved before, so "is to get" is the right wording.
+
+As of October 2026, almost all hospital documents in the ePA are PDF/A, [according to the German Hospital Federation][05:epa-pdf-late-2026]. Search beyond metadata comes in 2027 at the earliest (checked). [The European Health Data Space][06:epa-ehds-timeline] follows: secondary use from March 2029, with exchange of discharge reports and images from 2031 (read).
+
+Patients can object to this use of their data.
+
+Care side:
+
+- [**3 hours, 2.8 hours**][dki-documentation-hours] (checked, full text). Deutsches Krankenhausinstitut, flash survey of 400 hospitals, September 2025: 3.0 h per physician (quartiles 2.0 and 3.5) and 2.8 h per nurse per day for documentation and proof obligations, up from 2.9 and 2.6 in 2024. It is the hospitals' own estimate. [Direct observation in one German hospital][observed-documentation-93min] found 93 minutes per day (19.4%), internists 120 minutes (checked, nine physicians). If someone questions the 3 hours, agree and give the observed figure: the burden is still large.
+- [**Searching versus reading**][leipzig-search-time] (checked, full text). Leipzig university hospital, 13 physicians, 2,205 observed minutes: 37.1% of the time went into the record, of which 9.0% searching, 7.7% reading and 20.5% writing. 28.0% went to patients. The system there was SAP i.s.h.med, not ORBIS.
+
+The slide shows the burden, not that language models reduce it. Say "could help", not "will save". The evidence for relief is mixed: [a chart search that cites its sources][03:scout-rct] made clinicians 37.6% faster (Duke, randomised crossover, 20 participants, preprint), AI scribes saved about 10% of documentation time (B5), and an Epic chart summary saved no time (B6).
+
+### 16 Closing
+
+**Notes**
+- Read the three lines slowly
 - Thanks, questions
-- Backup: right once, then down
+- Backup: right once, then down (B1 to B14)
 
 ---
 
@@ -634,7 +533,128 @@ This is the sentence to end on: "We have the documents. Let us make them answer.
 
 **Background.** [Preprint][03:epic-summary-rct], figures checked in the abstract. Minus 27.4 points is on a scale from 0 to 400. The last note is my inference from comparing [Scout][03:scout-rct] (Duke, 37.6% faster with questions) with this trial. Nobody has tested it directly, so present it as an impression.
 
-### B7 Sources
+### B7 More questions like this
+
+**Click.** 1: pneumonitis cohort. 2: tumour size.
+
+**Notes**
+- Contrast reaction: safety question, CAVE field or an old letter
+- Cohort: typical doctoral thesis; synonyms, suspected diagnoses, missing codes
+- Tumour size: one number, two sources, two answers (returns in the demo)
+- One person, one group, one number
+
+**Background.** The three questions are different kinds of problem. The first is about absence: an empty field can mean "no reaction" or "nobody asked". The second is about finding patients. The third is about contradiction.
+
+Someone will say that the contrast reaction belongs into the CAVE field. Agree, and ask how many reactions are only in a letter from another hospital.
+
+### B8 The vendor says it too
+
+**Click.** 1: highlight on the first excerpt. 2: highlight on the second. 3: press release.
+
+**Notes**
+- Not my words: vendor magazine, 2024
+- Chief Medical Officer: systems imitate the paper chart
+- Guest article: large part unstructured, "so auch in ORBIS"
+- Press release last month: still navigating modules, views, forms
+- A generation of systems, all vendors
+
+**Background.** All three quotes are verbatim and checked. The context matters if a Dedalus-friendly colleague asks:
+
+- The first is from [an interview][01:dedalus-cmo-paper-copy] that promotes ORBIS U. The speaker describes the problem that the new product is meant to solve.
+- The second is [a guest article][01:dedalus-unstructured-orbis] by a Dedalus author. It also mentions UKM: about 300,000 outpatient bills per year, for which the diagnosis is to be derived from ORBIS documents with language processing.
+- [The third][01:dedalus-navigation-admission] speaks about hospital information systems in general. It announces the ORBIS Buddy assistant.
+
+Fairness: [KLAS gave ORBIS its DACH award][01:dedalus-market-share], and I found no usability score for ORBIS alone. [KLAS also reports][01:klas-market-crossroads] that customers criticise delays, support, outdated technology and usability across the vendors (checked). So criticise the generation of systems. Do not say that ORBIS is worse than others.
+
+The excerpts are short quotations with a source. If the slides are published, check the image rights.
+
+### B9 Is today's data reliable?
+
+**Click.** 1: second figure. 2: third figure.
+
+**Notes**
+- Before we doubt the AI: how good is the data now?
+- 34%: severe sepsis with a sepsis code, ten German hospitals
+- 6.6%: errors when people copy values from records into a study
+- 50%: note text copied (USA)
+- Compare AI with this, not with perfection
+
+**Background.**
+
+- [**34%**][05:sepsis-undercoding-germany] (checked). 10,334 charts in eight university and two teaching hospitals, 2015 to 2017. The range between hospitals was 11 to 59%. In a [follow-up analysis][sepsis-followup], 56% of cases were coded if sepsis was named in the chart, and 6% if it was not (read). The data predate a change in coding rules in 2020.
+- [**6.6%**][05:mra-error-rate] (checked). A meta-analysis of 93 papers from 1978 to 2008, so it is old, and definitions vary. With training and checks, one study reached 1.0 to 2.6% (read). Typing itself is not the problem: single data entry has 0.29% errors. The weak step is reading and interpreting the record, which is exactly what doctoral candidates do. An example from Erlangen: [668 hours by hand against about 35 with a data warehouse][05:erlangen-668-hours] for 251 patients (checked, not on the slide).
+- [**50%**][05:half-duplicated-text] (checked). 104 million notes at Penn Medicine. Templates count as copies, so part of it is harmless. Copying means that the same statement in five notes is one piece of evidence.
+
+Do not use "80% of health data is unstructured". I traced it to [a vendor-sponsored article][05:eighty-percent-folklore] without a measurement. The better figure is that [13% of the concepts][05:text-vs-codes-dutch-gp] in free text of 1.8 million Dutch GP records had a structured counterpart (checked). Do not turn that into "87% unstructured".
+
+### B10 Stated facts work. Judgement is harder.
+
+**Click.** 1: second question. 2: Münster study.
+
+**Notes**
+- 300 German oncology reports, models running locally
+- Metastasis yes or no: as good as people
+- Response to treatment: below people
+- People disagree there too
+- Münster: 14 heart values from 497 MRI reports, no training
+- Rule: is the answer written in the text?
+
+**Background.** [Passweg 2026][02:passweg-metastasis-response] (checked): Swiss hospital, reports in German, 300 in the test set, five models on local hardware. The human value comes from duplicate extraction by people. Humans agreed with each other in 96.6% of cases on metastasis and in 76.2% on response, so the second question is hard for everyone.
+
+A good detail for the discussion: experts looked again at cases where model and human reference disagreed, and [the human reference was wrong in about 20% of them][02:passweg-gold-standard-wrong] (read). Only disagreements were re-checked, which favours the model.
+
+[The Münster study][02:ukm-cardiac-mri] (checked) by Plagwitz and colleagues reached up to 95.4% correct annotation. "No fine-tuning" means that the models were used as they were, only with an instruction. The authors may be in the audience; the Münster affiliation was found by search and not read on the paper itself.
+
+### B11 What exists today
+
+**Notes**
+- ORBIS: five AI functions, vendor information
+- ORBIS Buddy: assistant over the record, announced last month
+- UKM: letter pilot, data stay in house
+- Bonn: local model, approved for real patient data
+- For research: LangExtract, LLM-AIx, free, local
+- Ask each tool: does it show me the source?
+
+**Background.** There is hardly any independent evidence for the first two rows. [The brochure claim][01:orbis-ai-available] that the speech assistant takes over 80 to 90% of documentation has no source. I did not check which functions UKM has licensed. [The Buddy press release][01:orbis-buddy] calls actions traceable, but does not describe links to passages.
+
+The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chamber of commerce magazine (checked). No UKM-internal language model and no UKM AI strategy were found publicly. If you know more, use that.
+
+[Bonn][06:bonn-llm] (checked, preprint): one server with eight GPUs, approved by management, compliance, data protection and security. Tasks tied to a source text were rated best, and free conclusions caused the most critical errors. That supports your message.
+
+[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 15).
+
+### B12 What comes next
+
+**Click.** 1: hospital.
+
+**Notes**
+- RAVEN: PDF documents, planned
+- Hospital: traceable answers, local hardware, structured data as by-product
+- Doctors write as today, structure arises alongside
+
+**Background.** The right side is your expectation. It is no announcement by UKM, so say "I hope" or "I would ask for". PDF is harder than it looks: [in one open pipeline][02:llmaix-ocr-errors], part of the wrong values came from reading the scan and not from the language model (read).
+
+### B13 What the chain does not prove
+
+**Click.** 1: the sentence.
+
+**Notes**
+- Very experienced radiologists: 82% correct, 46% once the AI suggestion was wrong
+- That can happen to us with a quote next to the value
+- Click: a quote shows where the words are. Not that the reading is right, not that nothing is missing
+- So: keep reading, take samples, check for gaps
+
+**Background.** This slide makes the talk credible. Only the mammography study is on the slide; the other two points are for questions.
+
+- [**15 of 23**][04:cora-double-edge] (checked). DKFZ preprint with 46 dermatology physicians. Without perceived support it was 2 of 25. Overall accuracy still rose from 70.8% to 82.6%, which you should say if the mood turns against AI. Whether the citation seemed to fit was not randomised, and the groups are small.
+- [**82% to 46%**][04:mammo-bias] (checked). 27 radiologists, 50 mammograms, deliberately wrong suggestions. Inexperienced readers fell from 80% to 20%. It was an experiment without clinical consequences.
+- **No trace.** In RAVEN an empty field is not an open task, so a record can be closed with missed values.
+
+In another experiment [only 39% of users ever clicked][04:users-click-sources] a source (119 of 308, lay people, checked). No study I found isolates whether source links help doctors find errors in patient records. If asked what helps: showing the passage next to the value without a click, second readings of samples, and a fixed list of fields that must be answered with "not documented".
+
+---
+
+### B14 Sources
 
 **Notes**
 - Short list, details in the speaker view
@@ -643,9 +663,9 @@ This is the sentence to end on: "We have the documents. Let us make them answer.
 
 ## Before the talk
 
-1. Have a clinician read the invented letters (slides 3, 12, 26).
-2. Run LC-009 in RAVEN and compare it with slide 20.
-3. Repeat the MELD search and confirm the MeDIC quote (slide 7).
+1. Have a clinician read the invented letters (slides 3, 8, 14).
+2. Run LC-009 in RAVEN and compare it with slide 13.
+3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 4).
 4. Ask whether the people in the photos agree (slide 2).
 5. Check the class of patient data for UniGPT (B2).
 6. Set the date in `HEADER` in `js/scenes.js`.
@@ -710,6 +730,9 @@ Every linked source in order of appearance.
 - [LLM-AIx (medRxiv 2024; npj Precision Oncology 2025) and KatherLab/llmaixweb, 2024-09][08:llmaix] (page read)
 - [Wiest et al., A software pipeline for medical information extraction with LLMs, npj Precis Oncol 9:313, 2025-09][02:llmaix-ocr-errors] (full text)
 - [KVB FORUM 3-4/2026, ePA-Ausbaustufen, 2026][08:kvb-structured-only] (full text)
+- [Blum and Ludwig, Bürokratiebelastung im Krankenhaus, Deutsches Krankenhausinstitut, 2025-09][dki-documentation-hours] (full text)
+- [Schröder et al., Dtsch Med Wochenschr 149(16), 2024][observed-documentation-93min] (full text)
+- [de Hoop and Neumuth, Appl Clin Inform 12(5), 2021][leipzig-search-time] (full text)
 - [DKG, Umsetzungshinweise für die elektronische Patientenakte, prozessual-technischer Teil, Version 2.4, 2026-10][05:epa-pdf-late-2026] (full text)
 - [European Commission, EHDS Regulation; Federal Ministry of Health, FAQ FDZ Gesundheit, 2026][06:epa-ehds-timeline] (page read)
 - [GDNG section 6, gesetze-im-internet.de, 2024][07:gdng-6-own-data] (full text)
@@ -744,6 +767,9 @@ Every linked source in order of appearance.
 [01:dedalus-navigation-admission]: https://www.dedalus.com/dach/de/news/10537/ "Dedalus and Corti press release, 2026-10"
 [01:dedalus-market-share]: https://www.dedalus.com/dach/de/media/news/orbis-im-klas-report/ "Dedalus, ORBIS im KLAS Report, 2025-08"
 [01:klas-market-crossroads]: https://engage.klasresearch.com/?p=8376 "KLAS Research, DACH KIS 2025: A Market at a Crossroads, 2025-08"
+[dki-documentation-hours]: https://www.dki.de/fileadmin//user_upload/2025-09_Buerokratiebelastung_im_Krankenhaus_-_final.pdf "Blum and Ludwig, Bürokratiebelastung im Krankenhaus, DKI 2025"
+[observed-documentation-93min]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11296878 "Schröder et al., Dtsch Med Wochenschr 2024"
+[leipzig-search-time]: https://pmc.ncbi.nlm.nih.gov/articles/PMC8695058/ "de Hoop and Neumuth, Appl Clin Inform 2021"
 [05:sepsis-undercoding-germany]: https://pmc.ncbi.nlm.nih.gov/articles/PMC10954942 "Schwarzkopf D et al., Understanding the biases to sepsis surveillance and quality assurance caused by inaccurate coding in administrative health data, Infection 2023;52(2):413-427, 2023-09"
 [sepsis-followup]: https://pmc.ncbi.nlm.nih.gov/articles/PMC12864231 "Thomas-Rüddel et al. 2025, follow-up analysis"
 [05:mra-error-rate]: https://pmc.ncbi.nlm.nih.gov/articles/PMC10775420/ "Garza MY et al., Error rates of data processing methods in clinical research, Int J Med Inform 2025, doi:10.1016/j.ijmedinf.2024.105749 (preprint full text and published abstract read; same numbers), 2025"

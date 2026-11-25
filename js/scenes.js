@@ -9,7 +9,6 @@
 (function () {
   'use strict';
 
-  var CHAPTERS = ['Status quo', 'New methods', 'RACOON-RAVEN', 'Outlook'];
   var HEADER = ['Hospital data management in the age of AI', 'Christian Römer, November 2026'];
 
   function slides() {
@@ -48,12 +47,6 @@
     add(header, 'div', 'header-title', HEADER[0]);
     add(header, 'div', 'header-name', HEADER[1]);
     add(section, 'div', 'slide-no', String(number));
-    if (section.dataset.chapter) {
-      var bar = add(section, 'div', 'chapters');
-      CHAPTERS.forEach(function (name, i) {
-        add(bar, 'span', String(i + 1) === section.dataset.chapter ? 'current' : '', name);
-      });
-    }
   }
 
   function setStep(section) {

@@ -10,7 +10,7 @@ Double-click `index.html`. Use a current version of Edge, Chrome or Firefox and 
 | --- | --- |
 | Space, right arrow | Next step or slide |
 | Left arrow | Previous step or slide |
-| Down arrow | Next backup slide (after the closing slide, press right once); on slide 20 the optional technical slides T1 to T9 |
+| Down arrow | Next backup slide (after the closing slide, press right once); on slide 13 the optional technical slides T1 to T9 |
 | S | Speaker view with notes |
 | Esc | Slide overview |
 | B | Black screen |
@@ -18,7 +18,7 @@ Double-click `index.html`. Use a current version of Edge, Chrome or Firefox and 
 
 The browser must allow pop-ups for the speaker view. The notes hold the full citation, the study design and the caveats for every figure.
 
-The address shows the position as `#/slide/backup/step`, all counted from zero. `#/7` is the vendor slide without a click, and `#/7/0/2` shows it after three clicks.
+The address shows the position as `#/slide/backup/step`, all counted from zero. `#/7` is the slide with the four verbs without a click, and `#/7/0/2` shows it after three clicks.
 
 ## Website
 
@@ -32,7 +32,7 @@ Open `index.html?print-pdf` in Edge or Chrome and print to PDF with background g
 
 - `index.html` contains all slides, in order, with the notes in `<aside class="notes">`.
 - `css/ukm.css` contains the UKM layout and one block per slide.
-- `js/scenes.js` adds the logo, header, slide number and chapter bar, and computes the current step. The name and date in the header are in `HEADER` at the top of the file.
+- `js/scenes.js` adds the logo, header and slide number, and computes the current step. The name and date in the header are in `HEADER` at the top of the file.
 
 A slide declares its number of clicks with `data-steps="3"`. The script writes the current step to `data-step` and all steps reached so far to `data-reached`. Elements with the class `s2` appear at step 2, and passages with the classes `hl m2` are highlighted at step 2. Other states are CSS rules on the two attributes.
 
