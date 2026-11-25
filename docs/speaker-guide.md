@@ -10,7 +10,7 @@ Reliability marks used below:
 
 Linked words lead to the source. Hover over a link to see its author and title. All full citations are also in the speaker view (`S`) of each slide, and all 210 findings are in `reports/Hospital data and AI talk.html`.
 
-**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 14) uses the same patient but another fact, the tumour size.
+**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 14 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
 
 **The idea.** The talk has one sentence to remember: "Idea: Let people write. Let machines structure." It lands on slide 7, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
 
@@ -20,11 +20,11 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 | --- | --- | --- |
 | 0 to 4 | The question, and how I ran into it | 1 to 4 |
 | 4 to 7 | Why it is hard, and why more forms will not fix it | 5 to 7 |
-| 7 to 12 | What machines can do now, and where they fail | 8 to 11 |
-| 12 to 16 | How we stay in charge | 12 to 14 |
-| 16 to 20 | The answer and why now | 15 to 17 |
+| 7 to 12 | What machines can do now, and where they fail | 8 to 10 |
+| 12 to 16 | How we stay in charge | 11 to 13 |
+| 16 to 20 | The answer and why now | 14 to 16 |
 
-Study figures appear on two slides only (11 and 16). All others are in the notes and in the backup, ready for questions.
+Study figures appear on two slides only (10 and 15). All others are in the notes and in the backup, ready for questions.
 
 
 ---
@@ -169,31 +169,21 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 **Background.** The four verbs are the vocabulary for the rest of the talk. The first two steps form a chain: classify narrows the record to the documents that matter, summarise makes them readable in one glance. This is how the opening question gets answered in care. "Extract" produces data that can be counted, so it matters most for research. "Search by meaning" finds passages.
 
+Search by meaning, if asked. An embedding is a list of numbers that places a text on a map with many dimensions. The search looks for passages near the question. 
+
+Figures if asked (checked): MRR, mean reciprocal rank, scaled to 100. 100 means the right passage is always first. A passage in second place scores 50, in fourth place 25. The source is [CliniQ][03:cliniq-synonym-gap], a preprint with 1,000 English discharge summaries from intensive care. "By meaning" is the best embedding model in that test.
+
+Two things to know. [For drug names keyword search was better][03:cliniq-hybrid-drugs], and the combination of both was best overall, so nobody should throw away keyword search. Semantic search can also [confuse a finding with its absence][03:negation-weakness] ("Atemnot" and "keine Atemnot"). The study behind this used biomedical literature (abstract read). Counterexample: [in hospital notes in Philadelphia][03:chop-semantic-search], a search plus language model answered 94% of negative questions correctly, compared with 71% without the search (preprint, checked).
+
+I found no comparison of keyword and semantic search on German clinical text. The nearest is [Essen][03:essen-german-embeddings], which trained a search model on German hospital documents without a keyword baseline (read).
+
 The document list and the summaries are invented and match the timeline on slide 5. The five relevant documents are the four from slide 3 plus the CT of 14 August, which raised the suspicion.
 
 Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis. Detecting such shades (negation, suspicion, time) is what separates a useful system from a risky one.
 
 How a language model works, if asked: it has learned from very much text which words fit together, and it can follow an instruction such as "return the drug and its status as a table". It has no database of facts about the patient except the text you give it.
 
-### 9 Search by meaning
-
-**Click.** 1: words move into clusters.
-
-**Notes**
-- Keyword search compares letters
-- Atemnot, Kurzatmigkeit, Dyspnoe, SOB: no shared letters, one meaning
-- Text becomes a position on a map, similar meaning lies close together
-- English data, German still open
-
-**Background.** An embedding is a list of numbers that places a text on a map with many dimensions. The search looks for passages near the question. The two clusters on the slide are drawn by hand.
-
-Figures if asked, no longer on the slide (checked): MRR, mean reciprocal rank, scaled to 100. 100 means the right passage is always first. A passage in second place scores 50, in fourth place 25. The source is [CliniQ][03:cliniq-synonym-gap], a preprint with 1,000 English discharge summaries from intensive care. "By meaning" is the best embedding model in that test.
-
-Two things to know. [For drug names keyword search was better][03:cliniq-hybrid-drugs], and the combination of both was best overall, so nobody should throw away keyword search. Semantic search can also [confuse a finding with its absence][03:negation-weakness] ("Atemnot" and "keine Atemnot"). The study behind this used biomedical literature (abstract read). Counterexample: [in hospital notes in Philadelphia][03:chop-semantic-search], a search plus language model answered 94% of negative questions correctly, compared with 71% without the search (preprint, checked).
-
-I found no comparison of keyword and semantic search on German clinical text. The nearest is [Essen][03:essen-german-embeddings], which trained a search model on German hospital documents without a keyword baseline (read).
-
-### 10 Where it fails
+### 9 Where it fails
 
 **Click.** 1: not documented.
 
@@ -209,7 +199,7 @@ I found no comparison of keyword and semantic search on German clinical text. Th
 - Not on the slide, say if asked: [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
 - [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
 
-### 11 Person plus model
+### 10 Person plus model
 
 **Click.** 1: minutes.
 
@@ -231,7 +221,7 @@ In a separate test the model alone reached 69.3%. Do not compare that directly w
 
 ## How we stay in charge
 
-### 12 How do I stay the boss?
+### 11 How do I stay the boss?
 
 **Click.** 1: the chain builds up. 2: closing line.
 
@@ -248,7 +238,7 @@ The closest relative in medicine is source data verification in clinical trials,
 
 Best supporting study: at Duke, [a chart search that cites every claim][03:scout-rct] made clinicians 37.6% faster at non-inferior quality (9.67 to 6.03 minutes, randomised crossover, 20 participants, preprint, checked).
 
-### 13 A form and its sources
+### 12 A form and its sources
 
 **Click.** 1: connections.
 
@@ -265,7 +255,7 @@ The ORBIS route is the text export: one column with the letter, other columns wi
 
 RAVEN sends the text as it is to the configured model. Local operation is possible and nothing enforces it. If asked about privacy: it depends on the configured endpoint, and the text is not de-identified before the call.
 
-### 14 One record in RACOON-RAVEN
+### 13 One record in RACOON-RAVEN
 
 **Click.** 1: cT stage and its quote. 2: quote not found. 3: conflict. 4: decision and export. Down: optional technical slides T1 to T9.
 
@@ -295,7 +285,7 @@ All of this was read from the code at commit a7fa7ec.
 
 ### T1 to T9 Optional technical stack
 
-Press down on slide 14 to enter, right to skip to slide 15. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
+Press down on slide 13 to enter, right to skip to slide 14. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
 
 Two more marks apply here:
 
@@ -306,7 +296,7 @@ Two more marks apply here:
 
 **Notes**
 - Cover of the technical part
-- Down: details. Right: back to slide 15
+- Down: details. Right: back to slide 14
 
 **Background.** The slide lists the topics and points down. If someone asks about size: about 9,700 lines of Python in the backend, 11,600 lines in the frontend, 458 backend and 187 frontend test functions, 7 browser tests against a fake LLM, 191 commits since 10 September 2026 (counted by command). There is no CI (fact sheet, from git log).
 
@@ -337,7 +327,7 @@ Two more marks apply here:
 - Worker: extract all reports first, then match and ingest row by row
 - Export reads the field values: CSV or XLSX
 
-**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 13 and 14: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 12 and 13: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
 
 ### T4 The prompt
 
@@ -424,7 +414,7 @@ Two more marks apply here:
 
 ## Back to the question
 
-### 15 Back to the question
+### 14 Back to the question
 
 **Click.** 1: answer with four passages. 2: cohort question.
 
@@ -440,7 +430,7 @@ Two more marks apply here:
 
 Transition to the next slide: "We have the documents. Let us make them answer, and soon."
 
-### 16 Why now
+### 15 Why now
 
 **Click.** 1: quote. 2: care.
 
@@ -468,7 +458,7 @@ Care side:
 
 The slide shows the burden, not that language models reduce it. Say "could help", not "will save". The evidence for relief is mixed: [a chart search that cites its sources][03:scout-rct] made clinicians 37.6% faster (Duke, randomised crossover, 20 participants, preprint), AI scribes saved about 10% of documentation time (B5), and an Epic chart summary saved no time (B6).
 
-### 17 Closing
+### 16 Closing
 
 **Notes**
 - Read the three lines slowly
@@ -629,7 +619,7 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 [Bonn][06:bonn-llm] (checked, preprint): one server with eight GPUs, approved by management, compliance, data protection and security. Tasks tied to a source text were rated best, and free conclusions caused the most critical errors. That supports your message.
 
-[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 16).
+[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 15).
 
 ### B12 What comes next
 
@@ -671,8 +661,8 @@ In another experiment [only 39% of users ever clicked][04:users-click-sources] a
 
 ## Before the talk
 
-1. Have a clinician read the invented letters (slides 3, 8, 15).
-2. Run LC-009 in RAVEN and compare it with slide 14.
+1. Have a clinician read the invented letters (slides 3, 8, 14).
+2. Run LC-009 in RAVEN and compare it with slide 13.
 3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 4).
 4. Ask whether the people in the photos agree (slide 2).
 5. Check the class of patient data for UniGPT (B2).
