@@ -139,9 +139,9 @@
 
 <section class="inside tight" data-steps="2">
   <h2>The structure ends at the document</h2>
-  <p class="abs tag" style="left:138px;top:290px">Structured: what the system knows</p>
-  <div class="abs meta" style="left:138px;top:338px"><span>Patient LC-009</span><span>Arztbrief</span><span>19.08.2026</span></div>
-  <p class="abs tag" style="left:138px;top:430px">Free text: what we need</p>
+  <p class="abs tag" style="left:138px;top:290px">Structured</p>
+  <div class="abs meta" style="left:138px;top:338px"><span>PID: LC-009</span><span>Type: Arztbrief</span><span>Date: 19.08.2026</span></div>
+  <p class="abs tag" style="left:138px;top:430px">Free text</p>
   <div class="abs paper letter">
     <div class="body">Vorstellung mit zunehmender Atemnot, kein Fieber. Im CT vom 14.08.2026 neue Milchglas&shy;infiltrate beidseits, V. a. immuntherapie&shy;assoziierte Pneumonitis. Pembrolizumab pausiert, Prednisolon begonnen.</div>
   </div>
@@ -154,7 +154,7 @@
     </div>
     <p class="scan-note">No text layer. Nothing in it can be searched.</p>
   </div>
-  <p class="abs final s2" style="top:846px;font-size:52px">The system knows that a letter exists, not what it says.</p>
+  <p class="abs final s2" style="top:846px;font-size:52px">Relevant information is unstructured, sometimes unparseable</p>
   <p class="abs invented">Invented example</p>
   <aside class="notes">
     <p>The tree on the previous slide sorts documents. This slide opens one. The system knows patient, type and date. Everything a researcher needs is in the free text, and for scanned documents not even the words are available.</p>
@@ -164,7 +164,7 @@
 </section>
 
 <section class="forms" data-steps="2">
-  <h2>Why not more forms?</h2>
+  <h2>Why not structure everything?</h2>
   <div class="abs" style="left:138px;top:350px;width:760px">
     <p class="lead">Norway, after the move to a structured record</p>
     <p class="quote" style="margin-top:22px">“free text remained the preferred method, with some exceptions”</p>
@@ -176,7 +176,7 @@
     <p style="margin-top:6px">More time than routine reading</p>
     <p class="src">Salg et al., npj Digital Medicine 2021</p>
   </div>
-  <p class="abs final s2">Let people write. Let machines structure.</p>
+  <p class="abs final s2">Idea: Let people write. Let machines structure.</p>
   <aside class="notes">
     <p>Golburean O et al., JMIR Form Res 2025;9:e63902, https://pmc.ncbi.nlm.nih.gov/articles/PMC11971576/. Qualitative study, one Norwegian university hospital, Sept 2023 to Jan 2024, observations and interviews. Physicians distrusted some structured data because colleagues kept writing text. Abstract read.</p>
     <p>Salg et al., A reporting and analysis framework for structured evaluation of COVID-19 clinical and imaging data, npj Digital Medicine 2021, https://pmc.ncbi.nlm.nih.gov/articles/PMC8041811. Proof of concept, 283 patients, 8 European centres, mint Lesion. The template that RACOON started from had 67 items. Completeness depended on the reader and on information radiologists do not see directly.</p>
@@ -192,7 +192,7 @@
   <div class="abs verb v1" style="top:270px"><b>Extract</b><div>from free text to structured template</div></div>
   <div class="abs verb v2" style="top:434px"><b>Classify</b><div>Relevant/Irrelevant for my query</div></div>
   <div class="abs verb v3" style="top:598px"><b>Summarise</b><div>Content-aware summary per document</div></div>
-  <div class="abs verb v4" style="top:762px"><b>Search by meaning</b><div>„Atemnot“ also finds "Dispnoe"</div></div>
+  <div class="abs verb v4" style="top:762px"><b>Search by meaning</b><div>"Atemnot" also finds "Dyspnoe"</div></div>
   <p class="abs invented">Illustration, invented example</p>
   <aside class="notes">
     <p>Four tasks on the same letter. Yellow always marks the passage the answer comes from. The output is an illustration; no model was run for this slide.</p>
@@ -647,19 +647,6 @@ return FieldResult(
   <aside class="notes">
     <p>ePA: electronic patient record. FDZ: Forschungsdatenzentrum Gesundheit, the national research data centre for health.</p>
     <p>KVB FORUM 3-4/2026, ePA-Ausbaustufen, https://www.kvb.de/fileadmin/kvb/Mitglieder/Service/Informationsservice/KVB-FORUM/2026-DS/Einzelartikel/KVB-FORUM-3-4-2026-ePA-Ausbaustufen.pdf. Summary of the gematik schedule by a physician association. It starts with the medication list; dates have moved before.</p>
-  </aside>
-</section>
-
-<section class="list monday" data-steps="2">
-  <h2>What you can do on Monday</h2>
-  <div class="abs grid wide" style="top:330px">
-    <b>Define the field</b><div>Write one sentence per field before anyone extracts. The model and the reviewer read the same words.</div>
-    <b class="s1">Keep the passage</b><div class="s1">Store the source sentence next to every value, in every table you build.</div>
-    <b class="s2">Ask for the sentence</b><div class="s2">Ask every tool, including the vendor’s: “Show me where you read that.”</div>
-  </div>
-  <aside class="notes">
-    <p>The call to action, for researchers first. Three habits that cost nothing and work with any tool, RAVEN or not.</p>
-    <p>Define the field: the hint at tumour size on slide 13 is the example. Keep the passage: it is what made the answer on slide 15 checkable. Ask for the sentence: ORBIS Buddy and the other announced tools (backup) do not describe links to source passages.</p>
   </aside>
 </section>
 

@@ -12,7 +12,7 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 
 **The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 14) uses the same patient but another fact, the tumour size.
 
-**The idea.** The talk has one sentence to remember: "Let people write. Let machines structure." It lands on slide 7, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
+**The idea.** The talk has one sentence to remember: "Idea: Let people write. Let machines structure." It lands on slide 7, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
 
 **The arc.** Five parts in 20 minutes. The slides carry no chapter titles, so the transitions are yours to say.
 
@@ -22,7 +22,7 @@ Linked words lead to the source. Hover over a link to see its author and title. 
 | 4 to 7 | Why it is hard, and why more forms will not fix it | 5 to 7 |
 | 7 to 12 | What machines can do now, and where they fail | 8 to 11 |
 | 12 to 16 | How we stay in charge | 12 to 14 |
-| 16 to 20 | The answer, why now, what you can do | 15 to 18 |
+| 16 to 20 | The answer and why now | 15 to 17 |
 
 Study figures appear on one slide only (11). All others are in the notes and in the backup, ready for questions.
 
@@ -125,14 +125,14 @@ Evidence that the order matters: in a simulation, [data grouped by problem was f
 - Structured: patient, type, date. That is what the system knows
 - Everything we need is in the free text
 - Click: a scan from outside. Not even the words are there
-- Click: the system knows that a letter exists, not what it says
+- Click: the relevant information is unstructured, sometimes not even machine-readable
 - Transition: so why not force structure at entry?
 
 **Background.** The letter text is the invented letter from slide 3. The scanned report is invented too; external findings, letters from other hospitals and faxes often arrive this way. Without OCR (optical character recognition) a scan is an image, and with OCR reading errors come on top: [in one open pipeline][02:llmaix-ocr-errors] part of the wrong values came from reading the scan and not from the language model (read).
 
 Supporting facts for questions, none of them on the slide: UKM radiology had to retrieve reports from ORBIS as PDF files for [its 2026 MELD study][01:ukm-radiology-hcc-pdf] (checked). MeDIC writes about [the ORBIS study module][01:ukm-studymodule-no-pdf] that an automatic search in PDF documents is not possible (checked, confirm with MeDIC). In the ePA, [almost all hospital documents are PDF/A][05:epa-pdf-late-2026] as of October 2026 (checked). Avoid "80% of health data is unstructured" (see B9).
 
-### 7 Why not more forms?
+### 7 Why not structure everything?
 
 **Click.** 1: RACOON template. 2: conclusion.
 
@@ -446,7 +446,7 @@ Transition to the next slide: "We have the documents. Let us make them answer, a
 - Only structured data, first the medication list
 - PDF findings stay outside
 - What we leave as PDF does not exist for research
-- Transition: so what can each of us do?
+- Transition: so let people write, and let machines structure
 
 **Background.** The quote is from [a KVB article][08:kvb-structured-only] that summarises the gematik schedule (checked). The dates have moved before, so "is to get" is the right wording.
 
@@ -454,20 +454,7 @@ As of October 2026, almost all hospital documents in the ePA are PDF/A, [accordi
 
 Patients can object to this use of their data.
 
-### 17 What you can do on Monday
-
-**Click.** 1: keep the passage. 2: ask for the sentence.
-
-**Notes**
-- Three habits, no budget needed
-- Define the field: one sentence, before extraction. The hint on slide 13 is an example
-- Keep the passage: the source sentence next to every value, in your own Excel tables too
-- Ask for the sentence: every tool, every vendor demo. "Show me where you read that"
-- Doctoral candidates can start with the first two tomorrow
-
-**Background.** This slide is new and has no study behind it. It turns the talk into advice. The three habits follow from slides 7, 13 and 14. If someone asks about tools that already keep the passage: [LangExtract][08:langextract] marks where each item stands in the text (backup B11).
-
-### 18 Closing
+### 17 Closing
 
 **Notes**
 - Read the three lines slowly

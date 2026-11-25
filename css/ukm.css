@@ -468,13 +468,7 @@ html.reveal-print .slides section { -webkit-print-color-adjust: exact; print-col
 /* B13 What the chain does not prove */
 .doubt .change b { color: var(--limit); }
 
-/* 17 What you can do on Monday */
-.monday .grid { grid-template-columns: 520px 1fr; }
-.monday .grid > * { padding: 30px 0; }
-.reveal .monday .grid b { font-size: 44px; line-height: 54px; color: var(--blue); }
-.reveal .monday .grid div { font-size: 38px; line-height: 50px; }
-
-/* 18 Closing */
+/* 17 Closing */
 .reveal .closing .who { top: 640px; }
 
 /* 6 The structure ends at the document */
