@@ -468,11 +468,24 @@ html.reveal-print .slides section { -webkit-print-color-adjust: exact; print-col
 /* B13 What the chain does not prove */
 .doubt .change b { color: var(--limit); }
 
-/* 16 What you can do on Monday */
+/* 17 What you can do on Monday */
 .monday .grid { grid-template-columns: 520px 1fr; }
 .monday .grid > * { padding: 30px 0; }
 .reveal .monday .grid b { font-size: 44px; line-height: 54px; color: var(--blue); }
 .reveal .monday .grid div { font-size: 38px; line-height: 50px; }
 
-/* 17 Closing */
+/* 18 Closing */
 .reveal .closing .who { top: 640px; }
+
+/* 6 The structure ends at the document */
+.reveal .inside .tag { font-size: 28px; line-height: 36px; font-weight: 700; color: var(--blue); }
+.reveal .inside .tag.warn { color: var(--limit); }
+.inside .meta { display: flex; gap: 14px; }
+.inside .meta span { padding: 8px 20px; background: var(--tint); border: 1px solid var(--line); font-size: 30px; line-height: 40px; color: var(--dark); }
+.inside .letter { left: 138px; top: 478px; width: 790px; height: 300px; padding: 30px 40px; }
+.inside .letter .body { font-size: 32px; line-height: 1.45; color: var(--dark); }
+.inside .scan { height: 380px; margin-top: 12px; padding: 30px 44px; background: #ECEAE3; box-shadow: 0 10px 34px rgba(0, 56, 102, .13); transform: rotate(-1.2deg); filter: blur(.7px) grayscale(1); font-family: Georgia, serif; color: #505050; }
+.inside .scan-head { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
+.reveal .inside .scan p { font-size: 28px; line-height: 1.45; margin-bottom: 12px; }
+.reveal .inside .scan-note { margin-top: 22px; font-size: 30px; color: var(--limit); }
+

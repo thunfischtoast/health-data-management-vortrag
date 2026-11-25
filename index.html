@@ -137,6 +137,32 @@
   </aside>
 </section>
 
+<section class="inside tight" data-steps="2">
+  <h2>The structure ends at the document</h2>
+  <p class="abs tag" style="left:138px;top:290px">Structured: what the system knows</p>
+  <div class="abs meta" style="left:138px;top:338px"><span>Patient LC-009</span><span>Arztbrief</span><span>19.08.2026</span></div>
+  <p class="abs tag" style="left:138px;top:430px">Free text: what we need</p>
+  <div class="abs paper letter">
+    <div class="body">Vorstellung mit zunehmender Atemnot, kein Fieber. Im CT vom 14.08.2026 neue Milchglas&shy;infiltrate beidseits, V. a. immuntherapie&shy;assoziierte Pneumonitis. Pembrolizumab pausiert, Prednisolon begonnen.</div>
+  </div>
+  <div class="abs s1" style="left:992px;top:290px;width:790px">
+    <p class="tag warn">Scanned PDF: a picture of text</p>
+    <div class="scan">
+      <div class="scan-head">Radiologische Praxis am Markt</div>
+      <p>Auswärtiger Befund, CT Thorax vom 28.01.2026</p>
+      <p>Raumforderung im linken Oberlappen, ca. 4 cm. Mediastinale Lymphknoten nicht vergrößert. Empfehlung: histologische Sicherung.</p>
+    </div>
+    <p class="scan-note">No text layer. Nothing in it can be searched.</p>
+  </div>
+  <p class="abs final s2" style="top:846px;font-size:52px">The system knows that a letter exists, not what it says.</p>
+  <p class="abs invented">Invented example</p>
+  <aside class="notes">
+    <p>The tree on the previous slide sorts documents. This slide opens one. The system knows patient, type and date. Everything a researcher needs is in the free text, and for scanned documents not even the words are available.</p>
+    <p>Scanned PDFs: external findings, letters from other hospitals, faxes. Without OCR (optical character recognition) they are images. With OCR, reading errors come on top.</p>
+    <p>Say if asked: UKM radiology had to retrieve reports from ORBIS as PDF files for its 2026 MELD study. MeDIC on the ORBIS study module: "An automatic search for information in PDF-documents is not possible." (MeDIC Münster, Study module, read 11/2026, confirm before the talk.) In the ePA, almost all hospital documents are PDF/A as of 10/2026 (German Hospital Federation, see speaker guide).</p>
+  </aside>
+</section>
+
 <section class="forms" data-steps="2">
   <h2>Why not more forms?</h2>
   <div class="abs" style="left:138px;top:350px;width:760px">
@@ -333,7 +359,7 @@
   <p class="abs go">Details below: press the down arrow</p>
   <p class="source">RACOON-RAVEN main a7fa7ec, 22.11.2026. Source code read, not run</p>
   <aside class="notes">
-    <p>Optional technical part. Down: details. Right: back to the main talk (slide 14).</p>
+    <p>Optional technical part. Down: details. Right: back to the main talk (slide 15).</p>
   </aside>
 </section>
 
@@ -633,7 +659,7 @@ return FieldResult(
   </div>
   <aside class="notes">
     <p>The call to action, for researchers first. Three habits that cost nothing and work with any tool, RAVEN or not.</p>
-    <p>Define the field: the hint at tumour size on slide 12 is the example. Keep the passage: it is what made the answer on slide 14 checkable. Ask for the sentence: ORBIS Buddy and the other announced tools (backup) do not describe links to source passages.</p>
+    <p>Define the field: the hint at tumour size on slide 13 is the example. Keep the passage: it is what made the answer on slide 15 checkable. Ask for the sentence: ORBIS Buddy and the other announced tools (backup) do not describe links to source passages.</p>
   </aside>
 </section>
 

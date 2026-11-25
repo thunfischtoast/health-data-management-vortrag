@@ -10,21 +10,21 @@ Reliability marks used below:
 
 Linked words lead to the source. Hover over a link to see its author and title. All full citations are also in the speaker view (`S`) of each slide, and all 210 findings are in `reports/Hospital data and AI talk.html`.
 
-**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 14 answers it. Yellow always means "this is the source". The RAVEN demo (slide 13) uses the same patient but another fact, the tumour size.
+**The red thread.** One invented patient (LC-009) and one question. Slide 3 asks "Why was the immunotherapy stopped?", slide 15 answers it. Yellow always means "this is the source". The RAVEN demo (slide 14) uses the same patient but another fact, the tumour size.
 
-**The idea.** The talk has one sentence to remember: "Let people write. Let machines structure." It lands on slide 6, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
+**The idea.** The talk has one sentence to remember: "Let people write. Let machines structure." It lands on slide 7, and the closing slide repeats it with a third line, "Check where they read." Everything between the two shows why the third line matters.
 
 **The arc.** Five parts in 20 minutes. The slides carry no chapter titles, so the transitions are yours to say.
 
 | Minutes | Part | Slides |
 | --- | --- | --- |
 | 0 to 4 | The question, and how I ran into it | 1 to 4 |
-| 4 to 7 | Why it is hard, and why more forms will not fix it | 5, 6 |
-| 7 to 12 | What machines can do now, and where they fail | 7 to 10 |
-| 12 to 16 | How we stay in charge | 11 to 13 |
-| 16 to 20 | The answer, why now, what you can do | 14 to 17 |
+| 4 to 7 | Why it is hard, and why more forms will not fix it | 5 to 7 |
+| 7 to 12 | What machines can do now, and where they fail | 8 to 11 |
+| 12 to 16 | How we stay in charge | 12 to 14 |
+| 16 to 20 | The answer, why now, what you can do | 15 to 18 |
 
-Study figures appear on one slide only (10). All others are in the notes and in the backup, ready for questions.
+Study figures appear on one slide only (11). All others are in the notes and in the backup, ready for questions.
 
 
 ---
@@ -116,7 +116,23 @@ MELD can be calculated from laboratory values (general knowledge). If someone sa
 
 Evidence that the order matters: in a simulation, [data grouped by problem was found faster][03:problem-view-faster] (173 instead of 205 seconds) and with fewer errors (3.4% instead of 7.7%) (abstract read). In Cologne, [a dashboard for one treatment question][01:orbis-vs-dashboard-time] needed 172 seconds instead of 635 in ORBIS (checked). Use that one with care: seven clinicians, built by the authors, and ORBIS had been completely filled beforehand. Neither is on the slide.
 
-### 6 Why not more forms?
+### 6 The structure ends at the document
+
+**Click.** 1: scanned PDF. 2: closing line.
+
+**Notes**
+- Open one of the documents from the tree
+- Structured: patient, type, date. That is what the system knows
+- Everything we need is in the free text
+- Click: a scan from outside. Not even the words are there
+- Click: the system knows that a letter exists, not what it says
+- Transition: so why not force structure at entry?
+
+**Background.** The letter text is the invented letter from slide 3. The scanned report is invented too; external findings, letters from other hospitals and faxes often arrive this way. Without OCR (optical character recognition) a scan is an image, and with OCR reading errors come on top: [in one open pipeline][02:llmaix-ocr-errors] part of the wrong values came from reading the scan and not from the language model (read).
+
+Supporting facts for questions, none of them on the slide: UKM radiology had to retrieve reports from ORBIS as PDF files for [its 2026 MELD study][01:ukm-radiology-hcc-pdf] (checked). MeDIC writes about [the ORBIS study module][01:ukm-studymodule-no-pdf] that an automatic search in PDF documents is not possible (checked, confirm with MeDIC). In the ePA, [almost all hospital documents are PDF/A][05:epa-pdf-late-2026] as of October 2026 (checked). Avoid "80% of health data is unstructured" (see B9).
+
+### 7 Why not more forms?
 
 **Click.** 1: RACOON template. 2: conclusion.
 
@@ -138,7 +154,7 @@ Counterpoints you may hear: structured reporting improves completeness in some s
 
 ## What machines can do
 
-### 7 LLM use cases in data management
+### 8 LLM use cases in data management
 
 **Click.** 1: extract. 2: classify. 3: summarise. 4: search by meaning.
 
@@ -156,7 +172,7 @@ Point out the "V. a.". A model that drops it turns a suspicion into a diagnosis.
 
 How a language model works, if asked: it has learned from very much text which words fit together, and it can follow an instruction such as "return the drug and its status as a table". It has no database of facts about the patient except the text you give it.
 
-### 8 Search by meaning
+### 9 Search by meaning
 
 **Click.** 1: words move into clusters.
 
@@ -174,7 +190,7 @@ Two things to know. [For drug names keyword search was better][03:cliniq-hybrid-
 
 I found no comparison of keyword and semantic search on German clinical text. The nearest is [Essen][03:essen-german-embeddings], which trained a search model on German hospital documents without a keyword baseline (read).
 
-### 9 Where it fails
+### 10 Where it fails
 
 **Click.** 1: not documented.
 
@@ -190,7 +206,7 @@ I found no comparison of keyword and semantic search on German clinical text. Th
 - Not on the slide, say if asked: [**25 and 2**][03:medagentbrief] (checked). Stanford, daily drafts of hospital courses, 100 reviewed by physicians. There were also 20 summaries with inaccuracies, which are not on the slide. No severe harm was reported. The physicians reported the errors themselves, so the true number may be higher.
 - [**Not documented**][02:absence-vs-silence] (abstract read, preprint, single author). In a test with 17 fields, most disagreement between differently worded prompts came from this distinction. For doctoral candidates this is practical advice: define in the codebook what an empty field means.
 
-### 10 Person plus model
+### 11 Person plus model
 
 **Click.** 1: minutes.
 
@@ -212,7 +228,7 @@ In a separate test the model alone reached 69.3%. Do not compare that directly w
 
 ## How we stay in charge
 
-### 11 How do I stay the boss?
+### 12 How do I stay the boss?
 
 **Click.** 1: the chain builds up. 2: closing line.
 
@@ -229,7 +245,7 @@ The closest relative in medicine is source data verification in clinical trials,
 
 Best supporting study: at Duke, [a chart search that cites every claim][03:scout-rct] made clinicians 37.6% faster at non-inferior quality (9.67 to 6.03 minutes, randomised crossover, 20 participants, preprint, checked).
 
-### 12 A form and its sources
+### 13 A form and its sources
 
 **Click.** 1: connections.
 
@@ -246,7 +262,7 @@ The ORBIS route is the text export: one column with the letter, other columns wi
 
 RAVEN sends the text as it is to the configured model. Local operation is possible and nothing enforces it. If asked about privacy: it depends on the configured endpoint, and the text is not de-identified before the call.
 
-### 13 One record in RACOON-RAVEN
+### 14 One record in RACOON-RAVEN
 
 **Click.** 1: cT stage and its quote. 2: quote not found. 3: conflict. 4: decision and export. Down: optional technical slides T1 to T9.
 
@@ -276,7 +292,7 @@ All of this was read from the code at commit a7fa7ec.
 
 ### T1 to T9 Optional technical stack
 
-Press down on slide 13 to enter, right to skip to slide 14. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
+Press down on slide 14 to enter, right to skip to slide 15. For a session with a technical audience. Everything describes RAVEN `main` a7fa7ec (22.11.2026). The code was read, not run. Paths are relative to `backend/racoon_raven/` unless they start with `frontend/` or `docs/`.
 
 Two more marks apply here:
 
@@ -287,7 +303,7 @@ Two more marks apply here:
 
 **Notes**
 - Cover of the technical part
-- Down: details. Right: back to slide 14
+- Down: details. Right: back to slide 15
 
 **Background.** The slide lists the topics and points down. If someone asks about size: about 9,700 lines of Python in the backend, 11,600 lines in the frontend, 458 backend and 187 frontend test functions, 7 browser tests against a fake LLM, 191 commits since 10 September 2026 (counted by command). There is no CI (fact sheet, from git log).
 
@@ -318,7 +334,7 @@ Two more marks apply here:
 - Worker: extract all reports first, then match and ingest row by row
 - Export reads the field values: CSV or XLSX
 
-**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 12 and 13: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
+**Background (fact sheet).** Uploading parses the file at once and stores the original in Garage. A file with a known SHA-256 hash gets a warning; it is not refused. Mapping assigns columns to roles and items, values to answer options, and optionally a text column with a strategy. Processing defers one job, which the browser follows over server-sent events. The worker runs two phases. Phase 1 extracts every report (progress 0 to 90%). Phase 2 handles each row in its own transaction: it matches subject and timepoint, then writes proposals or opens a review task. Extraction runs two calls in parallel by default (`RR_LLM_CONCURRENCY`). The examples are invented and match slides 13 and 14: the same report, 48 mm in the table and 38 mm in the text. The JSON answer is the expected one, not a model run. The export row assumes that a reviewer accepted 38 mm; the real export has more columns (study, patient data, template, review status, `__distance`), shortened to "…" on the slide.
 
 ### T4 The prompt
 
@@ -405,7 +421,7 @@ Two more marks apply here:
 
 ## Back to the question
 
-### 14 Back to the question
+### 15 Back to the question
 
 **Click.** 1: answer with four passages. 2: cohort question.
 
@@ -421,7 +437,7 @@ Two more marks apply here:
 
 Transition to the next slide: "We have the documents. Let us make them answer, and soon."
 
-### 15 Why now
+### 16 Why now
 
 **Click.** 1: quote.
 
@@ -438,20 +454,20 @@ As of October 2026, almost all hospital documents in the ePA are PDF/A, [accordi
 
 Patients can object to this use of their data.
 
-### 16 What you can do on Monday
+### 17 What you can do on Monday
 
 **Click.** 1: keep the passage. 2: ask for the sentence.
 
 **Notes**
 - Three habits, no budget needed
-- Define the field: one sentence, before extraction. The hint on slide 12 is an example
+- Define the field: one sentence, before extraction. The hint on slide 13 is an example
 - Keep the passage: the source sentence next to every value, in your own Excel tables too
 - Ask for the sentence: every tool, every vendor demo. "Show me where you read that"
 - Doctoral candidates can start with the first two tomorrow
 
-**Background.** This slide is new and has no study behind it. It turns the talk into advice. The three habits follow from slides 6, 12 and 13. If someone asks about tools that already keep the passage: [LangExtract][08:langextract] marks where each item stands in the text (backup B11).
+**Background.** This slide is new and has no study behind it. It turns the talk into advice. The three habits follow from slides 7, 13 and 14. If someone asks about tools that already keep the passage: [LangExtract][08:langextract] marks where each item stands in the text (backup B11).
 
-### 17 Closing
+### 18 Closing
 
 **Notes**
 - Read the three lines slowly
@@ -612,7 +628,7 @@ The UKM row comes from [an interview with the CIO][06:ukm-ai-status] in a chambe
 
 [Bonn][06:bonn-llm] (checked, preprint): one server with eight GPUs, approved by management, compliance, data protection and security. Tasks tied to a source text were rated best, and free conclusions caused the most critical errors. That supports your message.
 
-[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 15).
+[LangExtract][08:langextract] marks where each item stands in the text. [LLM-AIx][08:llmaix] needs no programming and compares with a human reading. Both need a cleared way of using the data first. The ePA is no source for this yet (slide 16).
 
 ### B12 What comes next
 
@@ -654,8 +670,8 @@ In another experiment [only 39% of users ever clicked][04:users-click-sources] a
 
 ## Before the talk
 
-1. Have a clinician read the invented letters (slides 3, 7, 14).
-2. Run LC-009 in RAVEN and compare it with slide 13.
+1. Have a clinician read the invented letters (slides 3, 8, 15).
+2. Run LC-009 in RAVEN and compare it with slide 14.
 3. Repeat the MELD search and confirm the MeDIC quote (notes of slide 4).
 4. Ask whether the people in the photos agree (slide 2).
 5. Check the class of patient data for UniGPT (B2).

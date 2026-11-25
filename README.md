@@ -18,7 +18,7 @@ Double-click `index.html`. Use a current version of Edge, Chrome or Firefox and 
 
 The browser must allow pop-ups for the speaker view. The notes hold the full citation, the study design and the caveats for every figure.
 
-The address shows the position as `#/slide/backup/step`, all counted from zero. `#/6` is the slide with the four verbs without a click, and `#/6/0/2` shows it after three clicks.
+The address shows the position as `#/slide/backup/step`, all counted from zero. `#/7` is the slide with the four verbs without a click, and `#/7/0/2` shows it after three clicks.
 
 ## Website
 
