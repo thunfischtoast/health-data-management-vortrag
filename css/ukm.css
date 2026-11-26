@@ -308,9 +308,13 @@ html, body { margin: 0; height: 100%; background: #fff; }
 .reveal .answer .cohort { left: 138px; top: 852px; width: 1644px; font-size: 46px; color: var(--dark); }
 .reveal .answer .cohort b { color: var(--blue); }
 
-/* B7 Sources */
-.refs .cols { left: 138px; top: 270px; width: 1644px; columns: 2; column-gap: 60px; }
-.reveal .refs p { font-size: 24px; line-height: 38px; break-inside: avoid; }
+/* 16 Our paper: graphical abstract, 4:3 */
+.paper .ga { left: 447px; top: 130px; width: 1026px; height: 768px; }
+
+/* B14 to B16 Sources, Vancouver style */
+.reveal .refs .cols { left: 138px; top: 262px; width: 1644px; margin: 0; padding-left: 40px; box-sizing: border-box; columns: 2; column-gap: 80px; }
+.reveal .refs li { margin-bottom: 14px; font-size: 20px; line-height: 27px; color: var(--text); break-inside: avoid; overflow-wrap: anywhere; }
+.reveal .refs li::marker { color: var(--muted); }
 
 /* T: optional technical slides on RACOON-RAVEN */
 .code { padding: 18px 24px; background: var(--tint); border: 1px solid var(--line); font-family: Consolas, "Courier New", monospace; font-size: 21px; line-height: 30px; color: var(--dark); white-space: pre-wrap; overflow: hidden; }

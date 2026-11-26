@@ -460,12 +460,19 @@ Care side:
 
 The slide shows the burden, not that language models reduce it. Say "could help", not "will save". The evidence for relief is mixed: [a chart search that cites its sources][03:scout-rct] made clinicians 37.6% faster (Duke, randomised crossover, 20 participants, preprint), AI scribes saved about 10% of documentation time (B5), and an Epic chart summary saved no time (B6).
 
-### 16 Closing
+### 16 Our paper
+
+**Notes**
+- Graphical abstract of the [RAVEN paper][raven-paper]
+- 119 thorax X-ray reports, 45 keys, two local models, every value rated by a person
+- RACOON-RAVEN is a new implementation; the paper's figures do not carry over
+
+### 17 Closing
 
 **Notes**
 - Read the three lines slowly
 - Thanks, questions
-- Backup: right once, then down (B1 to B14)
+- Backup: right once, then down (B1 to B16)
 
 ---
 
@@ -654,7 +661,7 @@ In another experiment [only 39% of users ever clicked][04:users-click-sources] a
 
 ---
 
-### B14 Sources
+### B14 to B16 Sources
 
 **Notes**
 - Short list, details in the speaker view
